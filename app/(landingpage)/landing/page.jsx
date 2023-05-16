@@ -1,7 +1,8 @@
 "use client";
-import { Button, Typography } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import classes from "../../../css/LandingPage.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 const LandingPage = () => {
   return (
@@ -28,6 +29,50 @@ const LandingPage = () => {
             </Link>
           </Button>
         </div>
+      </div>
+      <div className={classes.cards}>
+        <Card sx={{ maxWidth: "350px", padding: "20px" }}>
+          <Image
+            src="/images/analytics_icons.png"
+            width={260}
+            height={260}
+            alt="analytics"
+          />
+          <Typography variant="h4" color="#006ccf" fontWeight="bold">
+            Real-time Analytics
+          </Typography>
+          <Typography variant="p" color="textSecondary">
+            Stay on top of your social media game with real-time analytics.
+          </Typography>
+        </Card>
+        <Card sx={{ maxWidth: "350px", padding: "20px" }}>
+          <Image
+            src="/images/scheduling_icon.png"
+            width={260}
+            height={260}
+            alt="analytics"
+          />
+          <Typography variant="h4" color="#006ccf" fontWeight="bold">
+            Post Scheduling
+          </Typography>
+          <Typography variant="p" color="textSecondary">
+            Effortlessly plan and schedule your social media content in advance.
+          </Typography>
+        </Card>
+        <Card sx={{ maxWidth: "350px", padding: "20px" }}>
+          <Image
+            src="/images/insights_icon.png"
+            width={260}
+            height={260}
+            alt="analytics"
+          />
+          <Typography variant="h4" color="#006ccf" fontWeight="bold">
+            Competitive Insights
+          </Typography>
+          <Typography variant="p" color="textSecondary">
+            Interact with your followers directly from our intuitive dashboard.{" "}
+          </Typography>
+        </Card>
       </div>
     </section>
   );
