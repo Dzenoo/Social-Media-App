@@ -41,4 +41,5 @@
   padding: 40px;
   flex-wrap: wrap;
   text-align: center;
+  justify-content: center;
 }
