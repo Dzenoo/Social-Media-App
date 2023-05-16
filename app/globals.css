@@ -1,0 +1,13 @@
+:root {
+  --blue_color: #006ccf;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.link_no_decoration {
+  text-decoration: none;
+  color: #fff;
+}

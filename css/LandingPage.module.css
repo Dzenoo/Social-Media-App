@@ -1,0 +1,33 @@
+.landing_nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button_div {
+  margin-right: 20px;
+}
+
+.landing_hero {
+  text-align: center;
+  margin-top: 6em;
+}
+
+.landing_content {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  margin: auto;
+  gap: 1em;
+}
+
+.blue_span {
+  color: var(--blue_color);
+}
+
+.landing_buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
