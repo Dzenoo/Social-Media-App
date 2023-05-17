@@ -31,8 +31,8 @@ const Signup = () => {
               <Image
                 src="/images/search.png"
                 alt="google"
-                width={40}
-                height={40}
+                width={30}
+                height={30}
               />
             </div>
             <Button
