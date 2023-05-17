@@ -5,7 +5,7 @@ const layout = ({ children }) => {
   return (
     <div className="layout">
       <Sidebar />
-      <main>{children}</main>
+      {children}
     </div>
   );
 };

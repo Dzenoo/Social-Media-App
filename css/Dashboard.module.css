@@ -1,0 +1,40 @@
+.card_actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.container {
+  display: flex;
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  padding: 20px;
+  width: 300px;
+}
+
+.pst {
+  background-color: #f2f2f2;
+  padding: 6px;
+  border-radius: 8px;
+}
+.flw {
+  background-color: #0084ff27;
+  padding: 6px;
+  border-radius: 8px;
+}
+.lis {
+  background-color: #ff10102d;
+  padding: 6px;
+  border-radius: 8px;
+}
+.cmt {
+  background-color: #ffaa0041;
+  padding: 6px;
+  border-radius: 8px;
+}
