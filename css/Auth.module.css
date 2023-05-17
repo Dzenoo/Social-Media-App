@@ -44,7 +44,11 @@
 .auth_section .actions .google {
   background-color: #fff;
   padding: 3px 10px;
-  box-shadow: 0 2px 4px #333;
+  box-shadow: 0 2px 8px #333;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 @media (max-width: 884px) {
