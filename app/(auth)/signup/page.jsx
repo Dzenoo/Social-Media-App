@@ -6,9 +6,9 @@ import Image from "next/image";
 
 const Signup = () => {
   return (
-    <section className={classes.signup_section}>
+    <section className={classes.auth_section}>
       <div className={classes.empty_div}></div>
-      <div className={classes.signup_form_div}>
+      <div className={classes.form_div}>
         <Typography color="#333" variant="h4" fontWeight="bold">
           CREATE ACCOUNT
         </Typography>
@@ -18,7 +18,7 @@ const Signup = () => {
           placeat eos magnam reiciendis hic esse, omnis consequuntur. Dicta,
           laudantium!
         </Typography>
-        <form className={classes.signup_form}>
+        <form className={classes.form}>
           <TextField placeholder="Enter username" label="Username" />
           <TextField placeholder="Enter email" label="Email" />
           <TextField placeholder="Enter your password" label="Password" />
@@ -26,7 +26,7 @@ const Signup = () => {
             placeholder="Confirm your password..."
             label="Confirm password"
           />
-          <div className={classes.signup_actions}>
+          <div className={classes.actions}>
             <div className={classes.google}>
               <Image
                 src="/images/search.png"

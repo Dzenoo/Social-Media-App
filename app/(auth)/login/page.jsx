@@ -6,9 +6,9 @@ import Image from "next/image";
 
 const Login = () => {
   return (
-    <section className={classes.signup_section}>
+    <section className={classes.auth_section}>
       <div className={classes.empty_div}></div>
-      <div className={classes.signup_form_div}>
+      <div className={classes.form_div}>
         <Typography color="#333" variant="h4" fontWeight="bold">
           LOGIN
         </Typography>
@@ -18,10 +18,10 @@ const Login = () => {
           placeat eos magnam reiciendis hic esse, omnis consequuntur. Dicta,
           laudantium!
         </Typography>
-        <form className={classes.signup_form}>
+        <form className={classes.form}>
           <TextField placeholder="example@gmail.com" label="Email" />
           <TextField placeholder="****" label="Password" />
-          <div className={classes.signup_actions}>
+          <div className={classes.actions}>
             <div className={classes.google}>
               <Image
                 src="/images/search.png"
