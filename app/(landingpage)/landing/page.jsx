@@ -19,12 +19,12 @@ const LandingPage = () => {
         </Typography>
         <div className={classes.landing_buttons}>
           <Button variant="contained" fontWeight="bold" size="large">
-            <Link href="/auth" className="link_no_decoration">
+            <Link href="/signup" className="link_no_decoration">
               Sign Up Today!
             </Link>
           </Button>
           <Button variant="contained" fontWeight="bold" size="large">
-            <Link href="/auth" className="link_no_decoration">
+            <Link href="/login" className="link_no_decoration">
               Log in to Account
             </Link>
           </Button>

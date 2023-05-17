@@ -15,7 +15,7 @@ const LandingPageNav = () => {
       </div>
       <div className={classes.button_div}>
         <Button variant="contained" size="large">
-          <Link href="/auth" className="link_no_decoration">
+          <Link href="/signup" className="link_no_decoration">
             Sign Up
           </Link>
         </Button>
