@@ -1,0 +1,48 @@
+.signup_section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+  grid-template-areas:
+    "div div div form form"
+    "div div div form form"
+    "div div div form form";
+  height: 58.56em;
+}
+
+.signup_section .empty_div {
+  grid-area: div;
+  background: var(--blue_color);
+  width: 100%;
+  height: 100%;
+}
+
+.signup_section .signup_form_div {
+  grid-area: form;
+  padding: 40px;
+  max-width: 600px;
+  gap: 2em;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup_section .signup_form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.signup_section .signup_actions {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2em;
+}
+
+.signup_section .signup_actions .google {
+  background-color: #fff;
+  padding: 3px 10px;
+  box-shadow: 0 2px 4px #333;
+}
