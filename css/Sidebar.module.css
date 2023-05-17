@@ -18,13 +18,15 @@
   list-style: none;
   gap: 12px;
   margin-top: 2em;
+  position: relative;
+  right: 40px;
 }
 
 .sidebar_list li a {
   display: flex;
   align-items: center;
   gap: 1em;
-  padding: 12px 40px;
+  padding: 12px;
   border-radius: 8px;
   color: #00000099;
   text-decoration: none;
