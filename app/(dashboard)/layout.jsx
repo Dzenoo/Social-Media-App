@@ -3,10 +3,10 @@ import React from "react";
 
 const layout = ({ children }) => {
   return (
-    <>
+    <div className="layout">
       <Sidebar />
-      {children}
-    </>
+      <main>{children}</main>
+    </div>
   );
 };
 
