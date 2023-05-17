@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Container, Typography } from "@mui/material";
+import { Box, Card, Container, Typography } from "@mui/material";
 import classes from "../../css/Dashboard.module.css";
 import Image from "next/image";
 
@@ -33,14 +33,14 @@ const CARD = [
 
 const Cards = ({ posts, followers, likes, comments }) => {
   return (
-    <Container maxWidth="lg" className={classes.container}>
+    <Box className={classes.container}>
       {CARD.map((card) => (
         <Card className={classes.card} key={card.id}>
           <Typography variant="h6" color="textPrimary" fontWeight="bold">
             {card.title}
           </Typography>
           <div className={classes.card_actions}>
-            <Typography variant="h4" color="textPrimary" fontWeight="bold">
+            <Typography variant="h3" color="textPrimary" fontWeight="bold">
               {card.num === "posts" && posts}
               {card.num === "followers" && followers}
               {card.num === "likes" && likes}
@@ -59,7 +59,7 @@ const Cards = ({ posts, followers, likes, comments }) => {
           </div>
         </Card>
       ))}
-    </Container>
+    </Box>
   );
 };
 

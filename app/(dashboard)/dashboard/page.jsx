@@ -11,8 +11,10 @@ const Dashboard = () => {
       </Typography>
       {/* Cards */}
       <Cards posts={40} followers={60} likes={20} comments={20} />
+      {/* Line Chart */}
     </section>
   );
 };
 
 export default Dashboard;
+``;
