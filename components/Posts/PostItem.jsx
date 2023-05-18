@@ -1,5 +1,5 @@
 "use client";
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Button, Card, Typography } from "@mui/material";
 import classes from "../../css/Posts.module.css";
 import Image from "next/image";
 
@@ -43,11 +43,11 @@ const PostItem = () => {
       <Box className={classes.actions}>
         <div className={classes.action}>
           <Image src="/images/edit.png" width={40} height={40} />
-          <Typography fontWeight="bold">Edit</Typography>
+          <Button>Edit</Button>
         </div>
         <div className={classes.action}>
           <Image src="/images/remove.png" width={40} height={40} />
-          <Typography fontWeight="bold">Delete</Typography>
+          <Button sx={{ color: "red" }}>Delete</Button>
         </div>
       </Box>
     </Card>
