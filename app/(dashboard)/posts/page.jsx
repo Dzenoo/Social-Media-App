@@ -14,6 +14,7 @@ import Image from "next/image";
 import PostItem from "@/components/Posts/PostItem";
 import Modale from "@/components/Modal";
 import { useState } from "react";
+import posts from "../../../data/data.json";
 
 const Posts = () => {
   const [open, setopen] = useState(false);
@@ -58,12 +59,18 @@ const Posts = () => {
         </Box>
       </div>
       <div className={classes.posts_container}>
-        <PostItem openDeleteModal={handleOpen} />
-        <PostItem openDeleteModal={handleOpen} />
-        <PostItem openDeleteModal={handleOpen} />
-        <PostItem openDeleteModal={handleOpen} />
-        <PostItem openDeleteModal={handleOpen} />
-        <PostItem openDeleteModal={handleOpen} />
+        {posts.posts.map((post) => (
+          <PostItem
+            key={post.id}
+            id={post.id}
+            openDeleteModal={handleOpen}
+            description={post.description}
+            likes={post.likes}
+            comments={post.comments}
+            shares={post.shares}
+            date={post.date}
+          />
+        ))}
         <Modale isOpen={open} close={handleClose} />
       </div>
     </section>

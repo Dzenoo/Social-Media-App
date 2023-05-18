@@ -2,51 +2,58 @@
 import { Box, Button, Card, Typography } from "@mui/material";
 import classes from "../../css/Posts.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
-const PostItem = ({ openDeleteModal }) => {
+const PostItem = ({
+  openDeleteModal,
+  description,
+  likes,
+  comments,
+  shares,
+  date,
+  id,
+}) => {
   return (
     <Card className={classes.post_item}>
       <Box className={classes.img}>
-        <Image src="/images/setting.png" width={100} height={100} />
+        <Image alt="img" src="/images/setting.png" width={100} height={100} />
         <Typography variant="p" color="textSecondary">
-          Exciting news! We're launching a new product that will revolutionize
-          the industry. Stay tuned for updates! Exciting news! We're launching a
-          new product that will revolutionize the industry. Stay tuned for
-          updates! Exciting news! We're launching a new product that will
-          revolutionize the industry. Stay tuned for updates!
+          {description}
         </Typography>
       </Box>
       <Box className={classes.interactivity}>
         <div className={classes.interactive_item}>
           <div className={classes.interactive_background_like}>
-            <Image src="/images/like.png" width={20} height={20} />
+            <Image alt="img" src="/images/like.png" width={20} height={20} />
           </div>
-          <strong>125</strong>
+          <strong>{likes}</strong>
         </div>
         <div className={classes.interactive_item}>
           <div className={classes.interactive_background_comment}>
-            <Image src="/images/comment.png" width={20} height={20} />
+            <Image alt="img" src="/images/comment.png" width={20} height={20} />
           </div>
-          <strong>30</strong>
+          <strong>{comments}</strong>
         </div>
         <div className={classes.interactive_item}>
           <div className={classes.interactive_background_share}>
-            <Image src="/images/share.png" width={20} height={20} />
+            <Image alt="img" src="/images/share.png" width={20} height={20} />
           </div>
-          <strong>17</strong>
+          <strong>{shares}</strong>
         </div>
       </Box>
       <Box className={classes.date}>
-        <Image src="/images/calendar2.png" width={40} height={40} />
-        <Typography fontWeight="bold">May 4, 2023</Typography>
+        <Image alt="img" src="/images/calendar2.png" width={40} height={40} />
+        <Typography fontWeight="bold">{date}</Typography>
       </Box>
       <Box className={classes.actions}>
         <div className={classes.action}>
-          <Image src="/images/edit.png" width={40} height={40} />
-          <Button>Edit</Button>
+          <Image alt="img" src="/images/edit.png" width={40} height={40} />
+          <Button>
+            <Link href={`/posts/${id}`}>Edit</Link>
+          </Button>
         </div>
         <div className={classes.action}>
-          <Image src="/images/remove.png" width={40} height={40} />
+          <Image alt="img" src="/images/remove.png" width={40} height={40} />
           <Button sx={{ color: "red" }} onClick={openDeleteModal}>
             Delete
           </Button>

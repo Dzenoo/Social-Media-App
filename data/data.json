@@ -1,0 +1,52 @@
+{
+  "posts": [
+    {
+      "id": "p1",
+      "description": "Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates!",
+      "likes": 40,
+      "comments": 30,
+      "shares": 17,
+      "date": "May 4, 2023"
+    },
+    {
+      "id": "p2",
+      "description": "Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates!",
+      "likes": 40,
+      "comments": 30,
+      "shares": 17,
+      "date": "May 4, 2023"
+    },
+    {
+      "id": "p3",
+      "description": "Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates!",
+      "likes": 40,
+      "comments": 30,
+      "shares": 17,
+      "date": "May 4, 2023"
+    },
+    {
+      "id": "p4",
+      "description": "Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates!",
+      "likes": 40,
+      "comments": 30,
+      "shares": 17,
+      "date": "May 4, 2023"
+    },
+    {
+      "id": "p5",
+      "description": "Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates!",
+      "likes": 40,
+      "comments": 30,
+      "shares": 17,
+      "date": "May 4, 2023"
+    },
+    {
+      "id": "p6",
+      "description": "Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates! Exciting news! We're launching a new product that will revolutionize the industry. Stay tuned for updates!",
+      "likes": 40,
+      "comments": 30,
+      "shares": 17,
+      "date": "May 4, 2023"
+    }
+  ]
+}
