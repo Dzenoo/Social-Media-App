@@ -12,8 +12,14 @@ import {
 import classes from "../../../css/Posts.module.css";
 import Image from "next/image";
 import PostItem from "@/components/Posts/PostItem";
+import Modale from "@/components/Modal";
+import { useState } from "react";
 
 const Posts = () => {
+  const [open, setopen] = useState(false);
+  const handleOpen = () => setopen(true);
+  const handleClose = () => setopen(false);
+
   return (
     <section className={classes.main_dashboard}>
       <div className={classes.filter_bar}>
@@ -52,12 +58,13 @@ const Posts = () => {
         </Box>
       </div>
       <div className={classes.posts_container}>
-        <PostItem />
-        <PostItem />
-        <PostItem />
-        <PostItem />
-        <PostItem />
-        <PostItem />
+        <PostItem openDeleteModal={handleOpen} />
+        <PostItem openDeleteModal={handleOpen} />
+        <PostItem openDeleteModal={handleOpen} />
+        <PostItem openDeleteModal={handleOpen} />
+        <PostItem openDeleteModal={handleOpen} />
+        <PostItem openDeleteModal={handleOpen} />
+        <Modale isOpen={open} close={handleClose} />
       </div>
     </section>
   );

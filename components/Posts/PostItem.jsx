@@ -3,7 +3,7 @@ import { Box, Button, Card, Typography } from "@mui/material";
 import classes from "../../css/Posts.module.css";
 import Image from "next/image";
 
-const PostItem = () => {
+const PostItem = ({ openDeleteModal }) => {
   return (
     <Card className={classes.post_item}>
       <Box className={classes.img}>
@@ -47,7 +47,9 @@ const PostItem = () => {
         </div>
         <div className={classes.action}>
           <Image src="/images/remove.png" width={40} height={40} />
-          <Button sx={{ color: "red" }}>Delete</Button>
+          <Button sx={{ color: "red" }} onClick={openDeleteModal}>
+            Delete
+          </Button>
         </div>
       </Box>
     </Card>
