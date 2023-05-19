@@ -1,17 +1,46 @@
 "use client";
-import { Button, Card, Typography } from "@mui/material";
+import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 
+const CommentSection = () => {
+  return (
+    <div className={classes.comment_section}>
+      <hr />
+      <div className={classes.comment_div}>
+        <Image src="/images/setting.png" width={60} height={60} />
+        <form>
+          <TextField placeholder="Comment new.." fullWidth />
+        </form>
+      </div>
+      <Typography fontWeight="bold">All Comments</Typography>
+      <div className={classes.comment_info}>
+        <Image src="/images/setting.png" width={60} height={60} />
+        <div>
+          <Typography fontWeight="bold">John Doe</Typography>
+          <Typography color="textSecondary">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor
+          </Typography>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Post = () => {
+  const [commentIsOpen, setcommentIsOpen] = useState(false);
+
   return (
     <Card className={classes.post_card}>
       <div className={classes.post_card_header}>
         <div className={classes.post_card_header_info}>
           <Image src="/images/setting.png" width={60} height={60} alt="img" />
           <div>
-            <Typography>John Doe</Typography>
+            <Typography fontWeight="bold" variant="h6">
+              John Doe
+            </Typography>
             <Typography>12 minutes ago</Typography>
           </div>
         </div>
@@ -22,7 +51,7 @@ const Post = () => {
         </span>
       </div>
       <div className={classes.post_card_header}>
-        <Typography>
+        <Typography color="textSecondary">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -37,7 +66,11 @@ const Post = () => {
           <Image src="/images/like.png" width={30} height={30} alt="like" />
           Like
         </Button>
-        <Button fullWidth className={classes.post_card_button}>
+        <Button
+          fullWidth
+          className={classes.post_card_button}
+          onClick={() => setcommentIsOpen((prevState) => !prevState)}
+        >
           <Image
             src="/images/comment.png"
             width={30}
@@ -51,6 +84,8 @@ const Post = () => {
           Share
         </Button>
       </div>
+      {/* Comments for post */}
+      {commentIsOpen && <CommentSection />}
     </Card>
   );
 };
