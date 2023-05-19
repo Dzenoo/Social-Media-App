@@ -36,7 +36,7 @@ const EditPostPage = async ({ params }) => {
       <form>
         <div className={classes.image_div}>
           <div>
-            <Image src="/images/add.png" width={400} height={400} />
+            <Image src="/images/setting.png" width={400} height={400} />
             <Input type="file" sx={{ marginTop: "12px" }} />
           </div>
           <textarea
