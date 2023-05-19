@@ -1,0 +1,14 @@
+.comment_div {
+  display: flex;
+  width: 100%;
+  gap: 1.2em;
+}
+
+.comment_div form {
+  width: 100%;
+}
+
+.comment_actions {
+  display: flex;
+  justify-content: flex-end;
+}
