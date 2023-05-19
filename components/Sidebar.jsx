@@ -2,15 +2,22 @@
 import Image from "next/image";
 import classes from "../css/Sidebar.module.css";
 import Link from "next/link";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { useState } from "react";
 
 const Sidebar = () => {
+  const [barIsOpen, setbarIsOpen] = useState(false);
+  const toggle = () => setbarIsOpen(!barIsOpen);
+
+  const activeClassNames = barIsOpen
+    ? `${classes.sidebar} ${classes.open}`
+    : `${classes.sidebar} ${classes.closed}`;
+
   return (
-    <nav className={classes.sidebar}>
-      {/* <div>
-        <Image src="/images/logo_blue.png" width={220} height={70} alt="logo" />
-      </div> */}
-      <Typography color="textSecondary">Menu</Typography>
+    <nav className={activeClassNames}>
+      <Button onClick={toggle} variant="outlined">
+        Menu
+      </Button>
       <ul className={classes.sidebar_list}>
         <li>
           <Link href="/dashboard">
