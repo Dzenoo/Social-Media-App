@@ -8,7 +8,6 @@ import { useState } from "react";
 const Sidebar = () => {
   const [barIsOpen, setbarIsOpen] = useState(false);
   const toggle = () => setbarIsOpen(!barIsOpen);
-
   const activeClassNames = barIsOpen
     ? `${classes.sidebar} ${classes.open}`
     : `${classes.sidebar} ${classes.closed}`;
