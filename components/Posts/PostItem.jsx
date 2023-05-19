@@ -49,7 +49,9 @@ const PostItem = ({
         <div className={classes.action}>
           <Image alt="img" src="/images/edit.png" width={40} height={40} />
           <Button>
-            <Link href={`/posts/${id}`}>Edit</Link>
+            <Link className="link_no_decoration" href={`/posts/${id}`}>
+              Edit
+            </Link>
           </Button>
         </div>
         <div className={classes.action}>

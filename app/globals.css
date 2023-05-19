@@ -9,7 +9,7 @@
 
 .link_no_decoration {
   text-decoration: none;
-  color: #fff;
+  color: inherit;
 }
 
 .layout {
