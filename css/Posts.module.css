@@ -119,7 +119,7 @@
   width: fit-content;
 }
 
-.actions {
+.edit_dashboard form .edit_actions {
   position: absolute;
   right: 20px;
   bottom: 0;

@@ -58,7 +58,7 @@ const EditPostPage = async ({ params }) => {
             <TextField label="Location" id="location" />
           </FormControl>
         </div>
-        <div className={classes.actions}>
+        <div className={classes.edit_actions}>
           <Button variant="outlined">Cancel</Button>
           <Button variant="contained">Save</Button>
         </div>
