@@ -7,9 +7,9 @@ import { Typography } from "@mui/material";
 const Sidebar = () => {
   return (
     <nav className={classes.sidebar}>
-      <div>
+      {/* <div>
         <Image src="/images/logo_blue.png" width={220} height={70} alt="logo" />
-      </div>
+      </div> */}
       <Typography color="textSecondary">Menu</Typography>
       <ul className={classes.sidebar_list}>
         <li>
