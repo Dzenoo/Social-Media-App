@@ -17,9 +17,9 @@ const HomeNavbar = () => {
       <div className={classes.nav_buttons}>
         <Link
           className="link_no_decoration"
-          href={pathname === "/dashboard" ? "/" : "/dashboard"}
+          href={pathname === "/" ? "/dashboard" : "/"}
         >
-          {pathname === "/dashboard" ? "Go to home" : "Go to dashboard"}
+          {pathname === "/" ? "Go to dashboard" : "Go to home"}
         </Link>
         <Button variant="outlined">Logout</Button>
       </div>
@@ -27,7 +27,7 @@ const HomeNavbar = () => {
         <Typography variant="h6" fontWeight="bold">
           John Doe
         </Typography>
-        <Image src="/images/setting.png" width={60} height={60} />
+        <Image src="/images/setting.png" width={60} height={60} alt="logo" />
       </div>
     </header>
   );
