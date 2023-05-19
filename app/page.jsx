@@ -1,5 +1,4 @@
 "use client";
-
 import NewPost from "@/components/Home/NewPost";
 import Post from "@/components/Home/Post";
 import { Container } from "@mui/material";

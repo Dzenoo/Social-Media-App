@@ -8,7 +8,6 @@ import { Button, Typography } from "@mui/material";
 
 const HomeNavbar = () => {
   const pathname = usePathname();
-
   return (
     <header className={classes.home_navbar}>
       <div>
