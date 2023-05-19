@@ -12,3 +12,42 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.post_card {
+  margin-top: 20px;
+}
+
+.post_card .post_card_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.post_card .post_card_header .post_card_header_info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* .post_card .post_card_image {
+  width: 100%;
+  height: max-content;
+} */
+
+.post_card .post_card_image img {
+  width: 100%;
+  height: 40%;
+  aspect-ratio: 16 / 9;
+}
+
+.post_card .post_card_actions {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post_card .post_card_actions .post_card_button {
+  display: flex;
+  gap: 12px;
+}
