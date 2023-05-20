@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import classes from "../../css/HomeNavbar.module.css";
 import { usePathname } from "next/navigation";
-import classes from "../css/HomeNavbar.module.css";
 import { Button, Typography } from "@mui/material";
 
 const HomeNavbar = () => {

@@ -12,10 +12,10 @@ import {
 import classes from "../../../css/Posts.module.css";
 import Image from "next/image";
 import PostItem from "@/components/Posts/PostItem";
-import Modale from "@/components/Modal";
 import { useState } from "react";
 import posts from "../../../data/data.json";
 import Link from "next/link";
+import Modale from "@/components/Modal/Modal";
 
 const Posts = () => {
   const [open, setopen] = useState(false);

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import classes from "../css/Sidebar.module.css";
+import classes from "../../css/Sidebar.module.css";
 import Link from "next/link";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";

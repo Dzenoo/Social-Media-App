@@ -1,4 +1,4 @@
-import LandingPageNav from "@/components/LandingPageNav";
+import LandingPageNav from "@/components/Navbar/LandingPageNav";
 
 const layout = ({ children }) => {
   return (
