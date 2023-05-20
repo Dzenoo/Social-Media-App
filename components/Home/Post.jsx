@@ -69,7 +69,7 @@ const Post = () => {
           onClick={() => setisLiked((prevState) => !prevState)}
         >
           <Image
-            src={isLiked ? "/images/like.png" : "/images/like2.png"}
+            src={!isLiked ? "/images/like.png" : "/images/like2.png"}
             width={30}
             height={30}
             alt="like"

@@ -9,10 +9,11 @@
   align-items: center;
   padding: 20px;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .sidebar.open {
-  height: 100%;
+  height: 440px;
 }
 
 .sidebar.closed {
