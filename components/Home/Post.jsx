@@ -31,6 +31,7 @@ const CommentSection = () => {
 
 const Post = () => {
   const [commentIsOpen, setcommentIsOpen] = useState(false);
+  const [isLiked, setisLiked] = useState(false);
 
   return (
     <Card className={classes.post_card}>
@@ -62,8 +63,17 @@ const Post = () => {
         <Image src="/images/setting.png" width={100} height={100} alt="img" />
       </div>
       <div className={classes.post_card_actions}>
-        <Button fullWidth className={classes.post_card_button}>
-          <Image src="/images/like.png" width={30} height={30} alt="like" />
+        <Button
+          fullWidth
+          className={classes.post_card_button}
+          onClick={() => setisLiked((prevState) => !prevState)}
+        >
+          <Image
+            src={isLiked ? "/images/like.png" : "/images/like2.png"}
+            width={30}
+            height={30}
+            alt="like"
+          />
           Like
         </Button>
         <Button
