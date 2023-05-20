@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Card, Container, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import classes from "../../css/Dashboard.module.css";
 import Image from "next/image";
 

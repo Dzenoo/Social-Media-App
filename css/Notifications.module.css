@@ -1,0 +1,44 @@
+.notifications_section {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3em;
+}
+
+.notifications_section .notifications_buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.notifications_section .notifications_container {
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.notification_item {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+}
+
+.notification_item.activeNotification {
+  background-color: #006bcf1f;
+  position: relative;
+}
+
+.notification_item.activeNotification::before {
+  content: " ";
+  width: 20px;
+  height: 20px;
+  background-color: #006ccf;
+  border-radius: 60%;
+  position: absolute;
+  right: 20px;
+  top: 40px;
+}
+
+.notification_item.basic_notification {
+  background-color: #ffffff;
+}
