@@ -81,4 +81,5 @@
   display: flex;
   gap: 2px;
   justify-content: flex-end;
+  margin-top: 20px;
 }
