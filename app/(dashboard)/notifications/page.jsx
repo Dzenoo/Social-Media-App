@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import classes from "../../../css/Notifications.module.css";
 import NotificationItem from "@/components/Notifications/NotificationItem";
 
@@ -10,11 +10,6 @@ const Notifications = () => {
         <Typography variant="h4" fontWeight="bold">
           Notifications
         </Typography>
-      </Box>
-      <Box className={classes.notifications_buttons}>
-        <Button variant="contained">All</Button>
-        <Button variant="outlined">Following</Button>
-        <Button variant="outlined">Archive</Button>
       </Box>
       <Box className={classes.notifications_container}>
         <NotificationItem
