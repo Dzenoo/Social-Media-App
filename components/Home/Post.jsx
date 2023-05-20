@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Modale from "../Modal/Modal";
+import Link from "next/link";
 
 const CommentSection = () => {
   return (
@@ -49,9 +50,11 @@ const Post = () => {
         <div className={classes.post_card_header_info}>
           <Image src="/images/setting.png" width={60} height={60} alt="img" />
           <div>
-            <Typography fontWeight="bold" variant="h6">
-              John Doe
-            </Typography>
+            <Link className="link_no_decoration" href="/userId">
+              <Typography fontWeight="bold" variant="h6">
+                John Doe
+              </Typography>
+            </Link>
             <Typography>12 minutes ago</Typography>
           </div>
         </div>
