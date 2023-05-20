@@ -3,6 +3,7 @@ import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
+import Modale from "../Modal/Modal";
 
 const CommentSection = () => {
   return (
@@ -32,6 +33,15 @@ const CommentSection = () => {
 const Post = () => {
   const [commentIsOpen, setcommentIsOpen] = useState(false);
   const [isLiked, setisLiked] = useState(false);
+  const [isEnteredShare, setisEnteredShare] = useState(false);
+
+  const openShareContent = () => {
+    setisEnteredShare(true);
+  };
+
+  const closeShareContent = () => {
+    setisEnteredShare(false);
+  };
 
   return (
     <Card className={classes.post_card}>
@@ -89,7 +99,38 @@ const Post = () => {
           />
           Comment
         </Button>
-        <Button fullWidth className={classes.post_card_button}>
+        {isEnteredShare && (
+          <div
+            onMouseLeave={closeShareContent}
+            onMouseEnter={openShareContent}
+            className={classes.share_div_content}
+          >
+            <Image
+              src="/images/linkedin.png"
+              width={40}
+              height={40}
+              alt="linkedin"
+            />{" "}
+            <Image
+              src="/images/linkedin.png"
+              width={40}
+              height={40}
+              alt="linkedin"
+            />{" "}
+            <Image
+              src="/images/linkedin.png"
+              width={40}
+              height={40}
+              alt="linkedin"
+            />
+          </div>
+        )}
+        <Button
+          fullWidth
+          className={classes.post_card_button}
+          onMouseEnter={openShareContent}
+          onMouseLeave={closeShareContent}
+        >
           <Image src="/images/share.png" width={30} height={30} alt="share" />
           Share
         </Button>

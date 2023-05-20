@@ -45,6 +45,7 @@
   padding: 8px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .post_card .post_card_actions .post_card_button {
@@ -64,4 +65,18 @@
   display: flex;
   align-items: center;
   gap: 1.2em;
+}
+
+.share_div_content {
+  content: " ";
+  width: fit-content;
+  height: fit-content;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 8px 0px;
+  position: absolute;
+  bottom: 52px;
+  right: 0;
+  transition: 0.3s;
+  padding: 12px;
 }

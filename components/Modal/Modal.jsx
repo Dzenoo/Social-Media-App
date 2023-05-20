@@ -27,12 +27,7 @@ const Modale = ({ isOpen, close, text, title }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h5"
-            fontWeight="bold"
-            color="red"
-          >
+          <Typography id="modal-modal-title" variant="h5" fontWeight="bold">
             {title}
           </Typography>
           <Typography
