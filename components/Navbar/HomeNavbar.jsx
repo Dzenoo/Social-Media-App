@@ -20,7 +20,6 @@ const HomeNavbar = () => {
         >
           {pathname === "/" ? "Go to dashboard" : "Go to home"}
         </Link>
-        <Button variant="outlined">Logout</Button>
       </div>
       <div className={classes.nav_profile}>
         <Typography variant="h6" fontWeight="bold">
