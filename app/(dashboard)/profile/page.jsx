@@ -1,5 +1,12 @@
 "use client";
-import { Box, Button, Card, Switch, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
 import classes from "../../../css/Profile.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,6 +14,7 @@ import Modale from "@/components/Modal/Modal";
 import { useState } from "react";
 
 const Profile = () => {
+  const [isEdit, setisEdit] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const openModal = () => setmodalIsOpen(true);
   const closeModal = () => setmodalIsOpen(false);
@@ -27,13 +35,21 @@ const Profile = () => {
             alt="profile"
           />
           <div className={classes.profile_nm}>
-            <div>
-              <Typography variant="h4" fontWeight="bold">
-                John Doe
-              </Typography>
-              <Typography variant="p" color="textSecondary">
-                johndoe@gmail.com
-              </Typography>
+            <div className={classes.edit_inputs}>
+              {isEdit ? (
+                <Typography variant="h4" fontWeight="bold">
+                  John Doe
+                </Typography>
+              ) : (
+                <TextField label="Edit name" />
+              )}
+              {isEdit ? (
+                <Typography variant="p" color="textSecondary">
+                  johndoe@gmail.com
+                </Typography>
+              ) : (
+                <TextField label="Edit email" />
+              )}
             </div>
             <div className={classes.profile_followers_info}>
               <Typography className={classes.typo_profile} variant="p">
@@ -64,15 +80,28 @@ const Profile = () => {
           <Typography fontWeight="bold" variant="h6">
             Biography
           </Typography>
-          <textarea className={classes.profile_textarea}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </textarea>
+          {isEdit ? (
+            <Typography color="textSecondary">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Typography>
+          ) : (
+            <textarea
+              className={classes.profile_textarea}
+              placeholder=" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+            sunt in culpa qui officia deserunt mollit anim id est laborum."
+            ></textarea>
+          )}
         </div>
         <div>
           <Typography fontWeight="bold" variant="h6">
@@ -99,14 +128,17 @@ const Profile = () => {
         text="Are you sure you want to your profile?"
         title="Deleting Profile Confirmation"
       />
-      <Button
-        variant="outlined"
-        onClick={openModal}
-        color="error"
-        className={classes.delete_acc}
-      >
-        Delete account?
-      </Button>
+      <div className={classes.profile_buttons}>
+        <Button variant="outlined" onClick={openModal} color="error">
+          Delete account?
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => setisEdit((prevState) => !prevState)}
+        >
+          {isEdit ? "Edit" : "Save"}
+        </Button>
+      </div>
     </section>
   );
 };
