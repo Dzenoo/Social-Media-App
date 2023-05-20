@@ -29,5 +29,4 @@ const HomeNavbar = () => {
     </header>
   );
 };
-
 export default HomeNavbar;
