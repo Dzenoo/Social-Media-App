@@ -73,7 +73,12 @@ const Post = () => {
         </Typography>
       </div>
       <div className={classes.post_card_image}>
-        <Image src="/images/setting.png" width={100} height={100} alt="img" />
+        <Image
+          src="/images/exampleimg.jpg"
+          width={400}
+          height={400}
+          alt="img"
+        />
       </div>
       <div className={classes.post_card_actions}>
         <Button
