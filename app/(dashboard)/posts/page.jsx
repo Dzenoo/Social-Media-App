@@ -15,6 +15,7 @@ import PostItem from "@/components/Posts/PostItem";
 import Modale from "@/components/Modal";
 import { useState } from "react";
 import posts from "../../../data/data.json";
+import Link from "next/link";
 
 const Posts = () => {
   const [open, setopen] = useState(false);
@@ -42,19 +43,21 @@ const Posts = () => {
             <TextField label="Search" />
           </FormControl>
           <FormControl>
-            <Button
-              variant="contained"
-              size="large"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                padding: "12px",
-              }}
-            >
-              Create new post
-              <Image src="/images/add.png" width={30} height={30} />
-            </Button>
+            <Link className="link_no_decoration" href="/posts/new">
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "12px",
+                }}
+              >
+                Create new post
+                <Image src="/images/add.png" width={30} height={30} />
+              </Button>
+            </Link>
           </FormControl>
         </Box>
       </div>
