@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-const Modale = ({ isOpen, close }) => {
+const Modale = ({ isOpen, close, text, title }) => {
   return (
     <div>
       <Modal
@@ -33,15 +33,14 @@ const Modale = ({ isOpen, close }) => {
             fontWeight="bold"
             color="red"
           >
-            Delete Post Confirmation
+            {title}
           </Typography>
           <Typography
             id="modal-modal-description"
             sx={{ mt: 2 }}
             color="textSecondary"
           >
-            Are you sure you want to delete this post? This action cannot be
-            undone.
+            {text}
           </Typography>
           <Box sx={{ position: "absolute", bottom: "20px", right: "20px" }}>
             <Button variant="outlined" onClick={close}>

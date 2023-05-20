@@ -1,10 +1,16 @@
 "use client";
-import { Box, Card, Switch, Typography } from "@mui/material";
+import { Box, Button, Card, Switch, Typography } from "@mui/material";
 import classes from "../../../css/Profile.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import Modale from "@/components/Modal/Modal";
+import { useState } from "react";
 
 const Profile = () => {
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
+  const openModal = () => setmodalIsOpen(true);
+  const closeModal = () => setmodalIsOpen(false);
+
   return (
     <section className={classes.profile_section}>
       <Box>
@@ -41,10 +47,17 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <Card className={classes.profile_saved}>
-          <Image src="/images/save.png" width={30} height={30} alt="profile" />
-          <Typography fontWeight="bold">Saved Posts</Typography>
-        </Card>
+        <Link href="/profile/userId" className="link_no_decoration">
+          <Card className={classes.profile_saved}>
+            <Image
+              src="/images/save.png"
+              width={30}
+              height={30}
+              alt="profile"
+            />
+            <Typography fontWeight="bold">Saved Posts</Typography>
+          </Card>
+        </Link>
       </Box>
       <Box className={classes.profile_edit_info}>
         <div>
@@ -80,9 +93,20 @@ const Profile = () => {
           </div>
         </div>
       </Box>
-      <Link href="/" className={classes.delete_acc}>
+      <Modale
+        isOpen={modalIsOpen}
+        close={closeModal}
+        text="Are you sure you want to your profile?"
+        title="Deleting Profile Confirmation"
+      />
+      <Button
+        variant="outlined"
+        onClick={openModal}
+        color="error"
+        className={classes.delete_acc}
+      >
         Delete account?
-      </Link>
+      </Button>
     </section>
   );
 };

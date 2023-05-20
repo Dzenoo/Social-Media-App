@@ -74,7 +74,12 @@ const Posts = () => {
             date={post.date}
           />
         ))}
-        <Modale isOpen={open} close={handleClose} />
+        <Modale
+          isOpen={open}
+          close={handleClose}
+          text="Are you sure you want to delete this post?"
+          title="Deleting Post Confirmation"
+        />
       </div>
     </section>
   );
