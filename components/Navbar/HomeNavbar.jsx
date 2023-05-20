@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import classes from "../../css/HomeNavbar.module.css";

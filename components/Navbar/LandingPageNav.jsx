@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@mui/material";
 import classes from "../css/LandingPage.module.css";
 import Image from "next/image";
