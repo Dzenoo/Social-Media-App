@@ -1,0 +1,77 @@
+.profile_section {
+  width: 100%;
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile_section .profile_container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px 12px 0;
+  align-items: center;
+}
+
+.profile_section .profile_container .profile_info {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.profile_section .profile_container .profile_info .profile_nm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3em;
+}
+
+.profile_section .profile_container .profile_info .profile_nm .typo_profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_section
+  .profile_container
+  .profile_info
+  .profile_nm
+  .profile_followers_info {
+  display: flex;
+  gap: 1.2em;
+}
+
+.profile_section .profile_container .profile_saved {
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile_section .profile_edit_info {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.profile_section .profile_edit_info .profile_textarea {
+  width: 100%;
+  height: 200px;
+  font-size: 18px;
+  font-weight: 400;
+  resize: none;
+  color: #797979;
+  border: 1px solid #79797946;
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.11);
+  border-radius: 8px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.delete_acc {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}

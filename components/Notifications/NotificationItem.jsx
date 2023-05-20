@@ -17,8 +17,14 @@ const NotificationItem = ({ title, time, isActive }) => {
         height={60}
         alt="notifi_img"
       />
-      <Box>
-        <Typography fontWeight="bold" variant="h6">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <Typography fontWeight="bold" variant="p">
           {title}
         </Typography>
         <Typography color="textSecondary">{time}</Typography>
