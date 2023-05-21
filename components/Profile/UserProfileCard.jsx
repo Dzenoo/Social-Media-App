@@ -6,13 +6,12 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
 import classes from "../../css/Profile.module.css";
 
-const UserProfileCard = () => {
+const UserProfileCard = ({ isPrivate }) => {
   return (
     <Card className={classes.user_profile_card}>
       <Box className={classes.landingImage}>
@@ -25,9 +24,11 @@ const UserProfileCard = () => {
             <Typography variant="h6" fontWeight="bold">
               John Doe
             </Typography>
-            <Typography color="textSecondary" variant="p">
-              johndoe@gmail.com
-            </Typography>
+            {!isPrivate && (
+              <Typography color="textSecondary" variant="p">
+                johndoe@gmail.com
+              </Typography>
+            )}
           </div>
         </Box>
         <Box className={classes.profile_view_flw}>
@@ -46,17 +47,19 @@ const UserProfileCard = () => {
         </Box>
         <Button variant="contained">Follow</Button>
       </CardContent>
-      <CardActions className={classes.profile_view_actions}>
-        <Typography variant="h6" fontWeight="bold">
-          Bio
-        </Typography>
-        <Typography color="textSecondary" variant="p">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat
-        </Typography>
-      </CardActions>
+      {!isPrivate && (
+        <CardActions className={classes.profile_view_actions}>
+          <Typography variant="h6" fontWeight="bold">
+            Bio
+          </Typography>
+          <Typography color="textSecondary" variant="p">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat
+          </Typography>
+        </CardActions>
+      )}
     </Card>
   );
 };

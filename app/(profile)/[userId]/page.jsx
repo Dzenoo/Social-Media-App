@@ -5,14 +5,16 @@ import UserProfileCard from "@/components/Profile/UserProfileCard";
 import { Container, Typography } from "@mui/material";
 
 const userPosts = 4;
+const isPrivate = true;
 
 const UserProfile = () => {
   return (
     <Container maxWidth="lg">
-      <UserProfileCard />
-      {userPosts === 0 ? (
+      <UserProfileCard isPrivate={isPrivate} />
+      {userPosts === 0 || isPrivate ? (
         <Typography variant="h4" align="center" marginTop="40px">
-          User have no posts
+          {userPosts === 0 && "User have no posts"}
+          {isPrivate && "This account is private"}
         </Typography>
       ) : (
         <Container maxWidth="md">
