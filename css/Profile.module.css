@@ -91,15 +91,10 @@
   overflow: hidden;
 }
 
-.user_profile_card .landingImage {
-  /* padding-top: 26.45%; */
-  /* width: 100%; */
-}
-
 .user_profile_card .landingImage img {
   width: 100%;
   height: 20em;
-  /* height: 20%; */
+  object-fit: cover;
 }
 
 .user_profile_card .profile_content {
@@ -111,8 +106,14 @@
 
 .user_profile_card .profile_content img {
   background-color: #fff;
-  box-shadow: 0px 1px 4px rgba(25, 28, 204, 0.733);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.253);
   border-radius: 100px;
+}
+
+.user_profile_card .profile_content .profile_view_info {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
 }
 
 .user_profile_card .profile_content .profile_view_flw {

@@ -16,17 +16,19 @@ const UserProfileCard = () => {
   return (
     <Card className={classes.user_profile_card}>
       <Box className={classes.landingImage}>
-        <Image src="/images/landing.jpg" width={100} height={100} />
+        <Image src="/images/exampleimg.jpg" width={600} height={600} />
       </Box>
       <CardContent className={classes.profile_content}>
-        <Image src="/images/exampleimg.jpg" width={120} height={120} />
         <Box className={classes.profile_view_info}>
-          <Typography variant="h6" fontWeight="bold">
-            John Doe
-          </Typography>
-          <Typography color="textSecondary" variant="p">
-            johndoe@gmail.com
-          </Typography>
+          <Image src="/images/exampleimg.jpg" width={120} height={120} />
+          <div>
+            <Typography variant="h6" fontWeight="bold">
+              John Doe
+            </Typography>
+            <Typography color="textSecondary" variant="p">
+              johndoe@gmail.com
+            </Typography>
+          </div>
         </Box>
         <Box className={classes.profile_view_flw}>
           <Typography variant="p" className={classes.profile_flws}>
