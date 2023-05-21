@@ -13,17 +13,21 @@ const Signup = () => {
           CREATE ACCOUNT
         </Typography>
         <Typography color="textSecondary" variant="p">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-          aperiam aut saepe ipsum earum hic illum totam sit assumenda. Sequi
-          placeat eos magnam reiciendis hic esse, omnis consequuntur. Dicta,
-          laudantium!
+          Join our community today by filling out our simple signup form and
+          start enjoying exclusive benefits
         </Typography>
         <form className={classes.form}>
-          <TextField placeholder="Enter username" label="Username" />
+          <TextField placeholder="Enter First Name" label="First Name" />
+          <TextField placeholder="Enter Last Name" label="Last Name" />
           <TextField placeholder="Enter email" label="Email" />
+          <TextField
+            placeholder="Enter Biography"
+            label="Biography"
+            multiline
+          />
           <TextField placeholder="Enter your password" label="Password" />
           <TextField
-            placeholder="Confirm your password..."
+            placeholder="Confirm password..."
             label="Confirm password"
           />
           <div className={classes.actions}>

@@ -38,14 +38,14 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  gap: 2em;
+  gap: 1em;
 }
 
 .auth_section .actions .google {
   background-color: #fff;
   padding: 3px 10px;
-  box-shadow: 0 2px 8px #333;
-  border-radius: 12px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.253);
+  border-radius: 3px;
   display: flex;
   align-items: center;
   cursor: pointer;

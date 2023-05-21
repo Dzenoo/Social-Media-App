@@ -13,10 +13,8 @@ const Login = () => {
           LOGIN
         </Typography>
         <Typography color="textSecondary" variant="p">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-          aperiam aut saepe ipsum earum hic illum totam sit assumenda. Sequi
-          placeat eos magnam reiciendis hic esse, omnis consequuntur. Dicta,
-          laudantium!
+          Join our community today by filling out our simple login form and
+          start enjoying exclusive benefits
         </Typography>
         <form className={classes.form}>
           <TextField placeholder="example@gmail.com" label="Email" />
