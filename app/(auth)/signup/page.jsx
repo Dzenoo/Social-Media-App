@@ -1,8 +1,8 @@
 "use client";
-import { Button, TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import classes from "../../../css/Auth.module.css";
 import Link from "next/link";
-import Image from "next/image";
+import SignupForm from "@/components/Auth/SignupForm";
 
 const Signup = () => {
   return (
@@ -16,39 +16,7 @@ const Signup = () => {
           Join our community today by filling out our simple signup form and
           start enjoying exclusive benefits
         </Typography>
-        <form className={classes.form}>
-          <TextField placeholder="Enter First Name" label="First Name" />
-          <TextField placeholder="Enter Last Name" label="Last Name" />
-          <TextField placeholder="Enter email" label="Email" />
-          <TextField
-            placeholder="Enter Biography"
-            label="Biography"
-            multiline
-          />
-          <TextField placeholder="Enter your password" label="Password" />
-          <TextField
-            placeholder="Confirm password..."
-            label="Confirm password"
-          />
-          <div className={classes.actions}>
-            <div className={classes.google}>
-              <Image
-                src="/images/search.png"
-                alt="google"
-                width={30}
-                height={30}
-              />
-            </div>
-            <Button
-              type="submit"
-              size="large"
-              variant="contained"
-              sx={{ backgroundColor: "#006ccf", width: "100%" }}
-            >
-              Register
-            </Button>
-          </div>
-        </form>
+        <SignupForm classes={classes} />
         <Typography>
           You already have account? <Link href="/login">Click here</Link>
         </Typography>
