@@ -3,7 +3,6 @@ import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
-import Modale from "../Modal/Modal";
 import Link from "next/link";
 
 const CommentSection = () => {
