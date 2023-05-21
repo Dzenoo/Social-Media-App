@@ -22,7 +22,7 @@ export const useValidation = (validators) => {
   const [state, dispatch] = useReducer(reducer, {
     value: "",
     isTouched: false,
-    isValid: true,
+    isValid: false,
   });
 
   const handleChange = (e) => {

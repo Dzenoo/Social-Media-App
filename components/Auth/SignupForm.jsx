@@ -20,6 +20,28 @@ const SignupForm = ({ classes }) => {
     VALIDATOR_PASSWORD_MATCH(passwordValidation.value),
   ]);
 
+  const formData = {
+    first_name: firstNameValidation.value,
+    last_name: lastNameValidation.value,
+    email: emailValidation.value,
+    biography: biographyValidation.value,
+    password: passwordValidation.value,
+  };
+
+  let formIsValid = false;
+  if (
+    firstNameValidation.isValid &&
+    lastNameValidation.isValid &&
+    emailValidation.isValid &&
+    biographyValidation.isValid &&
+    passwordValidation.isValid &&
+    confirmPasswordValidation.isValid
+  ) {
+    formIsValid = true;
+  }
+
+  console.log(formIsValid);
+
   return (
     <form className={classes.form}>
       <TextField
@@ -114,6 +136,7 @@ const SignupForm = ({ classes }) => {
           type="submit"
           size="large"
           variant="contained"
+          disabled={!formIsValid}
           sx={{ backgroundColor: "#006ccf", width: "100%" }}
         >
           Register
