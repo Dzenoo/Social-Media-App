@@ -36,14 +36,14 @@ const Profile = () => {
           />
           <div className={classes.profile_nm}>
             <div className={classes.edit_inputs}>
-              {isEdit ? (
+              {!isEdit ? (
                 <Typography variant="h4" fontWeight="bold">
                   John Doe
                 </Typography>
               ) : (
                 <TextField label="Edit name" />
               )}
-              {isEdit ? (
+              {!isEdit ? (
                 <Typography variant="p" color="textSecondary">
                   johndoe@gmail.com
                 </Typography>
@@ -80,7 +80,7 @@ const Profile = () => {
           <Typography fontWeight="bold" variant="h6">
             Biography
           </Typography>
-          {isEdit ? (
+          {!isEdit ? (
             <Typography color="textSecondary">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -136,7 +136,7 @@ const Profile = () => {
           variant="contained"
           onClick={() => setisEdit((prevState) => !prevState)}
         >
-          {isEdit ? "Edit" : "Save"}
+          {!isEdit ? "Edit" : "Save"}
         </Button>
       </div>
     </section>
