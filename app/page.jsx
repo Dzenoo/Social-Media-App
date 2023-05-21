@@ -7,6 +7,8 @@ export default function Home() {
     <Container maxWidth="md" sx={{ padding: "20px" }}>
       {/* <NewPost /> */}
       <Post />
+      <Post />
+      <Post />
     </Container>
   );
 }

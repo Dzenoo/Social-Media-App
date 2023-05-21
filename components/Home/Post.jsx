@@ -31,6 +31,20 @@ const CommentSection = () => {
   );
 };
 
+const ShareSection = ({ closeContent, openContent }) => {
+  return (
+    <div
+      onMouseLeave={closeContent}
+      onMouseEnter={openContent}
+      className={classes.share_div_content}
+    >
+      <Image src="/images/linkedin.png" width={40} height={40} alt="linkedin" />{" "}
+      <Image src="/images/linkedin.png" width={40} height={40} alt="linkedin" />{" "}
+      <Image src="/images/linkedin.png" width={40} height={40} alt="linkedin" />
+    </div>
+  );
+};
+
 const Post = () => {
   const [commentIsOpen, setcommentIsOpen] = useState(false);
   const [isLiked, setisLiked] = useState(false);
@@ -108,30 +122,10 @@ const Post = () => {
           Comment
         </Button>
         {isEnteredShare && (
-          <div
-            onMouseLeave={closeShareContent}
-            onMouseEnter={openShareContent}
-            className={classes.share_div_content}
-          >
-            <Image
-              src="/images/linkedin.png"
-              width={40}
-              height={40}
-              alt="linkedin"
-            />{" "}
-            <Image
-              src="/images/linkedin.png"
-              width={40}
-              height={40}
-              alt="linkedin"
-            />{" "}
-            <Image
-              src="/images/linkedin.png"
-              width={40}
-              height={40}
-              alt="linkedin"
-            />
-          </div>
+          <ShareSection
+            closeContent={closeShareContent}
+            openContent={openShareContent}
+          />
         )}
         <Button
           fullWidth
