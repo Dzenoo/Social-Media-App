@@ -1,6 +1,6 @@
 "use client";
 import { Button, Card, Typography } from "@mui/material";
-import classes from "../../../css/LandingPage.module.css";
+import classes from "../../css/LandingPage.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
