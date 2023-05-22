@@ -4,8 +4,33 @@ import classes from "../../../css/Auth.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import LoginForm from "@/components/Auth/LoginForm";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
+import { FadeLoader } from "react-spinners";
 
 const Login = () => {
+  const [isLoading, setisLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (session) {
+        router.replace("/");
+      } else {
+        setisLoading(false);
+      }
+    });
+  }, [router]);
+
+  if (isLoading) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader width={400} height={400} />;
+      </div>
+    );
+  }
+
   return (
     <section className={classes.auth_section}>
       <div className={classes.empty_div}></div>

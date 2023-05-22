@@ -3,11 +3,28 @@
 import { useValidation } from "@/hooks/useValidation";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "@/utils/validators";
 import { Button, TextField } from "@mui/material";
+import { getProviders, signIn } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const LoginForm = ({ classes }) => {
+  const [providers, setproviders] = useState(null);
+  const router = useRouter();
   const emailValidation = useValidation([VALIDATOR_EMAIL()]);
   const passwordValidation = useValidation([VALIDATOR_MINLENGTH(6)]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getProviders();
+      setproviders(res);
+    })();
+  }, []);
+
+  const signInWithGoogle = (id) => {
+    signIn(id);
+    router.push("/");
+  };
 
   const formData = {
     email: emailValidation.value,
@@ -49,9 +66,24 @@ const LoginForm = ({ classes }) => {
         }
       />
       <div className={classes.actions}>
-        <div className={classes.google}>
-          <Image src="/images/search.png" alt="google" width={30} height={30} />
-        </div>
+        {providers &&
+          Object.values(providers).map((provider) => (
+            <button
+              type="button"
+              className={classes.google}
+              key={provider.name}
+              onClick={() => {
+                signInWithGoogle(provider.id);
+              }}
+            >
+              <Image
+                src="/images/search.png"
+                alt="google"
+                width={30}
+                height={30}
+              />
+            </button>
+          ))}
         <Button
           type="submit"
           size="large"

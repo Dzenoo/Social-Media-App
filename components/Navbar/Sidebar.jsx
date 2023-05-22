@@ -4,6 +4,7 @@ import classes from "../../css/Sidebar.module.css";
 import Link from "next/link";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
+import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const [barIsOpen, setbarIsOpen] = useState(false);
@@ -76,7 +77,9 @@ const Sidebar = () => {
               height={30}
               alt="dashboard"
             />
-            <Typography>Logout</Typography>
+            <Typography>
+              <Button onClick={signOut}>Logout</Button>
+            </Typography>
           </Link>
         </li>
       </ul>
