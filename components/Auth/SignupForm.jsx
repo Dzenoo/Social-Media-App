@@ -40,8 +40,6 @@ const SignupForm = ({ classes }) => {
     formIsValid = true;
   }
 
-  console.log(formIsValid);
-
   return (
     <form className={classes.form}>
       <TextField
