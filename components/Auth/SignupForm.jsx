@@ -8,7 +8,9 @@ import {
   VALIDATOR_REQUIRE,
 } from "@/utils/validators";
 import { Button, TextField } from "@mui/material";
+import { getProviders, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const SignupForm = ({ classes }) => {
   const firstNameValidation = useValidation([VALIDATOR_REQUIRE()]);
@@ -19,6 +21,15 @@ const SignupForm = ({ classes }) => {
   const confirmPasswordValidation = useValidation([
     VALIDATOR_PASSWORD_MATCH(passwordValidation.value),
   ]);
+  const { data: session } = useSession();
+  const [providers, setproviders] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getProviders();
+      setproviders(res);
+    })();
+  }, []);
 
   const formData = {
     first_name: firstNameValidation.value,
@@ -127,9 +138,24 @@ const SignupForm = ({ classes }) => {
         label="Confirm password"
       />
       <div className={classes.actions}>
-        <div className={classes.google}>
-          <Image src="/images/search.png" alt="google" width={30} height={30} />
-        </div>
+        {providers &&
+          Object.values(providers).map((provider) => (
+            <button
+              type="button"
+              className={classes.google}
+              key={provider.name}
+              onClick={() => {
+                signIn(provider.id);
+              }}
+            >
+              <Image
+                src="/images/search.png"
+                alt="google"
+                width={30}
+                height={30}
+              />
+            </button>
+          ))}
         <Button
           type="submit"
           size="large"

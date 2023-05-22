@@ -4,9 +4,12 @@ import Link from "next/link";
 import classes from "../../css/HomeNavbar.module.css";
 import { usePathname } from "next/navigation";
 import { Button, Typography } from "@mui/material";
+import { useSession } from "next-auth/react";
 
 const HomeNavbar = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
+
   return (
     <header className={classes.home_navbar}>
       <div>
@@ -21,10 +24,18 @@ const HomeNavbar = () => {
         </Link>
       </div>
       <div className={classes.nav_profile}>
-        <Typography variant="h6" fontWeight="bold">
-          John Doe
+        <Typography variant="p" fontWeight="bold">
+          {session?.user.name ? session?.user.name : "John Doe"}
         </Typography>
-        <Image src="/images/setting.png" width={60} height={60} alt="logo" />
+        <Image
+          src={
+            session?.user.image ? session?.user.image : "/images/setting.png"
+          }
+          width={48}
+          height={48}
+          alt="logo"
+          style={{ borderRadius: "100px" }}
+        />
       </div>
     </header>
   );
