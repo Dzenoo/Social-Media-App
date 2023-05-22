@@ -16,11 +16,11 @@ const PostForm = () => {
         </FormControl>
         <FormControl>
           <label htmlFor="image">Image</label>
-          <TextField id="image" label="Image" />
+          <TextField id="image" type="file" />
         </FormControl>
         <FormControl>
           <label htmlFor="description">Description</label>
-          <TextField id="description" label="Description" />
+          <TextField id="description" label="Description" multiline />
         </FormControl>
         <Button type="submit" variant="contained" size="large">
           Post
