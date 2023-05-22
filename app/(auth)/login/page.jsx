@@ -1,8 +1,7 @@
 "use client";
-import { Button, TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import classes from "../../../css/Auth.module.css";
 import Link from "next/link";
-import Image from "next/image";
 import LoginForm from "@/components/Auth/LoginForm";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

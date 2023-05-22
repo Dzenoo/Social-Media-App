@@ -3,8 +3,33 @@ import { Typography } from "@mui/material";
 import classes from "../../../css/Auth.module.css";
 import Link from "next/link";
 import SignupForm from "@/components/Auth/SignupForm";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FadeLoader } from "react-spinners";
+import { getSession } from "next-auth/react";
 
 const Signup = () => {
+  const [isLoading, setisLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    getSession().then((session) => {
+      if (session) {
+        router.replace("/");
+      } else {
+        setisLoading(false);
+      }
+    });
+  }, [router]);
+
+  if (isLoading) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
+
   return (
     <section className={classes.auth_section}>
       <div className={classes.empty_div}></div>

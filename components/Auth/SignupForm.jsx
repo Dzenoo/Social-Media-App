@@ -9,6 +9,7 @@ import {
 } from "@/utils/validators";
 import { Button, TextField } from "@mui/material";
 import { getProviders, signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -21,6 +22,7 @@ const SignupForm = ({ classes }) => {
   const confirmPasswordValidation = useValidation([
     VALIDATOR_PASSWORD_MATCH(passwordValidation.value),
   ]);
+  const router = useRouter();
   const { data: session } = useSession();
   const [providers, setproviders] = useState(null);
 
@@ -30,6 +32,11 @@ const SignupForm = ({ classes }) => {
       setproviders(res);
     })();
   }, []);
+
+  const signInWithGoogle = (id) => {
+    signIn(id);
+    router.push("/");
+  };
 
   const formData = {
     first_name: firstNameValidation.value,
@@ -145,7 +152,7 @@ const SignupForm = ({ classes }) => {
               className={classes.google}
               key={provider.name}
               onClick={() => {
-                signIn(provider.id);
+                signInWithGoogle(provider.id);
               }}
             >
               <Image
