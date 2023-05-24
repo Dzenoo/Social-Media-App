@@ -14,7 +14,7 @@ export const POST = async (request) => {
 
   let existingUser;
   try {
-    existingUser = await User.find({ email: email });
+    existingUser = await User.findOne({ email: email });
   } catch (error) {
     return new Response("Could not find user", { status: 404 });
   }
@@ -43,7 +43,7 @@ export const POST = async (request) => {
   let user;
   try {
     user = await newUser.save();
-    return new Response(JSON.stringify(newUser), { status: 500 });
+    return new Response(JSON.stringify(newUser), { status: 201 });
   } catch (error) {
     return new Response("Failed to create a new user", { status: 500 });
   }

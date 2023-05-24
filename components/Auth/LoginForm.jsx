@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const LoginForm = ({ classes }) => {
+const LoginForm = ({ classes, onLoginSubmit }) => {
   const [providers, setproviders] = useState(null);
   const router = useRouter();
   const emailValidation = useValidation([VALIDATOR_EMAIL()]);
@@ -36,8 +36,13 @@ const LoginForm = ({ classes }) => {
     formIsValid = true;
   }
 
+  const submitLogin = (e) => {
+    e.preventDefault();
+    onLoginSubmit(formData);
+  };
+
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitLogin}>
       <TextField
         placeholder="example@gmail.com"
         label="Email"

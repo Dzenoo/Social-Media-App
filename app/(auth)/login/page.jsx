@@ -22,10 +22,25 @@ const Login = () => {
     });
   }, [router]);
 
+  const onLoginSubmit = async (loginData) => {
+    setisLoading(true);
+    try {
+      const response = await fetch("/api/users/login", {
+        method: "POST",
+        body: JSON.stringify(loginData),
+      });
+    } catch (error) {
+      setisLoading(false);
+      console.log(error);
+    } finally {
+      setisLoading(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="loader_wrapper">
-        <FadeLoader width={400} height={400} />;
+        <FadeLoader />
       </div>
     );
   }
@@ -41,7 +56,7 @@ const Login = () => {
           Join our community today by filling out our simple login form and
           start enjoying exclusive benefits
         </Typography>
-        <LoginForm classes={classes} />
+        <LoginForm classes={classes} onLoginSubmit={onLoginSubmit} />
         <Typography>
           Don't have account? <Link href="/signup">Click here</Link>
         </Typography>

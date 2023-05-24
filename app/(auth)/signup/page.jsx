@@ -22,6 +22,21 @@ const Signup = () => {
     });
   }, [router]);
 
+  const onSubmitSignup = async (userData) => {
+    setisLoading(true);
+    try {
+      const response = await fetch("/api/users/signup", {
+        method: "POST",
+        body: JSON.stringify(userData),
+      });
+    } catch (error) {
+      setisLoading(false);
+      console.log(error);
+    } finally {
+      setisLoading(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="loader_wrapper">
@@ -29,17 +44,6 @@ const Signup = () => {
       </div>
     );
   }
-
-  const onSubmitSignup = async (userData) => {
-    try {
-      const response = await fetch("/api/users/signup", {
-        method: "POST",
-        body: JSON.stringify(userData),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <section className={classes.auth_section}>
