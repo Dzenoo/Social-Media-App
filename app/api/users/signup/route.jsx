@@ -1,6 +1,7 @@
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const POST = async (request) => {
   try {
@@ -43,8 +44,24 @@ export const POST = async (request) => {
   let user;
   try {
     user = await newUser.save();
-    return new Response(JSON.stringify(newUser), { status: 201 });
   } catch (error) {
     return new Response("Failed to create a new user", { status: 500 });
   }
+
+  let token;
+  try {
+    token = jwt.sign(
+      {
+        userId: user.id,
+      },
+      process.env.JWT_KEY,
+      {
+        expiresIn: "2h",
+      }
+    );
+  } catch (error) {
+    return new Response("Failed to sign up", { status: 500 });
+  }
+
+  return new Response(JSON.stringify(token), { status: 201 });
 };

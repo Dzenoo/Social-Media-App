@@ -8,7 +8,6 @@ export const metadata = {
   title: "Networkly Social Media App",
   description: "Networkly is very good application for social media",
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
