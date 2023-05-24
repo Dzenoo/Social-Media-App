@@ -30,6 +30,17 @@ const Signup = () => {
     );
   }
 
+  const onSubmitSignup = async (userData) => {
+    try {
+      const response = await fetch("/api/users/signup", {
+        method: "POST",
+        body: JSON.stringify(userData),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className={classes.auth_section}>
       <div className={classes.empty_div}></div>
@@ -41,7 +52,7 @@ const Signup = () => {
           Join our community today by filling out our simple signup form and
           start enjoying exclusive benefits
         </Typography>
-        <SignupForm classes={classes} />
+        <SignupForm classes={classes} onSubmitSignup={onSubmitSignup} />
         <Typography>
           You already have account? <Link href="/login">Click here</Link>
         </Typography>

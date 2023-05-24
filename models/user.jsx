@@ -16,9 +16,11 @@ const UserSchema = new Schema({
   },
   biography: {
     type: String,
+    required: [true, "Biography is required!"],
   },
   password: {
     type: String,
+    required: [true, "Password is required!"],
   },
   image: { type: String },
 });

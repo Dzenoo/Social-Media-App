@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const SignupForm = ({ classes }) => {
+const SignupForm = ({ classes, onSubmitSignup }) => {
   const firstNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
   const lastNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
   const emailValidation = useValidation([VALIDATOR_EMAIL()]);
@@ -57,8 +57,13 @@ const SignupForm = ({ classes }) => {
     formIsValid = true;
   }
 
+  const submitSignup = (e) => {
+    e.preventDefault();
+    onSubmitSignup(formData);
+  };
+
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitSignup}>
       <TextField
         value={firstNameValidation.value}
         error={!firstNameValidation.isValid && firstNameValidation.isTouched}
@@ -69,7 +74,6 @@ const SignupForm = ({ classes }) => {
         }
         onChange={firstNameValidation.onChangeHandler}
         onBlur={firstNameValidation.onBlurHandler}
-        placeholder="Enter First Name"
         label="First Name"
       />
       <TextField
@@ -82,7 +86,6 @@ const SignupForm = ({ classes }) => {
         }
         onChange={lastNameValidation.onChangeHandler}
         onBlur={lastNameValidation.onBlurHandler}
-        placeholder="Enter Last Name"
         label="Last Name"
       />
       <TextField
@@ -95,7 +98,6 @@ const SignupForm = ({ classes }) => {
         }
         onChange={emailValidation.onChangeHandler}
         onBlur={emailValidation.onBlurHandler}
-        placeholder="Enter email"
         label="Email"
       />
       <TextField
@@ -108,7 +110,6 @@ const SignupForm = ({ classes }) => {
         }
         onChange={biographyValidation.onChangeHandler}
         onBlur={biographyValidation.onBlurHandler}
-        placeholder="Enter Biography"
         label="Biography"
         multiline
       />
@@ -122,7 +123,6 @@ const SignupForm = ({ classes }) => {
         }
         onChange={passwordValidation.onChangeHandler}
         onBlur={passwordValidation.onBlurHandler}
-        placeholder="Enter your password"
         label="Password"
         type="password"
       />
@@ -139,7 +139,6 @@ const SignupForm = ({ classes }) => {
         }
         onChange={confirmPasswordValidation.onChangeHandler}
         onBlur={confirmPasswordValidation.onBlurHandler}
-        placeholder="Confirm password..."
         type="password"
         label="Confirm password"
       />
