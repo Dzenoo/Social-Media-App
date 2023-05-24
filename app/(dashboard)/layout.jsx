@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const layout = ({ children }) => {
+  const token = JSON.parse(localStorage.getItem("userdata")).token;
   const { data: session } = useSession();
   const [isLoading, setisLoading] = useState(true);
   const router = useRouter();
@@ -30,11 +31,13 @@ const layout = ({ children }) => {
 
   return (
     <div className="layout">
-      {session?.user && (
+      {session?.user || token ? (
         <>
           <Sidebar />
           {children}
         </>
+      ) : (
+        <></>
       )}
     </div>
   );

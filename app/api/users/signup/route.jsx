@@ -63,5 +63,14 @@ export const POST = async (request) => {
     return new Response("Failed to sign up", { status: 500 });
   }
 
-  return new Response(JSON.stringify(token), { status: 201 });
+  const userInfo = {
+    token: token,
+    firstname: newUser.first_name,
+    lastname: newUser.last_name,
+    image: newUser.image,
+  };
+
+  return new Response(JSON.stringify(userInfo), {
+    status: 201,
+  });
 };

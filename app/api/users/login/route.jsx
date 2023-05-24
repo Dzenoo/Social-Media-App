@@ -53,5 +53,12 @@ export const POST = async (request) => {
     return new Response("Failed to log in", { status: 500 });
   }
 
-  return new Response(JSON.stringify(token));
+  const userInfo = {
+    token: token,
+    firstname: existingUser.first_name,
+    lastname: existingUser.last_name,
+    image: existingUser.image,
+  };
+
+  return new Response(JSON.stringify(userInfo));
 };

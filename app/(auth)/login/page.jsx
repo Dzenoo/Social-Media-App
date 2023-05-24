@@ -33,7 +33,14 @@ const Login = () => {
       });
       const resdata = await response.json();
 
-      login(resdata);
+      login(resdata.token);
+
+      const userInfo = {
+        firstname: resdata.firstname,
+        lastname: resdata.lastname,
+        image: resdata.image,
+      };
+      localStorage.setItem("userinfo", JSON.stringify(userInfo));
 
       if (response.ok) {
         router.push("/");
