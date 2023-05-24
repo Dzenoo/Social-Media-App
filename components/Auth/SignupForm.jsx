@@ -3,9 +3,9 @@
 import { useValidation } from "@/hooks/useValidation";
 import {
   VALIDATOR_EMAIL,
+  VALIDATOR_FIRSTNAME,
   VALIDATOR_MINLENGTH,
   VALIDATOR_PASSWORD_MATCH,
-  VALIDATOR_REQUIRE,
 } from "@/utils/validators";
 import { Button, TextField } from "@mui/material";
 import { getProviders, signIn } from "next-auth/react";
@@ -14,8 +14,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const SignupForm = ({ classes }) => {
-  const firstNameValidation = useValidation([VALIDATOR_REQUIRE()]);
-  const lastNameValidation = useValidation([VALIDATOR_REQUIRE()]);
+  const firstNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
+  const lastNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
   const emailValidation = useValidation([VALIDATOR_EMAIL()]);
   const biographyValidation = useValidation([VALIDATOR_MINLENGTH(20)]);
   const passwordValidation = useValidation([VALIDATOR_MINLENGTH(6)]);
