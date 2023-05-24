@@ -5,9 +5,11 @@ import Link from "next/link";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
+import { useAuth } from "@/hooks/useAuth";
 
 const Sidebar = () => {
   const [barIsOpen, setbarIsOpen] = useState(false);
+  const { logout } = useAuth();
   const toggle = () => setbarIsOpen(!barIsOpen);
   const activeClassNames = barIsOpen
     ? `${classes.sidebar} ${classes.open}`
@@ -70,17 +72,9 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link href="/dashboard">
-            <Image
-              src="/images/logout.png"
-              width={30}
-              height={30}
-              alt="dashboard"
-            />
-            <Typography>
-              <Button onClick={signOut}>Logout</Button>
-            </Typography>
-          </Link>
+          <Button fullWidth variant="contained" onClick={signOut || logout}>
+            Logout
+          </Button>
         </li>
       </ul>
     </nav>

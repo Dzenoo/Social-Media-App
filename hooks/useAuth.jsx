@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 let logoutTimer;
@@ -5,6 +6,7 @@ let logoutTimer;
 export const useAuth = () => {
   const [token, settoken] = useState(null);
   const [tokenExp, settokenExp] = useState();
+  const router = useRouter();
 
   const login = useCallback((token, expirationDate) => {
     settoken(token);
@@ -25,6 +27,8 @@ export const useAuth = () => {
     settoken(null);
     settokenExp(null);
     localStorage.removeItem("userdata");
+    localStorage.removeItem("userinfo");
+    router.push("/login");
   }, []);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const layout = ({ children }) => {
-  const token = JSON.parse(localStorage.getItem("userdata")).token;
+  const token = JSON.parse(localStorage.getItem("userdata"));
   const { data: session } = useSession();
   const [isLoading, setisLoading] = useState(true);
   const router = useRouter();
@@ -20,6 +20,14 @@ const layout = ({ children }) => {
       }
     });
   }, [router]);
+
+  if (token) {
+    useEffect(() => {
+      if (!token?.token) {
+        router.replace("/");
+      }
+    }, [router]);
+  }
 
   if (isLoading) {
     return (
