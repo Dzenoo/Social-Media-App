@@ -1,5 +1,6 @@
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export const POST = async (request) => {
@@ -36,5 +37,21 @@ export const POST = async (request) => {
       status: 403,
     });
   }
-  return new Response("You are logged in");
+
+  let token;
+  try {
+    token = jwt.sign(
+      {
+        userId: existingUser.id,
+      },
+      process.env.JWT_KEY,
+      {
+        expiresIn: "2h",
+      }
+    );
+  } catch (error) {
+    return new Response("Failed to log in", { status: 500 });
+  }
+
+  return new Response(JSON.stringify(token));
 };
