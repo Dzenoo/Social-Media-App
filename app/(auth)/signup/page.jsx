@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FadeLoader } from "react-spinners";
 import { getSession } from "next-auth/react";
+import { useAuth } from "@/hooks/useAuth";
 
 const Signup = () => {
   const [isLoading, setisLoading] = useState(false);
+  const { login } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -29,6 +31,13 @@ const Signup = () => {
         method: "POST",
         body: JSON.stringify(userData),
       });
+
+      const resdata = await response.json();
+
+      login(resdata);
+      if (response.ok) {
+        router.push("/");
+      }
     } catch (error) {
       setisLoading(false);
       console.log(error);
