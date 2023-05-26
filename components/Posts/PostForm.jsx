@@ -9,12 +9,11 @@ const PostForm = () => {
   const [postValues, setpostValues] = useState({
     location: "",
     hashtags: "",
-    image: "",
     description: "",
   });
+  const [imageVal, setimageVal] = useState("");
   const locationVal = useValidation([VALIDATOR_REQUIRE()]);
   const hashtagsVal = useValidation([VALIDATOR_REQUIRE()]);
-  const imageVal = useValidation([VALIDATOR_REQUIRE()]);
   const descriptionVal = useValidation([VALIDATOR_REQUIRE()]);
 
   const handleInputChange = (event, onChangeHandler) => {
@@ -26,7 +25,14 @@ const PostForm = () => {
     onChangeHandler(event);
   };
 
-  console.log(postValues);
+  const handleImageChange = (e) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const imageUrl = fileReader.result;
+      setimageVal(imageUrl);
+    };
+    fileReader.readAsDataURL(e.target.files[0]);
+  };
 
   return (
     <form>
@@ -69,18 +75,11 @@ const PostForm = () => {
         </FormControl>
         <FormControl>
           <label htmlFor="image">Image</label>
-          <TextField
+          <input
             id="image"
+            accept="image/*"
             type="file"
-            value={imageVal.value}
-            onChange={(event) =>
-              handleInputChange(event, imageVal.onChangeHandler)
-            }
-            error={!imageVal.isValid && imageVal.isTouched}
-            onBlur={imageVal.onBlurHandler}
-            helperText={
-              !imageVal.isValid && imageVal.isTouched && "Enter valid image"
-            }
+            onChange={handleImageChange}
           />
         </FormControl>
         <FormControl>
