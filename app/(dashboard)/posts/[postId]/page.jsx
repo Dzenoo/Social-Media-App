@@ -7,7 +7,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { getPostById, getPosts } from "@/utils/posts";
 import classes from "../../../../css/Posts.module.css";
 import Image from "next/image";
 
@@ -21,10 +20,6 @@ export async function generateStaticParams() {
 
 const EditPostPage = async ({ params }) => {
   const post = await getPostById(params.postId);
-
-  if (!post) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <section className={classes.edit_dashboard}>

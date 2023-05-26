@@ -3,6 +3,8 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
+import { useState } from "react";
+import { FadeLoader } from "react-spinners";
 
 const style = {
   position: "absolute",
@@ -17,7 +19,40 @@ const style = {
   p: 4,
 };
 
-const Modale = ({ isOpen, close, text, title }) => {
+const Modale = ({
+  isOpen,
+  close,
+  text,
+  title,
+  id,
+  onCloseModal,
+  posts,
+  setPosts,
+}) => {
+  const [isLoading, setisLoading] = useState(false);
+
+  const deletePost = async () => {
+    setisLoading(true);
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      const filteredPosts = posts.filter((p) => p._id !== id);
+      setPosts(filteredPosts);
+      setisLoading(false);
+      onCloseModal();
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
+
   return (
     <div>
       <Modal
@@ -41,7 +76,11 @@ const Modale = ({ isOpen, close, text, title }) => {
             <Button variant="outlined" onClick={close}>
               Cancel
             </Button>
-            <Button variant="contained" sx={{ backgroundColor: "#E41818" }}>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "#E41818" }}
+              onClick={deletePost}
+            >
               Delete
             </Button>
           </Box>

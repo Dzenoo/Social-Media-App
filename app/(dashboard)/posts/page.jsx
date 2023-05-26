@@ -18,8 +18,12 @@ import Modale from "@/components/Modal/Modal";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const [postIdToDelete, setpostIdToDelete] = useState();
   const [open, setopen] = useState(false);
-  const handleOpen = () => setopen(true);
+  const handleOpen = (postId) => {
+    setopen(true);
+    setpostIdToDelete(postId);
+  };
   const handleClose = () => setopen(false);
 
   useEffect(() => {
@@ -30,8 +34,6 @@ const Posts = () => {
     };
     fetchPosts();
   }, []);
-
-  console.log(posts[0]);
 
   return (
     <section className={classes.main_dashboard}>
@@ -77,7 +79,7 @@ const Posts = () => {
           <PostItem
             key={post.id}
             id={post._id}
-            openDeleteModal={handleOpen}
+            openDeleteModal={() => handleOpen(post._id)}
             description={post.description}
             image={post.image}
           />
@@ -87,6 +89,10 @@ const Posts = () => {
           close={handleClose}
           text="Are you sure you want to delete this post?"
           title="Deleting Post Confirmation"
+          id={postIdToDelete}
+          onCloseModal={handleClose}
+          posts={posts}
+          setPosts={setPosts}
         />
       </div>
     </section>
