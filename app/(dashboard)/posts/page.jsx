@@ -12,15 +12,26 @@ import {
 import classes from "../../../css/Posts.module.css";
 import Image from "next/image";
 import PostItem from "@/components/Posts/PostItem";
-import { useState } from "react";
-import posts from "../../../data/data.json";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Modale from "@/components/Modal/Modal";
 
 const Posts = () => {
+  const [posts, setPosts] = useState([]);
   const [open, setopen] = useState(false);
   const handleOpen = () => setopen(true);
   const handleClose = () => setopen(false);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("/api/posts");
+      const responseData = await response.json();
+      setPosts(responseData);
+    };
+    fetchPosts();
+  }, []);
+
+  console.log(posts[0]);
 
   return (
     <section className={classes.main_dashboard}>
@@ -62,16 +73,13 @@ const Posts = () => {
         </Box>
       </div>
       <div className={classes.posts_container}>
-        {posts.posts.map((post) => (
+        {posts.map((post) => (
           <PostItem
             key={post.id}
-            id={post.id}
+            id={post._id}
             openDeleteModal={handleOpen}
             description={post.description}
-            likes={post.likes}
-            comments={post.comments}
-            shares={post.shares}
-            date={post.date}
+            image={post.image}
           />
         ))}
         <Modale

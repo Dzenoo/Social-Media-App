@@ -12,11 +12,12 @@ const PostItem = ({
   shares,
   date,
   id,
+  image,
 }) => {
   return (
     <Card className={classes.post_item}>
       <Box className={classes.img}>
-        <Image alt="img" src="/images/setting.png" width={100} height={100} />
+        <Image alt="img" src={image} width={100} height={100} />
         <Typography variant="p" color="textSecondary">
           {description}
         </Typography>
