@@ -4,13 +4,16 @@ import classes from "../../css/Sidebar.module.css";
 import Link from "next/link";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useAuth } from "@/hooks/useAuth";
 
 const Sidebar = () => {
   const [barIsOpen, setbarIsOpen] = useState(false);
-  const { logout } = useAuth();
   const toggle = () => setbarIsOpen(!barIsOpen);
+  const { data: session } = useSession();
+  const token = JSON.parse(localStorage.getItem("userdata"));
+  const { logout } = useAuth();
+
   const activeClassNames = barIsOpen
     ? `${classes.sidebar} ${classes.open}`
     : `${classes.sidebar} ${classes.closed}`;
@@ -72,9 +75,16 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Button fullWidth variant="contained" onClick={signOut || logout}>
-            Logout
-          </Button>
+          {session?.user && (
+            <Button fullWidth variant="contained" onClick={signOut}>
+              Logout
+            </Button>
+          )}
+          {token?.token && (
+            <Button fullWidth variant="contained" onClick={logout()}>
+              Logout
+            </Button>
+          )}
         </li>
       </ul>
     </nav>

@@ -1,33 +1,23 @@
 "use client";
 import Sidebar from "@/components/Navbar/Sidebar";
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { FadeLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const layout = ({ children }) => {
   const token = JSON.parse(localStorage.getItem("userdata"));
-  const { data: session } = useSession();
   const [isLoading, setisLoading] = useState(true);
   const router = useRouter();
+  const { data: session } = useSession();
 
   useEffect(() => {
-    getSession().then((session) => {
-      if (!session) {
-        router.replace("/");
-      } else {
-        setisLoading(false);
-      }
-    });
-  }, [router]);
-
-  if (token) {
-    useEffect(() => {
-      if (!token?.token) {
-        router.replace("/");
-      }
-    }, [router]);
-  }
+    if (!session?.user && !token) {
+      router.replace("/");
+    } else {
+      setisLoading(false);
+    }
+  }, [router, session, token]);
 
   if (isLoading) {
     return (
