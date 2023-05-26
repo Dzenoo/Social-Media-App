@@ -34,13 +34,18 @@ const PostForm = ({ onSubmitPost }) => {
     fileReader.readAsDataURL(e.target.files[0]);
   };
 
+  let formIsValid = false;
+  if (locationVal.isValid && hashtagsVal.isValid && descriptionVal.isValid) {
+    formIsValid = true;
+  }
+
   const submitFormHandler = (e) => {
     e.preventDefault();
 
     const data = {
       location: postValues.location,
-      hashtags: postValues.location,
-      description: postValues.location,
+      hashtags: postValues.hashtags,
+      description: postValues.description,
       image: imageVal,
     };
 
@@ -114,7 +119,12 @@ const PostForm = ({ onSubmitPost }) => {
             }
           />
         </FormControl>
-        <Button type="submit" variant="contained" size="large">
+        <Button
+          disabled={!formIsValid}
+          type="submit"
+          variant="contained"
+          size="large"
+        >
           Post
         </Button>
       </Card>

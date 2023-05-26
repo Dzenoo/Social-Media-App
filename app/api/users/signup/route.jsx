@@ -68,6 +68,7 @@ export const POST = async (request) => {
     firstname: newUser.first_name,
     lastname: newUser.last_name,
     image: newUser.image,
+    userId: existingUser.id,
   };
 
   return new Response(JSON.stringify(userInfo), {

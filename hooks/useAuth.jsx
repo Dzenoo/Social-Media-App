@@ -28,7 +28,7 @@ export const useAuth = () => {
     settokenExp(null);
     localStorage.removeItem("userdata");
     localStorage.removeItem("userinfo");
-    router.push("/login");
+    router.replace("/login");
   }, []);
 
   useEffect(() => {

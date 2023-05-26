@@ -39,6 +39,7 @@ const Signup = () => {
         firstname: resdata.firstname,
         lastname: resdata.lastname,
         image: resdata.image,
+        userId: resdata.userId,
       };
       localStorage.setItem("userinfo", JSON.stringify(userInfo));
       if (response.ok) {
