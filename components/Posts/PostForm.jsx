@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useValidation } from "@/hooks/useValidation";
 import { VALIDATOR_REQUIRE } from "@/utils/validators";
 
-const PostForm = () => {
+const PostForm = ({ onSubmitPost }) => {
   const [postValues, setpostValues] = useState({
     location: "",
     hashtags: "",
@@ -34,8 +34,21 @@ const PostForm = () => {
     fileReader.readAsDataURL(e.target.files[0]);
   };
 
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+
+    const data = {
+      location: postValues.location,
+      hashtags: postValues.location,
+      description: postValues.location,
+      image: imageVal,
+    };
+
+    onSubmitPost(data);
+  };
+
   return (
-    <form>
+    <form onSubmit={submitFormHandler}>
       <Card className={classes.post_form}>
         <FormControl>
           <label htmlFor="location">Location</label>

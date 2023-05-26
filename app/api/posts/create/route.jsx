@@ -19,8 +19,8 @@ export const POST = async (request) => {
     const newPost = await Post.create({
       location,
       hashtags,
-      image: photoUrl.url,
       description,
+      image: photoUrl.url,
     });
 
     await newPost.save();
