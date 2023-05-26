@@ -81,7 +81,7 @@ const Sidebar = () => {
             </Button>
           )}
           {token?.token && (
-            <Button fullWidth variant="contained" onClick={logout()}>
+            <Button fullWidth variant="contained" onClick={logout}>
               Logout
             </Button>
           )}
