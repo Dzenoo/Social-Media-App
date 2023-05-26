@@ -39,6 +39,7 @@ const Login = () => {
         firstname: resdata.firstname,
         lastname: resdata.lastname,
         image: resdata.image,
+        userId: resdata.userId,
       };
       localStorage.setItem("userinfo", JSON.stringify(userInfo));
 
