@@ -16,6 +16,8 @@ const PostList = () => {
     getPosts();
   }, []);
 
+  console.log(allPosts);
+
   return (
     <div>
       {allPosts.map((post) => (
@@ -26,6 +28,9 @@ const PostList = () => {
           image={post.image}
           date={post.createdAt}
           location={post.location}
+          firstName={post.creator.first_name}
+          lastName={post.creator.last_name}
+          creatorImg={post.creator.image}
         />
       ))}
     </div>

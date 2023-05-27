@@ -44,7 +44,16 @@ const ShareSection = ({ closeContent, openContent }) => {
   );
 };
 
-const Post = ({ description, image, hashtags, date, location }) => {
+const Post = ({
+  firstName,
+  lastName,
+  creatorImg,
+  description,
+  image,
+  hashtags,
+  date,
+  location,
+}) => {
   const [commentIsOpen, setcommentIsOpen] = useState(false);
   const [isLiked, setisLiked] = useState(false);
   const [isEnteredShare, setisEnteredShare] = useState(false);
@@ -74,11 +83,17 @@ const Post = ({ description, image, hashtags, date, location }) => {
     <Card className={classes.post_card}>
       <div className={classes.post_card_header}>
         <div className={classes.post_card_header_info}>
-          <Image src="/images/setting.png" width={78} height={78} alt="img" />
+          <Image
+            src={creatorImg}
+            width={78}
+            height={78}
+            alt="img"
+            style={{ borderRadius: "100px" }}
+          />
           <div>
             <Link className="link_no_decoration" href="/userId">
               <Typography fontWeight="bold" variant="h6">
-                John Doe
+                {firstName} {lastName}
               </Typography>
             </Link>
             <Typography>{location}</Typography>
