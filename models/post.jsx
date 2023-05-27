@@ -17,9 +17,10 @@ const PostSchema = new Schema(
     image: {
       type: String,
     },
-    likes: [{ type: Number, default: 0 }],
+    likes: { type: Number, default: 0 },
     comments: [{ type: String }],
     shares: [{ type: Number, default: 0 }],
+    creator: { type: mongoose.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
