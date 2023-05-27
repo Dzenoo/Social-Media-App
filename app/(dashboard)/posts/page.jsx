@@ -75,29 +75,37 @@ const Posts = () => {
         </Box>
       </div>
       <div className={classes.posts_container}>
-        {posts.map((post) => (
-          <PostItem
-            key={post.id}
-            id={post._id}
-            openDeleteModal={() => handleOpen(post._id)}
-            description={post.description}
-            image={post.image}
-            date={post.createdAt}
-            likes={post.likes}
-            comments={post.comments.length}
-            shares={post.shares.length}
+        {posts.length === 0 ? (
+          <Typography textAlign="center" variant="h4">
+            No posts jet
+          </Typography>
+        ) : (
+          posts.map((post) => (
+            <PostItem
+              key={post.id}
+              id={post._id}
+              openDeleteModal={() => handleOpen(post._id)}
+              description={post.description}
+              image={post.image}
+              date={post.createdAt}
+              likes={post.likes}
+              comments={post.comments.length}
+              shares={post.shares.length}
+            />
+          ))
+        )}
+        {posts.length > 0 && (
+          <Modale
+            isOpen={open}
+            close={handleClose}
+            text="Are you sure you want to delete this post?"
+            title="Deleting Post Confirmation"
+            id={postIdToDelete}
+            onCloseModal={handleClose}
+            posts={posts}
+            setPosts={setPosts}
           />
-        ))}
-        <Modale
-          isOpen={open}
-          close={handleClose}
-          text="Are you sure you want to delete this post?"
-          title="Deleting Post Confirmation"
-          id={postIdToDelete}
-          onCloseModal={handleClose}
-          posts={posts}
-          setPosts={setPosts}
-        />
+        )}
       </div>
     </section>
   );
