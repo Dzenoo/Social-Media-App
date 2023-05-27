@@ -19,6 +19,7 @@ import Modale from "@/components/Modal/Modal";
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [postIdToDelete, setpostIdToDelete] = useState();
+  const [query, setquery] = useState("");
   const [open, setopen] = useState(false);
   const handleOpen = (postId) => {
     setopen(true);
@@ -40,6 +41,10 @@ const Posts = () => {
     fetchUserPosts();
   }, []);
 
+  const handleSearchChange = (e) => {
+    setquery(e.target.value);
+  };
+
   return (
     <section className={classes.main_dashboard}>
       <div className={classes.filter_bar}>
@@ -58,7 +63,7 @@ const Posts = () => {
             </Select>
           </FormControl>
           <FormControl sx={{ width: "200px" }}>
-            <TextField label="Search" />
+            <TextField label="Search" onChange={handleSearchChange} />
           </FormControl>
           <FormControl>
             <Link className="link_no_decoration" href="/posts/new">
@@ -85,19 +90,21 @@ const Posts = () => {
             No posts jet
           </Typography>
         ) : (
-          posts.map((post) => (
-            <PostItem
-              key={post.id}
-              id={post._id}
-              openDeleteModal={() => handleOpen(post._id)}
-              description={post.description}
-              image={post.image}
-              date={post.createdAt}
-              likes={post.likes}
-              comments={post.comments.length}
-              shares={post.shares.length}
-            />
-          ))
+          posts
+            .filter((p) => p.description.toLowerCase().includes(query))
+            .map((post) => (
+              <PostItem
+                key={post.id}
+                id={post._id}
+                openDeleteModal={() => handleOpen(post._id)}
+                description={post.description}
+                image={post.image}
+                date={post.createdAt}
+                likes={post.likes}
+                comments={post.comments.length}
+                shares={post.shares.length}
+              />
+            ))
         )}
         {posts.length > 0 && (
           <Modale
