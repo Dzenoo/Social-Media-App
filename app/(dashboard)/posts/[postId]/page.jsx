@@ -6,13 +6,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getPostById } from "@/utils/functions";
 
-export async function generateStaticParams() {
-  const posts = await fetch("/api/posts/");
+// export async function generateStaticParams() {
+//   const posts = await fetch("/api/posts/");
 
-  return posts.map((post) => ({
-    slug: post._id,
-  }));
-}
+//   return posts.map((post) => ({
+//     slug: post._id,
+//   }));
+// }
 
 const EditPostPage = async ({ params }) => {
   const [editValues, setEditValues] = useState({

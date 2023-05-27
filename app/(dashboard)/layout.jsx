@@ -11,13 +11,13 @@ const layout = ({ children }) => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  // useEffect(() => {
-  //   if (!session?.user && !token) {
-  //     router.replace("/");
-  //   } else {
-  //     setisLoading(false);
-  //   }
-  // }, [router, session, token]);
+  useEffect(() => {
+    if (!session?.user && !token) {
+      router.replace("/");
+    } else {
+      setisLoading(false);
+    }
+  }, [router, session, token]);
 
   if (isLoading) {
     return (

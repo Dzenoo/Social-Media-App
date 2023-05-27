@@ -44,7 +44,7 @@ const ShareSection = ({ closeContent, openContent }) => {
   );
 };
 
-const Post = () => {
+const Post = ({ description, image, hashtags, date }) => {
   const [commentIsOpen, setcommentIsOpen] = useState(false);
   const [isLiked, setisLiked] = useState(false);
   const [isEnteredShare, setisEnteredShare] = useState(false);
@@ -57,6 +57,19 @@ const Post = () => {
     setisEnteredShare(false);
   };
 
+  const createdDate = new Date(date);
+  const currentTime = new Date();
+  const timeDifference = currentTime - createdDate;
+  const timeDifferenceHours = Math.floor(timeDifference / (1000 * 60 * 60));
+
+  let formattedTimeDIfference = "";
+  if (timeDifferenceHours > 0) {
+    formattedTimeDIfference = `${timeDifferenceHours}hr ago`;
+  } else {
+    const timeDifferenceMinutes = Math.floor(timeDifference / (1000 * 60));
+    formattedTimeDIfference = `${timeDifferenceMinutes} minutes ago`;
+  }
+
   return (
     <Card className={classes.post_card}>
       <div className={classes.post_card_header}>
@@ -68,7 +81,9 @@ const Post = () => {
                 John Doe
               </Typography>
             </Link>
-            <Typography>12 minutes ago</Typography>
+            <Typography color="textSecondary">
+              {formattedTimeDIfference}
+            </Typography>
           </div>
         </div>
         <span>
@@ -79,19 +94,19 @@ const Post = () => {
       </div>
       <div className={classes.post_card_header}>
         <Typography color="textSecondary">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat
+          {description} <br />
+          {hashtags.split(",").map((hs) => (
+            <Link
+              href={hs}
+              style={{ color: "royalblue", textDecoration: "none" }}
+            >
+              {hs}
+            </Link>
+          ))}
         </Typography>
       </div>
       <div className={classes.post_card_image}>
-        <Image
-          src="/images/exampleimg.jpg"
-          width={400}
-          height={400}
-          alt="img"
-        />
+        <Image src={image} width={400} height={400} alt="img" />
       </div>
       <div className={classes.post_card_actions}>
         <Button
