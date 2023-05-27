@@ -54,8 +54,7 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
     emailValidation.isValid &&
     biographyValidation.isValid &&
     passwordValidation.isValid &&
-    confirmPasswordValidation.isValid &&
-    !imageVal === ""
+    confirmPasswordValidation.isValid
   ) {
     formIsValid = true;
   }

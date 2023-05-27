@@ -48,6 +48,8 @@ export const POST = async (request) => {
     password: hashedPassword,
     posts: [],
     image: photoUrl.url,
+    wideImage:
+      "http://res.cloudinary.com/dzwb60tk1/image/upload/v1685202098/stpm1gyb0nzgid4k9qmt.jpg",
   });
 
   let user;

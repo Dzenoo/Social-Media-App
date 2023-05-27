@@ -41,6 +41,9 @@ const UserProfile = ({ params }) => {
         biography={user.biography}
         posts={user.posts}
         email={user.email}
+        followers={user.followers}
+        following={user.following}
+        wideImage={user.wideImage}
       />
       {userPosts === 0 || isPrivate ? (
         <Typography variant="h4" align="center" marginTop="40px">

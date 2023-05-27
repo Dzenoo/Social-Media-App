@@ -19,16 +19,14 @@ const UserProfileCard = ({
   email,
   posts,
   biography,
+  followers,
+  following,
+  wideImage,
 }) => {
   return (
     <Card className={classes.user_profile_card}>
       <Box className={classes.landingImage}>
-        <Image
-          src="/images/exampleimg.jpg"
-          width={600}
-          height={600}
-          alt="profileimg"
-        />
+        <Image src={wideImage} width={600} height={600} alt="profileimg" />
       </Box>
       <CardContent className={classes.profile_content}>
         <Box className={classes.profile_view_info}>
@@ -46,11 +44,11 @@ const UserProfileCard = ({
         </Box>
         <Box className={classes.profile_view_flw}>
           <Typography variant="p" className={classes.profile_flws}>
-            <strong>1200</strong>
+            <strong>{followers}</strong>
             followers
           </Typography>
           <Typography variant="p" className={classes.profile_flws}>
-            <strong>12</strong>
+            <strong>{following}</strong>
             following
           </Typography>{" "}
           <Typography variant="p" className={classes.profile_flws}>
