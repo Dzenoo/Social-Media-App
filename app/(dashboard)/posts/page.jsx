@@ -28,7 +28,7 @@ const Posts = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/posts");
+      const response = await fetch("/api/posts", { cache: "no-store" });
       const responseData = await response.json();
       setPosts(responseData);
     };

@@ -7,17 +7,17 @@ import React, { useEffect, useState } from "react";
 
 const layout = ({ children }) => {
   const token = JSON.parse(localStorage.getItem("userdata"));
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setisLoading] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
 
-  useEffect(() => {
-    if (!session?.user && !token) {
-      router.replace("/");
-    } else {
-      setisLoading(false);
-    }
-  }, [router, session, token]);
+  // useEffect(() => {
+  //   if (!session?.user && !token) {
+  //     router.replace("/");
+  //   } else {
+  //     setisLoading(false);
+  //   }
+  // }, [router, session, token]);
 
   if (isLoading) {
     return (
