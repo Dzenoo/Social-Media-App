@@ -1,7 +1,7 @@
 "use client";
 import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Link from "next/link";
 
@@ -113,7 +113,8 @@ const Post = ({
           {description} <br />
           {hashtags.split(",").map((hs) => (
             <Link
-              href={hs}
+              href={"/"}
+              key={hs}
               style={{ color: "royalblue", textDecoration: "none" }}
             >
               {hs}
