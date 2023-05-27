@@ -5,7 +5,7 @@ export const GET = async (request, { params }) => {
   try {
     await connectToDB();
 
-    const user = await User.findById(params.userId);
+    const user = await User.findById(params.userId).populate("posts");
     return new Response(JSON.stringify(user), { status: 200 });
   } catch (error) {
     return new Response("Could not connect");

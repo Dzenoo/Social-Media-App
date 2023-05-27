@@ -26,13 +26,18 @@ const Posts = () => {
   };
   const handleClose = () => setopen(false);
 
+  const userId = JSON.parse(localStorage.getItem("userinfo"));
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch("/api/posts", { cache: "no-store" });
+    const fetchUserPosts = async () => {
+      const response = await fetch(`/api/users/${userId.userId}`, {
+        cache: "no-store",
+      });
       const responseData = await response.json();
-      setPosts(responseData);
+
+      setPosts(responseData.posts);
     };
-    fetchPosts();
+    fetchUserPosts();
   }, []);
 
   return (
