@@ -13,6 +13,7 @@ const PostItem = ({
   date,
   id,
   image,
+  hashtags,
 }) => {
   const createdDate = new Date(date);
   const currentTime = new Date();
@@ -33,6 +34,17 @@ const PostItem = ({
         <Image alt="img" src={image} width={100} height={100} />
         <Typography variant="p" color="textSecondary">
           {description}
+        </Typography>
+        <Typography
+          variant="p"
+          color="textSecondary"
+          sx={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
+        >
+          {hashtags.split(",").map((h) => (
+            <Link style={{ textDecoration: "none" }} href="/posts">
+              {h}
+            </Link>
+          ))}
         </Typography>
       </Box>
       <Box className={classes.interactivity}>

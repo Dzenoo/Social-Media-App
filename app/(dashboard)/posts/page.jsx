@@ -91,7 +91,11 @@ const Posts = () => {
           </Typography>
         ) : (
           posts
-            .filter((p) => p.description.toLowerCase().includes(query))
+            .filter(
+              (p) =>
+                p.description.toLowerCase().includes(query) ||
+                p.hashtags.toLowerCase().includes(query)
+            )
             .map((post) => (
               <PostItem
                 key={post.id}
@@ -103,6 +107,7 @@ const Posts = () => {
                 likes={post.likes}
                 comments={post.comments.length}
                 shares={post.shares.length}
+                hashtags={post.hashtags}
               />
             ))
         )}
