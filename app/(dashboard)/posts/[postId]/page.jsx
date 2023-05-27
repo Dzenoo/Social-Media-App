@@ -4,6 +4,7 @@ import { Button, FormControl, TextField, Typography } from "@mui/material";
 import classes from "../../../../css/Posts.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { getPostById } from "@/utils/functions";
 
 export async function generateStaticParams() {
   const posts = await fetch("/api/posts/");
@@ -21,22 +22,7 @@ const EditPostPage = async ({ params }) => {
   });
   const [imageVal, setimageVal] = useState("");
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      const response = await fetch(`/api/posts/${params.postId}`);
-      const post = await response.json();
-
-      setEditValues({
-        location: post.location,
-        hashtags: post.hashtags,
-        description: post.description,
-        image: post.image,
-      });
-      setimageVal(post.image);
-    };
-
-    fetchPost();
-  }, []);
+  const post = await getPostById(params.postId);
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
@@ -55,14 +41,10 @@ const EditPostPage = async ({ params }) => {
     fileReader.readAsDataURL(e.target.files[0]);
   };
 
-  console.log(editValues);
-  console.log(imageVal);
-
-  // const editPost = async () => {
-  //   try {
-  //     const response = await fetch();
-  //   } catch (error) {}
-  // };
+  const submitEditHandler = (e) => {
+    e.preventDefault();
+    console.log(editValues);
+  };
 
   return (
     <section className={classes.edit_dashboard}>
@@ -71,9 +53,9 @@ const EditPostPage = async ({ params }) => {
         You are about to edit this post. Make the necessary changes and save
         your updates.
       </Typography>
-      <form>
+      <form onSubmit={submitEditHandler}>
         <div className={classes.image_div}>
-          <Image src={imageVal} width={400} height={400} alt="img" />
+          <Image src={post.image} width={400} height={400} alt="img" />
           <input
             id="image"
             type="file"
@@ -83,7 +65,7 @@ const EditPostPage = async ({ params }) => {
           />
           <TextField
             id="description"
-            defaultValue={editValues.description}
+            value={post.description}
             onChange={handleInputChange}
             multiline
           />
@@ -94,7 +76,7 @@ const EditPostPage = async ({ params }) => {
               label="Hashtags"
               id="hashtags"
               multiline
-              defaultValue={editValues.hashtags}
+              value={post.hashtags}
               onChange={handleInputChange}
             />
           </FormControl>
@@ -103,13 +85,15 @@ const EditPostPage = async ({ params }) => {
               label="Location"
               id="location"
               onChange={handleInputChange}
-              defaultValue={editValues.location}
+              value={post.location}
             />
           </FormControl>
         </div>
         <div className={classes.edit_actions}>
           <Button variant="outlined">Cancel</Button>
-          <Button variant="contained">Save</Button>
+          <Button variant="contained" type="submit">
+            Save
+          </Button>
         </div>
       </form>
     </section>
