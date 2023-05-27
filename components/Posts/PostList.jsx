@@ -12,7 +12,11 @@ const PostList = () => {
       const response = await fetch("/api/posts");
       const responseData = await response.json();
 
-      setallPosts(responseData);
+      const recentPosts = responseData.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+
+      setallPosts(recentPosts);
     };
     getPosts();
   }, []);

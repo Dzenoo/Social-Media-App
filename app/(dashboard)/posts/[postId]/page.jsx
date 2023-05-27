@@ -7,9 +7,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export async function generateStaticParams() {
-  const posts = await fetch("/api/posts/");
+  const user = JSON.parse(localStorage.getItem("userinfo"));
 
-  return posts.map((post) => ({
+  const response = await fetch(`/api/users/${user.userId}`);
+  const responseData = await response.json();
+
+  return responseData.posts.map((post) => ({
     slug: post._id,
   }));
 }
@@ -21,20 +24,23 @@ const EditPostPage = async ({ params }) => {
     description: "",
   });
   const [imageVal, setimageVal] = useState("");
+  const user = JSON.parse(localStorage.getItem("userinfo"));
   const router = useRouter();
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await fetch(`/api/posts/${params.postId}`);
+      const response = await fetch(`/api/users/${user.userId}`);
       const responseData = await response.json();
+
+      const post = responseData.posts.find((p) => p._id === params.postId);
 
       setEditValues((prevValues) => ({
         ...prevValues,
-        location: responseData.location,
-        hashtags: responseData.hashtags,
-        description: responseData.description,
+        location: post.location,
+        hashtags: post.hashtags,
+        description: post.description,
       }));
-      setimageVal(responseData.image);
+      setimageVal(post.image);
     };
     fetchPost();
   }, []);
@@ -118,7 +124,9 @@ const EditPostPage = async ({ params }) => {
           </FormControl>
         </div>
         <div className={classes.edit_actions}>
-          <Button variant="outlined">Cancel</Button>
+          <Button variant="outlined" onClick={() => router.replace("/posts")}>
+            Cancel
+          </Button>
           <Button variant="contained" type="submit">
             Save
           </Button>

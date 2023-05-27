@@ -1,7 +1,7 @@
 "use client";
 import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Link from "next/link";
 
@@ -58,14 +58,10 @@ const Post = ({
   const [commentIsOpen, setcommentIsOpen] = useState(false);
   const [isLiked, setisLiked] = useState(false);
   const [isEnteredShare, setisEnteredShare] = useState(false);
+  const user = JSON.parse(localStorage.getItem("userinfo"));
 
-  const openShareContent = () => {
-    setisEnteredShare(true);
-  };
-
-  const closeShareContent = () => {
-    setisEnteredShare(false);
-  };
+  const openShareContent = () => setisEnteredShare(true);
+  const closeShareContent = () => setisEnteredShare(false);
 
   const createdDate = new Date(date);
   const currentTime = new Date();
@@ -74,7 +70,7 @@ const Post = ({
 
   let formattedTimeDIfference = "";
   if (timeDifferenceHours > 0) {
-    formattedTimeDIfference = `${timeDifferenceHours}hr ago`;
+    formattedTimeDIfference = `${timeDifferenceHours} hr ago`;
   } else {
     const timeDifferenceMinutes = Math.floor(timeDifference / (1000 * 60));
     formattedTimeDIfference = `${timeDifferenceMinutes} minutes ago`;
@@ -92,7 +88,10 @@ const Post = ({
             style={{ borderRadius: "100px" }}
           />
           <div>
-            <Link className="link_no_decoration" href={`/${userId}`}>
+            <Link
+              className="link_no_decoration"
+              href={userId === user.userId ? "/" : `/${userId}`}
+            >
               <Typography fontWeight="bold" variant="h6">
                 {firstName} {lastName}
               </Typography>
