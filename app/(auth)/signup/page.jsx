@@ -33,6 +33,7 @@ const Signup = () => {
       });
 
       const resdata = await response.json();
+      console.log(resdata);
       login(resdata.token);
 
       const userInfo = {

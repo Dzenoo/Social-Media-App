@@ -23,6 +23,7 @@ const UserSchema = new Schema({
     required: [true, "Password is required!"],
   },
   image: { type: String },
+  posts: [{ type: mongoose.Types.ObjectId, ref: "Post" }],
 });
 
 const User = models.User || model("User", UserSchema);

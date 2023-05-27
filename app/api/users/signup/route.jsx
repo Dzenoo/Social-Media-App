@@ -37,6 +37,7 @@ export const POST = async (request) => {
     email: email,
     biography: biography,
     password: hashedPassword,
+    posts: [],
     image:
       "https://res.cloudinary.com/dzwb60tk1/image/upload/v1678535834/Untitled_design_3_zbm2cx.png",
   });
@@ -68,7 +69,7 @@ export const POST = async (request) => {
     firstname: newUser.first_name,
     lastname: newUser.last_name,
     image: newUser.image,
-    userId: existingUser.id,
+    userId: newUser.id,
   };
 
   return new Response(JSON.stringify(userInfo), {

@@ -15,6 +15,7 @@ const PostForm = ({ onSubmitPost }) => {
   const locationVal = useValidation([VALIDATOR_REQUIRE()]);
   const hashtagsVal = useValidation([VALIDATOR_REQUIRE()]);
   const descriptionVal = useValidation([VALIDATOR_REQUIRE()]);
+  const user = JSON.parse(localStorage.getItem("userinfo"));
 
   const handleInputChange = (event, onChangeHandler) => {
     const { id, value } = event.target;
@@ -47,6 +48,7 @@ const PostForm = ({ onSubmitPost }) => {
       hashtags: postValues.hashtags,
       description: postValues.description,
       image: imageVal,
+      userId: user.userId,
     };
 
     onSubmitPost(data);
