@@ -5,23 +5,21 @@ import Link from "next/link";
 import LoginForm from "@/components/Auth/LoginForm";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getSession } from "next-auth/react";
 import { FadeLoader } from "react-spinners";
 import { useAuth } from "@/hooks/useAuth";
 
 const Login = () => {
   const { login } = useAuth();
   const [isLoading, setisLoading] = useState(false);
+  const token = JSON.parse(localStorage.getItem("userdata"));
   const router = useRouter();
 
   useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
-        router.replace("/");
-      } else {
-        setisLoading(false);
-      }
-    });
+    if (token?.token) {
+      router.replace("/");
+    } else {
+      setisLoading(false);
+    }
   }, [router]);
 
   const onLoginSubmit = async (loginData) => {

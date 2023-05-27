@@ -8,7 +8,6 @@ import {
   VALIDATOR_PASSWORD_MATCH,
 } from "@/utils/validators";
 import { Button, TextField } from "@mui/material";
-import { getProviders, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -23,20 +22,7 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
     VALIDATOR_PASSWORD_MATCH(passwordValidation.value),
   ]);
   const router = useRouter();
-  const [providers, setproviders] = useState(null);
   const [imageVal, setimageVal] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setproviders(res);
-    })();
-  }, []);
-
-  const signInWithGoogle = (id) => {
-    signIn(id);
-    router.push("/");
-  };
 
   const formData = {
     first_name: firstNameValidation.value,
@@ -161,24 +147,6 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
         label="Confirm password"
       />
       <div className={classes.actions}>
-        {/* {providers &&
-          Object.values(providers).map((provider) => (
-            <button
-              type="button"
-              className={classes.google}
-              key={provider.name}
-              onClick={() => {
-                signInWithGoogle(provider.id);
-              }}
-            >
-              <Image
-                src="/images/search.png"
-                alt="google"
-                width={30}
-                height={30}
-              />
-            </button>
-          ))} */}
         <Button
           type="submit"
           size="large"

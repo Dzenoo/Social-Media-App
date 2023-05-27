@@ -4,13 +4,11 @@ import classes from "../../css/Sidebar.module.css";
 import Link from "next/link";
 import { Button, Typography } from "@mui/material";
 import { useState } from "react";
-import { signOut, useSession } from "next-auth/react";
 import { useAuth } from "@/hooks/useAuth";
 
 const Sidebar = () => {
   const [barIsOpen, setbarIsOpen] = useState(false);
   const toggle = () => setbarIsOpen(!barIsOpen);
-  const { data: session } = useSession();
   const token = JSON.parse(localStorage.getItem("userdata"));
   const { logout } = useAuth();
 
@@ -75,11 +73,6 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          {session?.user && (
-            <Button fullWidth variant="contained" onClick={signOut}>
-              Logout
-            </Button>
-          )}
           {token?.token && (
             <Button fullWidth variant="contained" onClick={logout}>
               Logout

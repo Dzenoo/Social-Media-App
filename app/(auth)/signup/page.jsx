@@ -6,22 +6,20 @@ import SignupForm from "@/components/Auth/SignupForm";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FadeLoader } from "react-spinners";
-import { getSession } from "next-auth/react";
 import { useAuth } from "@/hooks/useAuth";
 
 const Signup = () => {
   const [isLoading, setisLoading] = useState(false);
   const { login } = useAuth();
+  const token = JSON.parse(localStorage.getItem("userdata"));
   const router = useRouter();
 
   useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
-        router.replace("/");
-      } else {
-        setisLoading(false);
-      }
-    });
+    if (token?.token) {
+      router.replace("/");
+    } else {
+      setisLoading(false);
+    }
   }, [router]);
 
   const onSubmitSignup = async (userData) => {
