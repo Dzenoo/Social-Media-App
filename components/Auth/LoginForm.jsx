@@ -71,7 +71,7 @@ const LoginForm = ({ classes, onLoginSubmit }) => {
         }
       />
       <div className={classes.actions}>
-        {providers &&
+        {/* {providers &&
           Object.values(providers).map((provider) => (
             <button
               type="button"
@@ -88,7 +88,7 @@ const LoginForm = ({ classes, onLoginSubmit }) => {
                 height={30}
               />
             </button>
-          ))}
+          ))} */}
         <Button
           type="submit"
           size="large"

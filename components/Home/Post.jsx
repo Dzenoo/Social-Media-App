@@ -90,7 +90,7 @@ const Post = ({
           <div>
             <Link
               className="link_no_decoration"
-              href={userId === user.userId ? "/" : `/${userId}`}
+              href={userId === user?.userId ? "/" : `/${userId}`}
             >
               <Typography fontWeight="bold" variant="h6">
                 {firstName} {lastName}

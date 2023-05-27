@@ -1,18 +1,9 @@
 "use client";
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import classes from "../../../css/Posts.module.css";
 import Image from "next/image";
 import PostItem from "@/components/Posts/PostItem";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Modale from "@/components/Modal/Modal";
 
@@ -31,7 +22,7 @@ const Posts = () => {
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      const response = await fetch(`/api/users/${userId.userId}`, {
+      const response = await fetch(`/api/users/${userId?.userId}`, {
         cache: "no-store",
       });
       const responseData = await response.json();
@@ -53,15 +44,9 @@ const Posts = () => {
           fontWeight="bold"
           sx={{ padding: "20px", position: "relative", right: "22px" }}
         >
-          Posts
+          Posts ({posts.length})
         </Typography>
         <Box sx={{ display: "flex", gap: "12px" }}>
-          <FormControl sx={{ width: "200px" }}>
-            <InputLabel>FIlter</InputLabel>
-            <Select placeholder="Filter">
-              <MenuItem>Hashtags</MenuItem>
-            </Select>
-          </FormControl>
           <FormControl sx={{ width: "200px" }}>
             <TextField label="Search" onChange={handleSearchChange} />
           </FormControl>

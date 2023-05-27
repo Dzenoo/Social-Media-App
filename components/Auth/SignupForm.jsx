@@ -161,7 +161,7 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
         label="Confirm password"
       />
       <div className={classes.actions}>
-        {providers &&
+        {/* {providers &&
           Object.values(providers).map((provider) => (
             <button
               type="button"
@@ -178,7 +178,7 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
                 height={30}
               />
             </button>
-          ))}
+          ))} */}
         <Button
           type="submit"
           size="large"
