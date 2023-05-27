@@ -4,15 +4,15 @@ import { Button, FormControl, TextField, Typography } from "@mui/material";
 import classes from "../../../../css/Posts.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getPostById } from "@/utils/functions";
+import { useRouter } from "next/navigation";
 
-// export async function generateStaticParams() {
-//   const posts = await fetch("/api/posts/");
+export async function generateStaticParams() {
+  const posts = await fetch("/api/posts/");
 
-//   return posts.map((post) => ({
-//     slug: post._id,
-//   }));
-// }
+  return posts.map((post) => ({
+    slug: post._id,
+  }));
+}
 
 const EditPostPage = async ({ params }) => {
   const [editValues, setEditValues] = useState({
@@ -21,8 +21,23 @@ const EditPostPage = async ({ params }) => {
     description: "",
   });
   const [imageVal, setimageVal] = useState("");
+  const router = useRouter();
 
-  const post = await getPostById(params.postId);
+  useEffect(() => {
+    const fetchPost = async () => {
+      const response = await fetch(`/api/posts/${params.postId}`);
+      const responseData = await response.json();
+
+      setEditValues((prevValues) => ({
+        ...prevValues,
+        location: responseData.location,
+        hashtags: responseData.hashtags,
+        description: responseData.description,
+      }));
+      setimageVal(responseData.image);
+    };
+    fetchPost();
+  }, []);
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
@@ -41,9 +56,22 @@ const EditPostPage = async ({ params }) => {
     fileReader.readAsDataURL(e.target.files[0]);
   };
 
-  const submitEditHandler = (e) => {
+  const submitEditHandler = async (e) => {
     e.preventDefault();
-    console.log(editValues);
+
+    const response = await fetch(`/api/posts/${params.postId}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        location: editValues.location,
+        hashtags: editValues.hashtags,
+        description: editValues.description,
+        image: imageVal,
+      }),
+    });
+
+    if (response.ok) {
+      router.push("/posts");
+    }
   };
 
   return (
@@ -55,7 +83,7 @@ const EditPostPage = async ({ params }) => {
       </Typography>
       <form onSubmit={submitEditHandler}>
         <div className={classes.image_div}>
-          <Image src={post.image} width={400} height={400} alt="img" />
+          <Image src={imageVal} width={400} height={400} alt="img" />
           <input
             id="image"
             type="file"
@@ -65,7 +93,7 @@ const EditPostPage = async ({ params }) => {
           />
           <TextField
             id="description"
-            value={post.description}
+            value={editValues.description}
             onChange={handleInputChange}
             multiline
           />
@@ -76,7 +104,7 @@ const EditPostPage = async ({ params }) => {
               label="Hashtags"
               id="hashtags"
               multiline
-              value={post.hashtags}
+              value={editValues.hashtags}
               onChange={handleInputChange}
             />
           </FormControl>
@@ -85,7 +113,7 @@ const EditPostPage = async ({ params }) => {
               label="Location"
               id="location"
               onChange={handleInputChange}
-              value={post.location}
+              value={editValues.location}
             />
           </FormControl>
         </div>
