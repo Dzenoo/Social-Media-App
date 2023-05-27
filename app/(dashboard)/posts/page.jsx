@@ -82,6 +82,7 @@ const Posts = () => {
             openDeleteModal={() => handleOpen(post._id)}
             description={post.description}
             image={post.image}
+            date={post.createdAt}
           />
         ))}
         <Modale

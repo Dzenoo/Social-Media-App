@@ -14,6 +14,19 @@ const PostItem = ({
   id,
   image,
 }) => {
+  const createdDate = new Date(date);
+  const currentTime = new Date();
+  const timeDifference = currentTime - createdDate;
+  const timeDifferenceHours = Math.floor(timeDifference / (1000 * 60 * 60));
+
+  let formattedTimeDIfference = "";
+  if (timeDifferenceHours > 0) {
+    formattedTimeDIfference = `${timeDifferenceHours}hr ago`;
+  } else {
+    const timeDifferenceMinutes = Math.floor(timeDifference / (1000 * 60));
+    formattedTimeDIfference = `${timeDifferenceMinutes} minutes ago`;
+  }
+
   return (
     <Card className={classes.post_item}>
       <Box className={classes.img}>
@@ -44,7 +57,7 @@ const PostItem = ({
       </Box>
       <Box className={classes.date}>
         <Image alt="img" src="/images/calendar2.png" width={40} height={40} />
-        <Typography fontWeight="bold">{date}</Typography>
+        <Typography fontWeight="bold">{formattedTimeDIfference}</Typography>
       </Box>
       <Box className={classes.actions}>
         <div className={classes.action}>

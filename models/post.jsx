@@ -17,6 +17,9 @@ const PostSchema = new Schema(
     image: {
       type: String,
     },
+    likes: [{ type: Number, default: 0 }],
+    comments: [{ type: String }],
+    shares: [{ type: Number, default: 0 }],
   },
   { timestamps: true }
 );
