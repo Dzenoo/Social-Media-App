@@ -25,6 +25,7 @@ const PostList = () => {
           description={post.description}
           image={post.image}
           date={post.createdAt}
+          location={post.location}
         />
       ))}
     </div>
