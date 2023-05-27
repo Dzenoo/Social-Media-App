@@ -24,6 +24,10 @@ const UserSchema = new Schema({
   },
   image: { type: String },
   posts: [{ type: mongoose.Types.ObjectId, ref: "Post" }],
+  landingImage: { type: String },
+  followers: { type: Number, default: 0 },
+  following: { type: Number, default: 0 },
+  isPrivate: { type: Boolean },
 });
 
 const User = models.User || model("User", UserSchema);

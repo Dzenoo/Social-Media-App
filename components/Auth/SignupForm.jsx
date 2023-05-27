@@ -24,6 +24,7 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
   ]);
   const router = useRouter();
   const [providers, setproviders] = useState(null);
+  const [imageVal, setimageVal] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -43,6 +44,7 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
     email: emailValidation.value,
     biography: biographyValidation.value,
     password: passwordValidation.value,
+    image: imageVal,
   };
 
   let formIsValid = false;
@@ -52,10 +54,20 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
     emailValidation.isValid &&
     biographyValidation.isValid &&
     passwordValidation.isValid &&
-    confirmPasswordValidation.isValid
+    confirmPasswordValidation.isValid &&
+    !imageVal === ""
   ) {
     formIsValid = true;
   }
+
+  const handleImageChange = (e) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const imageUrl = fileReader.result;
+      setimageVal(imageUrl);
+    };
+    fileReader.readAsDataURL(e.target.files[0]);
+  };
 
   const submitSignup = (e) => {
     e.preventDefault();
@@ -87,6 +99,13 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
         onChange={lastNameValidation.onChangeHandler}
         onBlur={lastNameValidation.onBlurHandler}
         label="Last Name"
+      />
+      <Image src={imageVal} width={70} height={70} alt="profimg" />
+      <input
+        type="file"
+        accept="image/*"
+        required={true}
+        onChange={handleImageChange}
       />
       <TextField
         value={emailValidation.value}
