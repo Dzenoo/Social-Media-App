@@ -11,22 +11,35 @@ import {
 import Image from "next/image";
 import classes from "../../css/Profile.module.css";
 
-const UserProfileCard = ({ isPrivate }) => {
+const UserProfileCard = ({
+  isPrivate,
+  userImage,
+  firstName,
+  lastName,
+  email,
+  posts,
+  biography,
+}) => {
   return (
     <Card className={classes.user_profile_card}>
       <Box className={classes.landingImage}>
-        <Image src="/images/exampleimg.jpg" width={600} height={600} />
+        <Image
+          src="/images/exampleimg.jpg"
+          width={600}
+          height={600}
+          alt="profileimg"
+        />
       </Box>
       <CardContent className={classes.profile_content}>
         <Box className={classes.profile_view_info}>
-          <Image src="/images/exampleimg.jpg" width={120} height={120} />
+          <Image src={userImage} width={120} height={120} alt="landingimg" />
           <div>
             <Typography variant="h6" fontWeight="bold">
-              John Doe
+              {firstName} {lastName}
             </Typography>
             {!isPrivate && (
               <Typography color="textSecondary" variant="p">
-                johndoe@gmail.com
+                {email}
               </Typography>
             )}
           </div>
@@ -41,7 +54,7 @@ const UserProfileCard = ({ isPrivate }) => {
             following
           </Typography>{" "}
           <Typography variant="p" className={classes.profile_flws}>
-            <strong>2</strong>
+            <strong>{posts.length}</strong>
             posts
           </Typography>
         </Box>
@@ -53,10 +66,7 @@ const UserProfileCard = ({ isPrivate }) => {
             Bio
           </Typography>
           <Typography color="textSecondary" variant="p">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat
+            {biography}
           </Typography>
         </CardActions>
       )}

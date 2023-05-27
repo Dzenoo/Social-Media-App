@@ -16,8 +16,6 @@ const PostList = () => {
     getPosts();
   }, []);
 
-  console.log(allPosts);
-
   return (
     <div>
       {allPosts.map((post) => (
@@ -31,6 +29,7 @@ const PostList = () => {
           firstName={post.creator.first_name}
           lastName={post.creator.last_name}
           creatorImg={post.creator.image}
+          userId={post.creator._id}
         />
       ))}
     </div>

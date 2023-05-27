@@ -53,6 +53,7 @@ const Post = ({
   hashtags,
   date,
   location,
+  userId,
 }) => {
   const [commentIsOpen, setcommentIsOpen] = useState(false);
   const [isLiked, setisLiked] = useState(false);
@@ -91,7 +92,7 @@ const Post = ({
             style={{ borderRadius: "100px" }}
           />
           <div>
-            <Link className="link_no_decoration" href="/userId">
+            <Link className="link_no_decoration" href={`/${userId}`}>
               <Typography fontWeight="bold" variant="h6">
                 {firstName} {lastName}
               </Typography>
