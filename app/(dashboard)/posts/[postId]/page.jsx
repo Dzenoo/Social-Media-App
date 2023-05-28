@@ -99,8 +99,8 @@ const EditPostPage = async ({ params }) => {
           />
           <TextField
             id="description"
-            value={editValues.description}
-            onChange={handleInputChange}
+            defaultValue={editValues.description}
+            onBlur={handleInputChange}
             multiline
           />
         </div>
@@ -110,16 +110,16 @@ const EditPostPage = async ({ params }) => {
               label="Hashtags"
               id="hashtags"
               multiline
-              value={editValues.hashtags}
-              onChange={handleInputChange}
+              defaultValue={editValues.hashtags}
+              onBlur={handleInputChange}
             />
           </FormControl>
           <FormControl>
             <TextField
               label="Location"
               id="location"
-              onChange={handleInputChange}
-              value={editValues.location}
+              onBlur={handleInputChange}
+              defaultValue={editValues.location}
             />
           </FormControl>
         </div>
