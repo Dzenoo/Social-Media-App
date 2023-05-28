@@ -39,7 +39,7 @@ const CommentSection = ({
           height={60}
           style={{ borderRadius: "100px" }}
         />
-        <form onSubmit={commentPost}>
+        <form className={classes.comment_form} onSubmit={commentPost}>
           <TextField
             placeholder="Comment new.."
             fullWidth
