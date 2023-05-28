@@ -3,11 +3,14 @@
 import { useEffect, useState } from "react";
 import Post from "../Home/Post";
 import { Typography } from "@mui/material";
+import { FadeLoader } from "react-spinners";
 
 const PostList = () => {
   const [allPosts, setallPosts] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
+    setisLoading(true);
     const getPosts = async () => {
       const response = await fetch("/api/posts");
       const responseData = await response.json();
@@ -17,9 +20,18 @@ const PostList = () => {
       );
 
       setallPosts(recentPosts);
+      setisLoading(false);
     };
     getPosts();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
 
   return (
     <div>
