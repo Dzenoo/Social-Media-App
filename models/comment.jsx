@@ -1,12 +1,7 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const CommentSchema = new Schema(
   {
-    postId: {
-      type: mongoose.Types.ObjectId,
-      ref: "Post",
-      required: true,
-    },
     userImage: {
       type: String,
       required: true,
