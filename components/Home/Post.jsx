@@ -96,8 +96,6 @@ const ShareSection = ({ closeContent, openContent }) => {
       onMouseEnter={openContent}
       className={classes.share_div_content}
     >
-      <Image src="/images/linkedin.png" width={40} height={40} alt="linkedin" />{" "}
-      <Image src="/images/linkedin.png" width={40} height={40} alt="linkedin" />{" "}
       <Image src="/images/linkedin.png" width={40} height={40} alt="linkedin" />
     </div>
   );
