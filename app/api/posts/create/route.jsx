@@ -24,6 +24,8 @@ export const POST = async (request) => {
       description,
       image: photoUrl.url,
       creator: userId,
+      likes: [],
+      comments: [],
     });
 
     await newPost.save();

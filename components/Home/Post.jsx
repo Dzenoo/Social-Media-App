@@ -137,7 +137,7 @@ const Post = ({
             height={30}
             alt="like"
           />
-          Like
+          Like {!isLiked ? "0" : "1"}
         </Button>
         <Button
           fullWidth
