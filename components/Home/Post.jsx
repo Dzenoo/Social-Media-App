@@ -1,7 +1,7 @@
 "use client";
 import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Link from "next/link";
 
@@ -54,15 +54,18 @@ const Post = ({
   date,
   location,
   userId,
+  postId,
+  likes,
 }) => {
-  const [commentIsOpen, setcommentIsOpen] = useState(false);
-  const [isLiked, setisLiked] = useState(false);
-  const [isEnteredShare, setisEnteredShare] = useState(false);
-  const user = JSON.parse(localStorage.getItem("userinfo"));
+  const user = JSON.parse(localStorage.getItem("userinfo")); // user info
+  const [isLiked, setIsLiked] = useState(likes.includes(user.userId)); // like state
+  const [commentIsOpen, setcommentIsOpen] = useState(false); // comment state
+  const [isEnteredShare, setisEnteredShare] = useState(false); // share state
 
-  const openShareContent = () => setisEnteredShare(true);
-  const closeShareContent = () => setisEnteredShare(false);
+  const openShareContent = () => setisEnteredShare(true); // open share div
+  const closeShareContent = () => setisEnteredShare(false); // close share div
 
+  // Logic for date //
   const createdDate = new Date(date);
   const currentTime = new Date();
   const timeDifference = currentTime - createdDate;
@@ -75,6 +78,24 @@ const Post = ({
     const timeDifferenceMinutes = Math.floor(timeDifference / (1000 * 60));
     formattedTimeDIfference = `${timeDifferenceMinutes} minutes ago`;
   }
+  // Logic for date //
+
+  // Like function //
+  const likePost = async () => {
+    try {
+      const response = await fetch(`/api/posts/${postId}/like`, {
+        method: "POST",
+        body: JSON.stringify({
+          userId: user.userId,
+        }),
+      });
+      if (response.ok) {
+        setIsLiked((prevState) => !prevState);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Card className={classes.post_card}>
@@ -129,15 +150,15 @@ const Post = ({
         <Button
           fullWidth
           className={classes.post_card_button}
-          onClick={() => setisLiked((prevState) => !prevState)}
+          onClick={likePost}
         >
           <Image
-            src={!isLiked ? "/images/like.png" : "/images/like2.png"}
+            src={isLiked ? "/images/like2.png" : "/images/like.png"}
             width={30}
             height={30}
             alt="like"
           />
-          Like {!isLiked ? "0" : "1"}
+          Like {likes.length}
         </Button>
         <Button
           fullWidth

@@ -14,5 +14,14 @@ export const POST = async (request, { params }) => {
       $push: { likes: userId },
       new: true,
     });
-  } catch (error) {}
+
+    if (post.likes.includes(userId)) {
+      await Post.findByIdAndUpdate(params.postId, {
+        $pull: { likes: userId },
+      });
+    }
+    return new Response(JSON.stringify(post), { status: 201 });
+  } catch (error) {
+    return new Response("Could not like post", { status: 500 });
+  }
 };

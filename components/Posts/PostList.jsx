@@ -31,6 +31,7 @@ const PostList = () => {
         allPosts.map((post) => (
           <Post
             key={post._id}
+            postId={post._id}
             hashtags={post.hashtags}
             description={post.description}
             image={post.image}
@@ -40,6 +41,7 @@ const PostList = () => {
             lastName={post.creator.last_name}
             creatorImg={post.creator.image}
             userId={post.creator._id}
+            likes={post.likes}
           />
         ))
       )}
