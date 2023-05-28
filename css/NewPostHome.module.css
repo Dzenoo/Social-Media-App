@@ -65,9 +65,15 @@
 
 .comment_section .comment_info {
   display: flex;
-  align-items: center;
   gap: 1.2em;
   padding: 12px;
+  flex-direction: column;
+}
+
+.comment_section .comment_info .comments_div_inline {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
 }
 
 .share_div_content {

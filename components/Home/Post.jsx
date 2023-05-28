@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Link from "next/link";
+import { FadeLoader } from "react-spinners";
 
 const CommentSection = ({
   userImg,
@@ -12,9 +13,12 @@ const CommentSection = ({
   userName,
   postId,
   comments,
+  isLoading,
+  setisLoading,
 }) => {
   const commentPost = async (e) => {
     e.preventDefault();
+    setisLoading(true);
     try {
       const response = await fetch(`/api/posts/${postId}/comment`, {
         method: "POST",
@@ -24,10 +28,23 @@ const CommentSection = ({
           userName: userName,
         }),
       });
+
+      if (response.ok) {
+        setisLoading(false);
+      }
     } catch (error) {
+      setisLoading(false);
       console.log(error);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
 
   return (
     <div className={classes.comment_section}>
@@ -53,7 +70,7 @@ const CommentSection = ({
       <Typography fontWeight="bold">All Comments</Typography>
       <div className={classes.comment_info}>
         {comments.map((comment) => (
-          <>
+          <div className={classes.comments_div_inline}>
             <Image
               src={comment.userImage}
               width={60}
@@ -65,7 +82,7 @@ const CommentSection = ({
               <Typography fontWeight="bold">{comment.userName}</Typography>
               <Typography color="textSecondary">{comment.content}</Typography>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>
@@ -101,6 +118,7 @@ const Post = ({
   comments,
 }) => {
   const user = JSON.parse(localStorage.getItem("userinfo")); // user info
+  const [isLoading, setisLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(likes.includes(user.userId)); // like state
   const [comment, setComment] = useState(""); // comment state
   const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
@@ -243,6 +261,8 @@ const Post = ({
           setComment={setComment}
           comment={comment}
           comments={comments}
+          isLoading={isLoading}
+          setisLoading={setisLoading}
         />
       )}
     </Card>
