@@ -1,30 +1,72 @@
 "use client";
 import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Link from "next/link";
 
-const CommentSection = () => {
+const CommentSection = ({
+  userImg,
+  setComment,
+  comment,
+  userName,
+  postId,
+  comments,
+}) => {
+  const commentPost = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/posts/${postId}/comment`, {
+        method: "POST",
+        body: JSON.stringify({
+          commentText: comment,
+          userImage: userImg,
+          userName: userName,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={classes.comment_section}>
       <hr />
       <div className={classes.comment_div}>
-        <Image src="/images/setting.png" width={60} height={60} />
-        <form>
-          <TextField placeholder="Comment new.." fullWidth />
+        <Image
+          src={userImg}
+          width={60}
+          height={60}
+          style={{ borderRadius: "100px" }}
+        />
+        <form onSubmit={commentPost}>
+          <TextField
+            placeholder="Comment new.."
+            fullWidth
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <Button type="submit" variant="contained">
+            Comment
+          </Button>
         </form>
       </div>
       <Typography fontWeight="bold">All Comments</Typography>
       <div className={classes.comment_info}>
-        <Image src="/images/setting.png" width={60} height={60} />
-        <div>
-          <Typography fontWeight="bold">John Doe</Typography>
-          <Typography color="textSecondary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor
-          </Typography>
-        </div>
+        {comments.map((comment) => (
+          <>
+            <Image
+              src={comment.userImage}
+              width={60}
+              height={60}
+              style={{ borderRadius: "100px" }}
+              alt={comment.userName}
+            />
+            <div>
+              <Typography fontWeight="bold">{comment.userName}</Typography>
+              <Typography color="textSecondary">{comment.content}</Typography>
+            </div>
+          </>
+        ))}
       </div>
     </div>
   );
@@ -56,12 +98,15 @@ const Post = ({
   userId,
   postId,
   likes,
+  comments,
 }) => {
   const user = JSON.parse(localStorage.getItem("userinfo")); // user info
   const [isLiked, setIsLiked] = useState(likes.includes(user.userId)); // like state
-  const [commentIsOpen, setcommentIsOpen] = useState(false); // comment state
+  const [comment, setComment] = useState(""); // comment state
+  const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
   const [isEnteredShare, setisEnteredShare] = useState(false); // share state
 
+  console.log(comments);
   const openShareContent = () => setisEnteredShare(true); // open share div
   const closeShareContent = () => setisEnteredShare(false); // close share div
 
@@ -190,7 +235,16 @@ const Post = ({
         </Button>
       </div>
       {/* Comments for post */}
-      {commentIsOpen && <CommentSection />}
+      {commentIsOpen && (
+        <CommentSection
+          userImg={user?.image}
+          userName={user?.firstname.concat(" ", user?.lastname)}
+          postId={postId}
+          setComment={setComment}
+          comment={comment}
+          comments={comments}
+        />
+      )}
     </Card>
   );
 };

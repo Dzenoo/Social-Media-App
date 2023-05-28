@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import mongoose, { Schema, model, models } from "mongoose";
 
 const PostSchema = new Schema(
@@ -19,7 +18,7 @@ const PostSchema = new Schema(
       type: String,
     },
     likes: [{ type: mongoose.Types.ObjectId, ref: "User" }],
-    comments: [{ type: String }],
+    comments: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
     shares: [{ type: Number, default: 0 }],
     creator: { type: mongoose.Types.ObjectId, ref: "User" },
   },

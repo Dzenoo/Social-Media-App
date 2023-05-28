@@ -10,7 +10,7 @@ export const GET = async () => {
 
   let posts;
   try {
-    posts = await Post.find().populate("creator");
+    posts = await Post.find().populate("creator").populate("comments");
   } catch (error) {
     return new Response("Failed to get posts", { status: 500 });
   }

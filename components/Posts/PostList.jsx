@@ -54,6 +54,7 @@ const PostList = () => {
             creatorImg={post.creator.image}
             userId={post.creator._id}
             likes={post.likes}
+            comments={post.comments}
           />
         ))
       )}
