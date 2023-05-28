@@ -89,7 +89,7 @@ const Posts = () => {
                 description={post.description}
                 image={post.image}
                 date={post.createdAt}
-                likes={post.likes}
+                likes={post.likes.length}
                 comments={post.comments.length}
                 shares={post.shares.length}
                 hashtags={post.hashtags}
