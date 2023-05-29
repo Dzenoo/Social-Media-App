@@ -117,7 +117,7 @@ const Post = ({
 }) => {
   const user = JSON.parse(localStorage.getItem("userinfo")); // user info
   const [isLoading, setisLoading] = useState(false);
-  const [isLiked, setIsLiked] = useState(likes.includes(user.userId)); // like state
+  const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state
   const [comment, setComment] = useState(""); // comment state
   const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
   const [isEnteredShare, setisEnteredShare] = useState(false); // share state
@@ -231,7 +231,7 @@ const Post = ({
             height={30}
             alt="comment"
           />
-          Comment
+          Comment {comments.length}
         </Button>
         {isEnteredShare && (
           <ShareSection

@@ -98,7 +98,10 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <Link href="/profile/userId" className="link_no_decoration">
+        <Link
+          href={`/profile/${userInfo?.userId}`}
+          className="link_no_decoration"
+        >
           <Card className={classes.profile_saved}>
             <Image
               src="/images/save.png"
