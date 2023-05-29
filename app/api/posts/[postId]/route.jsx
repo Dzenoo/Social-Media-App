@@ -1,4 +1,6 @@
+import Comment from "@/models/comment";
 import Post from "@/models/post";
+import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 import { v2 as cloudinary } from "cloudinary";
 cloudinary.config({
@@ -62,9 +64,13 @@ export const DELETE = async (request, { params }) => {
   }
 
   try {
-    await Post.findByIdAndRemove(params.postId);
+    const post = await Post.findByIdAndRemove(params.postId);
+    await Comment.findOneAndDelete({ post: params.postId });
+    const user = await User.findById(post.creator);
+    await user.posts.pull(post);
+    await user.save();
     return new Response("Post deleted", { status: 200 });
   } catch (error) {
-    return new Response("Cannot find post by id", { status: 402 });
+    return new Response("Cannot find post by id", { status: 404 });
   }
 };
