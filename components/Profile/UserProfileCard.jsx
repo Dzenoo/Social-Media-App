@@ -22,6 +22,8 @@ const UserProfileCard = ({
   followers,
   following,
   wideImage,
+  followUser,
+  isUserFollowed,
 }) => {
   return (
     <Card className={classes.user_profile_card}>
@@ -56,7 +58,11 @@ const UserProfileCard = ({
             posts
           </Typography>
         </Box>
-        <Button variant="contained">Follow</Button>
+        {!isUserFollowed && (
+          <Button variant="contained" onClick={followUser}>
+            Follow
+          </Button>
+        )}
       </CardContent>
       {!isPrivate && (
         <CardActions className={classes.profile_view_actions}>

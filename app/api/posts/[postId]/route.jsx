@@ -1,7 +1,6 @@
 import Post from "@/models/post";
 import { connectToDB } from "@/utils/database";
 import { v2 as cloudinary } from "cloudinary";
-
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,

@@ -122,7 +122,6 @@ const Post = ({
   const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
   const [isEnteredShare, setisEnteredShare] = useState(false); // share state
 
-  console.log(comments);
   const openShareContent = () => setisEnteredShare(true); // open share div
   const closeShareContent = () => setisEnteredShare(false); // close share div
 

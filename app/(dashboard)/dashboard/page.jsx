@@ -27,7 +27,7 @@ const Dashboard = () => {
       </Typography>
       <Cards
         posts={data?.posts.length}
-        followers={60}
+        followers={data?.followers.length}
         likes={data?.posts.reduce(
           (count, post) => count + post.likes.length,
           0

@@ -47,6 +47,8 @@ export const POST = async (request) => {
     biography: biography,
     password: hashedPassword,
     posts: [],
+    followers: [],
+    following: [],
     image: photoUrl.url,
     wideImage:
       "http://res.cloudinary.com/dzwb60tk1/image/upload/v1685202098/stpm1gyb0nzgid4k9qmt.jpg",

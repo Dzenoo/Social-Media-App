@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const PostSchema = new Schema(
   {
@@ -17,10 +17,10 @@ const PostSchema = new Schema(
     image: {
       type: String,
     },
-    likes: [{ type: mongoose.Types.ObjectId, ref: "User" }],
-    comments: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
+    likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     shares: [{ type: Number, default: 0 }],
-    creator: { type: mongoose.Types.ObjectId, ref: "User" },
+    creator: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

@@ -12,15 +12,18 @@ const PostList = () => {
   useEffect(() => {
     setisLoading(true);
     const getPosts = async () => {
-      const response = await fetch("/api/posts");
+      const response = await fetch("/api/posts", {
+        cache: "no-store",
+        next: { revalidate: 2 },
+      });
       const responseData = await response.json();
 
       const recentPosts = responseData.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
 
-      setallPosts(recentPosts);
       setisLoading(false);
+      setallPosts(recentPosts);
     };
     getPosts();
   }, []);

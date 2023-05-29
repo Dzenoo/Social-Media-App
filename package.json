@@ -16,7 +16,7 @@
     "cloudinary": "^1.37.0",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.5.0",
-    "mongoose": "^7.1.1",
+    "mongoose": "^7.2.1",
     "next": "^13.4.3",
     "next-auth": "^4.22.1",
     "react": "18.2.0",

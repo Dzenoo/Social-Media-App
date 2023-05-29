@@ -19,10 +19,10 @@ export const POST = async (request, { params }) => {
   }
 
   const createdComment = new Comment({
-    postId: post._id,
     userImage: userImage,
     userName: userName,
     content: commentText,
+    post: post._id,
   });
 
   try {

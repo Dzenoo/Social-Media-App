@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
   first_name: {
@@ -23,10 +23,10 @@ const UserSchema = new Schema({
     required: [true, "Password is required!"],
   },
   image: { type: String },
-  posts: [{ type: mongoose.Types.ObjectId, ref: "Post" }],
+  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   wideImage: { type: String },
-  followers: { type: Number, default: 0 },
-  following: { type: Number, default: 0 },
+  followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  following: [{ type: Schema.Types.ObjectId, ref: "User" }],
   isPrivate: { type: Boolean, default: false },
 });
 
