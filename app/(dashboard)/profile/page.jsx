@@ -11,13 +11,47 @@ import classes from "../../../css/Profile.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import Modale from "@/components/Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FadeLoader } from "react-spinners";
 
 const Profile = () => {
+  const [user, setuser] = useState();
   const [isEdit, setisEdit] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const openModal = () => setmodalIsOpen(true);
   const closeModal = () => setmodalIsOpen(false);
+
+  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch(`/api/users/${userInfo.userId}`, {
+        cache: "no-store",
+        next: { revalidate: 2 },
+      });
+      const responseData = await response.json();
+      setuser(responseData);
+    };
+    fetchUser();
+  }, []);
+
+  const changeUserPrivate = async () => {
+    try {
+      const response = await fetch(`/api/users/${userInfo.userId}`, {
+        method: "PATCH",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!user) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
 
   return (
     <section className={classes.profile_section}>
@@ -29,7 +63,8 @@ const Profile = () => {
       <Box className={classes.profile_container}>
         <div className={classes.profile_info}>
           <Image
-            src="/images/setting.png"
+            src={user?.image}
+            style={{ borderRadius: "100px" }}
             width={200}
             height={200}
             alt="profile"
@@ -38,26 +73,26 @@ const Profile = () => {
             <div className={classes.edit_inputs}>
               {!isEdit ? (
                 <Typography variant="h4" fontWeight="bold">
-                  John Doe
+                  {user?.first_name.concat(" ", user?.last_name)}
                 </Typography>
               ) : (
-                <TextField label="Edit name" />
+                <TextField label="Edit name" defaultValue={user?.first_name} />
               )}
               {!isEdit ? (
                 <Typography variant="p" color="textSecondary">
-                  johndoe@gmail.com
+                  {user?.email}
                 </Typography>
               ) : (
-                <TextField label="Edit email" />
+                <TextField label="Edit email" defaultValue={user?.email} />
               )}
             </div>
             <div className={classes.profile_followers_info}>
               <Typography className={classes.typo_profile} variant="p">
-                <strong>1200</strong>
+                <strong>{user?.followers.length}</strong>
                 followers
               </Typography>
               <Typography className={classes.typo_profile} variant="p">
-                <strong>12</strong>
+                <strong>{user?.following.length}</strong>
                 following
               </Typography>
             </div>
@@ -81,25 +116,11 @@ const Profile = () => {
             Biography
           </Typography>
           {!isEdit ? (
-            <Typography color="textSecondary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Typography>
+            <Typography color="textSecondary">{user?.biography}</Typography>
           ) : (
             <textarea
               className={classes.profile_textarea}
-              placeholder=" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-            enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum."
+              defaultValue={user?.biography}
             ></textarea>
           )}
         </div>
@@ -117,8 +138,11 @@ const Profile = () => {
             Privacy
           </Typography>
           <div className={classes.profile_actions}>
-            <Switch />
-            Turn my profile public
+            <Switch
+              onClick={changeUserPrivate}
+              defaultChecked={user?.isPrivate}
+            />
+            Turn my profile private
           </div>
         </div>
       </Box>

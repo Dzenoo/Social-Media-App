@@ -40,3 +40,23 @@ export const POST = async (request, { params }) => {
     return new Response("Could not follow user", { status: 500 });
   }
 };
+
+export const PATCH = async (request, { params }) => {
+  try {
+    await connectToDB();
+  } catch (error) {
+    return new Response("Could not connect", { status: 500 });
+  }
+
+  try {
+    const user = await User.findById(params.userId);
+
+    user.isPrivate = !user.isPrivate;
+    await user.save();
+    return new Response("User profile visibility toggled successfully", {
+      status: 200,
+    });
+  } catch (error) {
+    return new Response("Could not find user", { status: 500 });
+  }
+};
