@@ -1,6 +1,5 @@
 "use client";
 import LandingPage from "@/components/Home/LandingPage";
-import Post from "@/components/Home/Post";
 import PostList from "@/components/Posts/PostList";
 import { Container } from "@mui/material";
 
