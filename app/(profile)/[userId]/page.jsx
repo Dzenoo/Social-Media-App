@@ -72,7 +72,7 @@ const UserProfile = ({ params }) => {
       )}
       {user.isPrivate && !isUserFollowed && <div>Profile is private</div>}
       {isUserFollowed && (
-        <div>
+        <Container maxWidth="md">
           {Object.keys(user.posts).map((key) => {
             const post = user.posts[key];
             return (
@@ -94,7 +94,7 @@ const UserProfile = ({ params }) => {
               />
             );
           })}
-        </div>
+        </Container>
       )}
     </Container>
   );
