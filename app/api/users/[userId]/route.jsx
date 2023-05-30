@@ -1,3 +1,5 @@
+import Comment from "@/models/comment";
+import Post from "@/models/post";
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 
@@ -62,5 +64,35 @@ export const PATCH = async (request, { params }) => {
     });
   } catch (error) {
     return new Response("Could not find user", { status: 500 });
+  }
+};
+
+export const DELETE = async (request, { params }) => {
+  try {
+    await connectToDB();
+
+    const user = await User.findByIdAndDelete(params.userId);
+
+    if (!user) {
+      return new Response("User not found", { status: 500 });
+    }
+
+    await Comment.deleteMany({ userName: user.first_name });
+
+    await Post.updateMany(
+      { likes: params.userId },
+      { $pull: { likes: params.userId } }
+    );
+
+    const posts = await Post.find({ creator: params.userId });
+    const postIds = posts.map((p) => p._id);
+    await Comment.deleteMany({ post: { $in: postIds } });
+    await Post.deleteMany({ creator: params.userId });
+
+    await User.findByIdAndDelete(params.userId);
+
+    return new Response("User deleted", { status: 200 });
+  } catch (error) {
+    return new Response("Could not connect", { status: 500 });
   }
 };

@@ -1,25 +1,17 @@
 "use client";
-import {
-  Box,
-  Button,
-  Card,
-  Switch,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, Switch, Typography } from "@mui/material";
 import classes from "../../../css/Profile.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import Modale from "@/components/Modal/Modal";
-import { useState } from "react";
 import { getUser } from "@/utils/functions";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const Profile = async () => {
-  const [isEdit, setisEdit] = useState(false);
-  const [modalIsOpen, setmodalIsOpen] = useState(false);
-  const openModal = () => setmodalIsOpen(true);
-  const closeModal = () => setmodalIsOpen(false);
-
+  const { logout } = useAuth();
+  const router = useRouter();
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
   const user = await getUser(userInfo.userId);
 
@@ -31,6 +23,18 @@ const Profile = async () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const deleteUser = async () => {
+    try {
+      await fetch(`/api/users/${userInfo.userId}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    router.push("/");
+    logout();
   };
 
   return (
@@ -51,20 +55,12 @@ const Profile = async () => {
           />
           <div className={classes.profile_nm}>
             <div className={classes.edit_inputs}>
-              {!isEdit ? (
-                <Typography variant="h4" fontWeight="bold">
-                  {user?.first_name.concat(" ", user?.last_name)}
-                </Typography>
-              ) : (
-                <TextField label="Edit name" defaultValue={user?.first_name} />
-              )}
-              {!isEdit ? (
-                <Typography variant="p" color="textSecondary">
-                  {user?.email}
-                </Typography>
-              ) : (
-                <TextField label="Edit email" defaultValue={user?.email} />
-              )}
+              <Typography variant="h4" fontWeight="bold">
+                {user?.first_name.concat(" ", user?.last_name)}
+              </Typography>
+              <Typography variant="p" color="textSecondary">
+                {user?.email}
+              </Typography>
             </div>
             <div className={classes.profile_followers_info}>
               <Typography className={classes.typo_profile} variant="p">
@@ -98,14 +94,7 @@ const Profile = async () => {
           <Typography fontWeight="bold" variant="h6">
             Biography
           </Typography>
-          {!isEdit ? (
-            <Typography color="textSecondary">{user?.biography}</Typography>
-          ) : (
-            <textarea
-              className={classes.profile_textarea}
-              defaultValue={user?.biography}
-            ></textarea>
-          )}
+          <Typography color="textSecondary">{user?.biography}</Typography>
         </div>
         <div>
           <Typography fontWeight="bold" variant="h6">
@@ -129,21 +118,9 @@ const Profile = async () => {
           </div>
         </div>
       </Box>
-      <Modale
-        isOpen={modalIsOpen}
-        close={closeModal}
-        text="Are you sure you want to your profile?"
-        title="Deleting Profile Confirmation"
-      />
       <div className={classes.profile_buttons}>
-        <Button variant="outlined" onClick={openModal} color="error">
+        <Button variant="outlined" onClick={deleteUser} color="error">
           Delete account?
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => setisEdit((prevState) => !prevState)}
-        >
-          {!isEdit ? "Edit" : "Save"}
         </Button>
       </div>
     </section>
