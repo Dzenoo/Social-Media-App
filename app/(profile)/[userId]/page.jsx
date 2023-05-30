@@ -1,6 +1,6 @@
 "use client";
 
-import Post from "@/components/Home/Post";
+import Post from "@/components/Posts/Post";
 import UserProfileCard from "@/components/Profile/UserProfileCard";
 import { Container, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Post from "../Home/Post";
+import Post from "./Post";
 import { Typography } from "@mui/material";
 import { FadeLoader } from "react-spinners";
 

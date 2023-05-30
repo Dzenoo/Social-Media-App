@@ -131,12 +131,19 @@ const Post = ({
   const timeDifference = currentTime - createdDate;
   const timeDifferenceHours = Math.floor(timeDifference / (1000 * 60 * 60));
 
-  let formattedTimeDIfference = "";
-  if (timeDifferenceHours > 0) {
-    formattedTimeDIfference = `${timeDifferenceHours} hr ago`;
+  let formattedTimeDifference = "";
+  if (timeDifferenceHours >= 24) {
+    const timeDifferenceDays = Math.floor(
+      timeDifference / (1000 * 60 * 60 * 24)
+    );
+    formattedTimeDifference = `${timeDifferenceDays} ${
+      timeDifferenceDays === 1 ? "day" : "days"
+    } ago`;
+  } else if (timeDifferenceHours > 0) {
+    formattedTimeDifference = `${timeDifferenceHours} hr ago`;
   } else {
     const timeDifferenceMinutes = Math.floor(timeDifference / (1000 * 60));
-    formattedTimeDIfference = `${timeDifferenceMinutes} minutes ago`;
+    formattedTimeDifference = `${timeDifferenceMinutes} minutes ago`;
   }
   // Logic for date //
 
@@ -179,7 +186,7 @@ const Post = ({
             </Link>
             <Typography>{location}</Typography>
             <Typography color="textSecondary">
-              {formattedTimeDIfference}
+              {formattedTimeDifference}
             </Typography>
           </div>
         </div>
