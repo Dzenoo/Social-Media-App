@@ -47,6 +47,7 @@ export const POST = async (request) => {
     biography: biography,
     password: hashedPassword,
     posts: [],
+    savedPosts: [],
     followers: [],
     following: [],
     image: photoUrl.url,

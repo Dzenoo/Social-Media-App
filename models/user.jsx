@@ -24,6 +24,7 @@ const UserSchema = new Schema({
   },
   image: { type: String },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  savedPosts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   wideImage: { type: String },
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   following: [{ type: Schema.Types.ObjectId, ref: "User" }],

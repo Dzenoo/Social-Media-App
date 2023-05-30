@@ -25,6 +25,14 @@ export const GET = async (request, { params }) => {
   }
 };
 
+export const POST = async (request, { params }) => {
+  try {
+    await connectToDB();
+  } catch (error) {
+    return new Response("Failed to connect", { status: 500 });
+  }
+};
+
 export const PATCH = async (request, { params }) => {
   try {
     await connectToDB();
