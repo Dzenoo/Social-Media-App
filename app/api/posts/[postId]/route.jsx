@@ -31,6 +31,25 @@ export const POST = async (request, { params }) => {
   } catch (error) {
     return new Response("Failed to connect", { status: 500 });
   }
+
+  const { userId } = await request.json();
+
+  console.log("USERID" + userId);
+
+  try {
+    const user = await User.findById(userId);
+
+    if (user.savedPosts.includes(params.postId)) {
+      return new Response("Post already saved", { status: 500 });
+    }
+
+    user.savedPosts.push(params.postId);
+    await user.save();
+
+    return new Response("Successfully saved a post", { status: 201 });
+  } catch (error) {
+    return new Response("Cannot save post", { status: 500 });
+  }
 };
 
 export const PATCH = async (request, { params }) => {

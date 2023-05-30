@@ -164,6 +164,13 @@ const Post = ({
     }
   };
 
+  const savePost = async () => {
+    await fetch(`/api/posts/${postId}`, {
+      method: "POST",
+      body: JSON.stringify({ userId: user.userId }),
+    });
+  };
+
   return (
     <Card className={classes.post_card}>
       <div className={classes.post_card_header}>
@@ -191,7 +198,7 @@ const Post = ({
           </div>
         </div>
         <span>
-          <Button className={classes.post_card_button}>
+          <Button className={classes.post_card_button} onClick={savePost}>
             <Image src="/images/save.png" width={30} height={30} alt="save" />
           </Button>
         </span>
