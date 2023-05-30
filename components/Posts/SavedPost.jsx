@@ -1,12 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
-const SavedPost = () => {
+const SavedPost = ({ image }) => {
   return (
     <Link href="/">
-      <Image src="/images/exm.jpg" width={400} height={400} alt="savedpost" />
+      <Image src={image} width={400} height={400} alt="savedpost" />
     </Link>
   );
 };

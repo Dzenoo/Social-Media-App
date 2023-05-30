@@ -11,3 +11,10 @@ export const getPosts = async () => {
 
   return responseData;
 };
+
+export const getUser = async (uId) => {
+  const response = await fetch(`/api/users/${uId}`, { cache: "no-store" });
+  const responseData = await response.json();
+
+  return responseData;
+};

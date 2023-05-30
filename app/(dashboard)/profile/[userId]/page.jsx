@@ -1,24 +1,21 @@
 "use client";
 
 import SavedPost from "@/components/Posts/SavedPost";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import classes from "../../../../css/Posts.module.css";
+import { getUser } from "@/utils/functions";
 
-const UserSavedPosts = () => {
+const UserSavedPosts = async () => {
+  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const user = await getUser(userInfo.userId);
+
+  console.log(user);
+
   return (
     <Container maxWidth="xl" className={classes.saved_posts_container}>
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
-      <SavedPost />
+      {user.savedPosts.map((post) => (
+        <SavedPost image={post.image} />
+      ))}
     </Container>
   );
 };

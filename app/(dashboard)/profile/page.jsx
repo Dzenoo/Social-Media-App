@@ -11,47 +11,27 @@ import classes from "../../../css/Profile.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import Modale from "@/components/Modal/Modal";
-import { useEffect, useState } from "react";
-import { FadeLoader } from "react-spinners";
+import { useState } from "react";
+import { getUser } from "@/utils/functions";
 
-const Profile = () => {
-  const [user, setuser] = useState();
+const Profile = async () => {
   const [isEdit, setisEdit] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const openModal = () => setmodalIsOpen(true);
   const closeModal = () => setmodalIsOpen(false);
 
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(`/api/users/${userInfo.userId}`, {
-        cache: "no-store",
-        next: { revalidate: 2 },
-      });
-      const responseData = await response.json();
-      setuser(responseData);
-    };
-    fetchUser();
-  }, []);
+  const user = await getUser(userInfo.userId);
 
   const changeUserPrivate = async () => {
     try {
-      const response = await fetch(`/api/users/${userInfo.userId}`, {
+      await fetch(`/api/users/${userInfo.userId}`, {
         method: "PATCH",
       });
     } catch (error) {
       console.log(error);
     }
   };
-
-  if (!user) {
-    return (
-      <div className="loader_wrapper">
-        <FadeLoader />
-      </div>
-    );
-  }
 
   return (
     <section className={classes.profile_section}>
