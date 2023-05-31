@@ -28,7 +28,6 @@
   align-items: center;
   display: flex;
   gap: 12px;
-  max-width: 800px;
 }
 
 .post_item .interactivity {
