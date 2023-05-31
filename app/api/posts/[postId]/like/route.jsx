@@ -32,6 +32,8 @@ export const POST = async (request, { params }) => {
 
     userWhichGetNot.notifications.push(notification);
 
+    await userWhichGetNot.save();
+
     return new Response(JSON.stringify(post), { status: 201 });
   } catch (error) {
     return new Response("Could not like post", { status: 500 });

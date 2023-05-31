@@ -4,13 +4,9 @@ import Image from "next/image";
 import React from "react";
 import classes from "../../css/Notifications.module.css";
 
-const NotificationItem = ({ title, time, isActive, image }) => {
-  const isNewNotifications = isActive
-    ? ` ${classes.notification_item} ${classes.activeNotification} `
-    : ` ${classes.notification_item}  ${classes.basic_notification}`;
-
+const NotificationItem = ({ title, time, image }) => {
   return (
-    <Card className={isNewNotifications}>
+    <Card className={classes.notification_item}>
       <Image
         src={image}
         width={60}

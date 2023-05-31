@@ -16,15 +16,17 @@ const Notifications = async () => {
         </Typography>
       </Box>
       <Box className={classes.notifications_container}>
-        {user.notifications.map((not) => (
-          <NotificationItem
-            key={not._id}
-            title={not.message}
-            time={new Date(not.date).toLocaleDateString()}
-            image={not.image}
-            isActive={true}
-          />
-        ))}
+        {user.notifications.map((not) => {
+          return (
+            <NotificationItem
+              key={not._id}
+              title={not.message}
+              time={new Date(not.date).toLocaleDateString()}
+              image={not.image}
+              isActive={true}
+            />
+          );
+        })}
       </Box>
     </section>
   );
