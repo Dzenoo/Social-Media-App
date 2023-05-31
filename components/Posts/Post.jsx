@@ -4,6 +4,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Link from "next/link";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
 
 const CommentSection = ({
@@ -31,9 +33,11 @@ const CommentSection = ({
 
       if (response.ok) {
         setisLoading(false);
+        toast.success("Successfully commented!");
       }
     } catch (error) {
       setisLoading(false);
+      toast.error(error);
       console.log(error);
     }
   };
@@ -158,17 +162,28 @@ const Post = ({
       });
       if (response.ok) {
         setIsLiked((prevState) => !prevState);
+        toast.success("Post liked!");
       }
     } catch (error) {
+      toast.error(error);
       console.log(error);
     }
   };
 
   const savePost = async () => {
-    await fetch(`/api/posts/${postId}`, {
-      method: "POST",
-      body: JSON.stringify({ userId: user.userId }),
-    });
+    try {
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "POST",
+        body: JSON.stringify({ userId: user.userId }),
+      });
+
+      if (response.ok) {
+        toast.success("Post saved!");
+      }
+    } catch (error) {
+      toast.error(error);
+      console.log(error);
+    }
   };
 
   return (
@@ -276,6 +291,7 @@ const Post = ({
           setisLoading={setisLoading}
         />
       )}
+      <ToastContainer />
     </Card>
   );
 };
