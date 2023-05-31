@@ -2,8 +2,12 @@
 import { Box, Typography } from "@mui/material";
 import classes from "../../../css/Notifications.module.css";
 import NotificationItem from "@/components/Notifications/NotificationItem";
+import { getUser } from "@/utils/functions";
 
-const Notifications = () => {
+const Notifications = async () => {
+  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const user = await getUser(userInfo.userId);
+
   return (
     <section className={classes.notifications_section}>
       <Box>
@@ -12,21 +16,15 @@ const Notifications = () => {
         </Typography>
       </Box>
       <Box className={classes.notifications_container}>
-        <NotificationItem
-          title="Anna Srzand liked your post"
-          time="2h ago"
-          isActive={true}
-        />
-        <NotificationItem
-          title="Jess mentioned you in Tennis List"
-          isActive={false}
-          time="2h ago"
-        />
-        <NotificationItem
-          title="Anna Srzand liked your post"
-          time="2h ago"
-          isActive={false}
-        />
+        {user.notifications.map((not) => (
+          <NotificationItem
+            key={not._id}
+            title={not.message}
+            time={new Date(not.date).toLocaleDateString()}
+            image={not.image}
+            isActive={true}
+          />
+        ))}
       </Box>
     </section>
   );

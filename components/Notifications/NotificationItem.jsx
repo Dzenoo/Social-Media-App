@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import classes from "../../css/Notifications.module.css";
 
-const NotificationItem = ({ title, time, isActive }) => {
+const NotificationItem = ({ title, time, isActive, image }) => {
   const isNewNotifications = isActive
     ? ` ${classes.notification_item} ${classes.activeNotification} `
     : ` ${classes.notification_item}  ${classes.basic_notification}`;
@@ -12,10 +12,11 @@ const NotificationItem = ({ title, time, isActive }) => {
   return (
     <Card className={isNewNotifications}>
       <Image
-        src="/images/setting.png"
+        src={image}
         width={60}
         height={60}
         alt="notifi_img"
+        style={{ borderRadius: "100px", border: "1.2px solid grey" }}
       />
       <Box
         sx={{

@@ -1,4 +1,5 @@
 import Post from "@/models/post";
+import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 
 export const POST = async (request, { params }) => {
@@ -20,6 +21,17 @@ export const POST = async (request, { params }) => {
         $pull: { likes: userId },
       });
     }
+
+    const userWhichLike = await User.findById(userId);
+    const userWhichGetNot = await User.findById(post.creator);
+
+    const notification = {
+      message: `${userWhichLike.first_name} ${userWhichLike.last_name} liked your post!`,
+      image: `${userWhichLike.image}`,
+    };
+
+    userWhichGetNot.notifications.push(notification);
+
     return new Response(JSON.stringify(post), { status: 201 });
   } catch (error) {
     return new Response("Could not like post", { status: 500 });
