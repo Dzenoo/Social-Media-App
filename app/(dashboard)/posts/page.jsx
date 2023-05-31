@@ -1,6 +1,8 @@
 "use client";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import classes from "../../../css/Posts.module.css";
 import Image from "next/image";
 import PostItem from "@/components/Posts/PostItem";
@@ -27,7 +29,11 @@ const Posts = () => {
       });
       const responseData = await response.json();
 
-      setPosts(responseData.posts);
+      if (response.ok) {
+        setPosts(responseData.posts);
+      } else {
+        toast.error("Cannot get posts");
+      }
     };
     fetchUserPosts();
   }, []);
@@ -109,6 +115,7 @@ const Posts = () => {
           />
         )}
       </div>
+      <ToastContainer />
     </section>
   );
 };

@@ -1,5 +1,7 @@
 "use client";
 import Modal from "@mui/material/Modal";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
@@ -39,9 +41,13 @@ const Modale = ({
 
     if (response.ok) {
       const filteredPosts = posts.filter((p) => p._id !== id);
+      toast.success("Post deleted!");
       setPosts(filteredPosts);
       setisLoading(false);
       onCloseModal();
+    } else {
+      toast.error("Post deleting failed");
+      console.log(response);
     }
   };
 
@@ -55,6 +61,7 @@ const Modale = ({
 
   return (
     <div>
+      <ToastContainer />
       <Modal
         open={isOpen}
         onClose={close}

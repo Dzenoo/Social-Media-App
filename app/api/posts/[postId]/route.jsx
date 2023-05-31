@@ -92,9 +92,10 @@ export const DELETE = async (request, { params }) => {
 
   try {
     const post = await Post.findByIdAndRemove(params.postId);
-    await Comment.findOneAndDelete({ post: params.postId });
+    await Comment.deleteMany({ post: params.postId });
     const user = await User.findById(post.creator);
     await user.posts.pull(post);
+    await user.savedPosts.pull(post);
     await user.save();
     return new Response("Post deleted", { status: 200 });
   } catch (error) {
