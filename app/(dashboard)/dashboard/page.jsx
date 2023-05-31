@@ -4,19 +4,15 @@ import { getUser } from "@/utils/functions";
 import classes from "../../../css/Dashboard.module.css";
 import Cards from "@/components/Dashboard/Cards";
 import PostItem from "@/components/Posts/PostItem";
+import NotificationItem from "@/components/Notifications/NotificationItem";
 
 const Dashboard = async () => {
   const userId = JSON.parse(localStorage.getItem("userinfo"));
   const user = await getUser(userId.userId);
-
-  console.log(user.posts[0].description);
+  const postItems = user.posts.slice(0, 2);
+  const notificationItems = user.notifications.slice(0, 2);
 
   const obj = () => console.log("");
-
-  const postItems = user.posts.slice(0, 2);
-
-  console.log(Array.isArray(postItems));
-  console.log(postItems);
 
   return (
     <section className={classes.main_dashboard}>
@@ -37,6 +33,9 @@ const Dashboard = async () => {
           )}
         />
         <Box className={classes.container_posts}>
+          <Typography variant="h5" fontWeight="bold" sx={{ padding: "20px" }}>
+            Recent Posts
+          </Typography>
           {postItems.map((post) => (
             <PostItem
               description={post.description}
@@ -50,6 +49,19 @@ const Dashboard = async () => {
               key={post._id}
               show={false}
               openDeleteModal={obj}
+            />
+          ))}
+        </Box>
+        <Box className={classes.container_posts}>
+          <Typography variant="h5" fontWeight="bold" sx={{ padding: "20px" }}>
+            Recent Notifications
+          </Typography>
+          {notificationItems.map((notification) => (
+            <NotificationItem
+              key={notification._id}
+              title={notification.message}
+              image={notification.image}
+              time={new Date(notification.date).toLocaleDateString()}
             />
           ))}
         </Box>

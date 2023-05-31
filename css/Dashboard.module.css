@@ -19,13 +19,13 @@
 .main_cont {
   display: flex !important;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
 }
 
 .container_posts {
   display: flex;
   flex-direction: column;
-  gap: 1.2em;
+  gap: 12px;
   justify-content: center;
 }
 
