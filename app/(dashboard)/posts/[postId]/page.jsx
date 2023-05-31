@@ -62,6 +62,7 @@ const EditPostPage = async ({ params }) => {
     fileReader.readAsDataURL(e.target.files[0]);
   };
 
+  let disabled = false;
   const submitEditHandler = async (e) => {
     e.preventDefault();
 
@@ -77,6 +78,8 @@ const EditPostPage = async ({ params }) => {
 
     if (response.ok) {
       router.push("/posts");
+    } else {
+      disabled = true;
     }
   };
 
@@ -127,7 +130,7 @@ const EditPostPage = async ({ params }) => {
           <Button variant="outlined" onClick={() => router.replace("/posts")}>
             Cancel
           </Button>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" disabled={disabled}>
             Save
           </Button>
         </div>
