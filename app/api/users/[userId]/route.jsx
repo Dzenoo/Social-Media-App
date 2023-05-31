@@ -38,6 +38,13 @@ export const POST = async (request, { params }) => {
     userToFollow.followers.push(userWhichSendRequest.id);
     userWhichSendRequest.following.push(userToFollow.id);
 
+    const notification = {
+      message: `${userWhichSendRequest.first_name} ${userWhichSendRequest.last_name} has started following you!`,
+      image: `${userWhichSendRequest.image}`,
+    };
+
+    userToFollow.notifications.push(notification);
+
     await userToFollow.save();
     await userWhichSendRequest.save();
 

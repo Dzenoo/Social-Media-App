@@ -22,7 +22,14 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Password is required!"],
   },
-  image: { type: String },
+  notifications: [
+    {
+      message: { type: String },
+      date: { type: Date, default: Date.now() },
+      image: { type: String },
+    },
+  ],
+  image: { type: String, required: [true, "Image is required!"] },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   savedPosts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   wideImage: { type: String },

@@ -46,6 +46,7 @@ export const POST = async (request) => {
     email: email,
     biography: biography,
     password: hashedPassword,
+    notifications: [],
     posts: [],
     savedPosts: [],
     followers: [],
