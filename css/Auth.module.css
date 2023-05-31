@@ -40,7 +40,6 @@
   align-items: stretch;
   gap: 1em;
 }
-
 @media (max-width: 884px) {
   .auth_section {
     grid-template-columns: repeat(1, 1fr);
