@@ -144,7 +144,7 @@ const Post = ({
       timeDifferenceDays === 1 ? "day" : "days"
     } ago`;
   } else if (timeDifferenceHours > 0) {
-    formattedTimeDifference = `${timeDifferenceHours} hr ago`;
+    formattedTimeDifference = `${timeDifferenceHours}hr ago`;
   } else {
     const timeDifferenceMinutes = Math.floor(timeDifference / (1000 * 60));
     formattedTimeDifference = `${timeDifferenceMinutes} minutes ago`;
