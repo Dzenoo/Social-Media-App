@@ -4,6 +4,8 @@ import classes from "../../../../css/NewPost.module.css";
 import PostForm from "@/components/Posts/PostForm";
 import { useState } from "react";
 import { FadeLoader } from "react-spinners";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const NewPost = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -17,6 +19,8 @@ const NewPost = () => {
       });
       if (!response.ok) {
         console.log("Not ok");
+      } else {
+        toast.success("Post created successfully!");
       }
     } catch (error) {
       console.log(error);
@@ -42,6 +46,7 @@ const NewPost = () => {
         </Typography>
       </Box>
       <PostForm onSubmitPost={onSubmitPost} />
+      <ToastContainer />
     </Container>
   );
 };

@@ -3,6 +3,8 @@
 import { Button, FormControl, TextField, Typography } from "@mui/material";
 import classes from "../../../../css/Posts.module.css";
 import Image from "next/image";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -77,14 +79,17 @@ const EditPostPage = async ({ params }) => {
     });
 
     if (response.ok) {
+      toast.success("Post edited");
       router.push("/posts");
     } else {
+      toast.error("Post editing failed");
       disabled = true;
     }
   };
 
   return (
     <section className={classes.edit_dashboard}>
+      <ToastContainer />
       <Typography variant="h4">Edit Post</Typography>
       <Typography color="textSecondary">
         You are about to edit this post. Make the necessary changes and save
