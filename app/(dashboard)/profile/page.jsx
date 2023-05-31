@@ -3,9 +3,9 @@ import { Box, Button, Card, Switch, Typography } from "@mui/material";
 import classes from "../../../css/Profile.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import Modale from "@/components/Modal/Modal";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { getUser } from "@/utils/functions";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -17,28 +17,39 @@ const Profile = async () => {
 
   const changeUserPrivate = async () => {
     try {
-      await fetch(`/api/users/${userInfo.userId}`, {
+      const response = await fetch(`/api/users/${userInfo.userId}`, {
         method: "PATCH",
       });
+
+      if (response.ok) {
+        toast.success("Profile Updated");
+      }
     } catch (error) {
+      toast.error(error);
       console.log(error);
     }
   };
 
   const deleteUser = async () => {
     try {
-      await fetch(`/api/users/${userInfo.userId}`, {
+      const response = await fetch(`/api/users/${userInfo.userId}`, {
         method: "DELETE",
       });
+
+      if (response.ok) {
+        toast.success("Profile Deleted");
+        router.push("/");
+        logout();
+      }
     } catch (error) {
+      toast.error(error);
       console.log(error);
     }
-    router.push("/");
-    logout();
   };
 
   return (
     <section className={classes.profile_section}>
+      <ToastContainer />
       <Box>
         <Typography fontWeight="bold" variant="h4">
           Profile

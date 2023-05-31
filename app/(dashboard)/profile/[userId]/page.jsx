@@ -13,6 +13,11 @@ const UserSavedPosts = async () => {
 
   return (
     <Container maxWidth="xl" className={classes.saved_posts_container}>
+      {user.savedPosts.length === 0 && (
+        <Typography textAlign="center" fontWeight="bold">
+          No saved posts
+        </Typography>
+      )}
       {user.savedPosts.map((post) => (
         <SavedPost image={post.image} />
       ))}

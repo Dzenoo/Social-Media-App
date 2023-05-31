@@ -24,6 +24,7 @@ const NewPost = () => {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Post cannot be created!");
     } finally {
       setisLoading(false);
     }
