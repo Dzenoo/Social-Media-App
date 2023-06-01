@@ -3,6 +3,7 @@ import Post from "@/models/post";
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 import { v2 as cloudinary } from "cloudinary";
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -12,16 +13,23 @@ cloudinary.config({
 export const GET = async (request, { params }) => {
   try {
     await connectToDB();
-  } catch (error) {
-    return new Response("Failed to connect", { status: 500 });
-  }
 
-  let post;
-  try {
-    post = await Post.findById(params.postId).populate("creator");
-    return new Response(JSON.stringify(post), { status: 200 });
+    const post = await Post.findById(params.postId);
+
+    if (!post) {
+      return new Response("Post not found", { status: 404 });
+    }
+
+    const [comments, creator] = await Promise.all([
+      Comment.find({ _id: { $in: post.comments } }),
+      User.findById(post.creator),
+    ]);
+
+    const populatedPost = { ...post.toObject(), comments, creator };
+
+    return new Response(JSON.stringify(populatedPost), { status: 200 });
   } catch (error) {
-    return new Response("Cannot find post by id", { status: 402 });
+    return new Response("Failed to get the post", { status: 500 });
   }
 };
 
