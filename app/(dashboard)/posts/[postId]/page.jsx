@@ -29,6 +29,8 @@ const EditPostPage = async ({ params }) => {
   const user = JSON.parse(localStorage.getItem("userinfo"));
   const router = useRouter();
 
+  console.log(editValues);
+
   useEffect(() => {
     const fetchPost = async () => {
       const response = await fetch(`/api/users/${user.userId}`);
@@ -80,7 +82,6 @@ const EditPostPage = async ({ params }) => {
 
     if (response.ok) {
       toast.success("Post edited");
-      router.push("/posts");
     } else {
       toast.error("Post editing failed");
       disabled = true;

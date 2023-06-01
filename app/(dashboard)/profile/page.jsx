@@ -176,7 +176,7 @@ const Profile = async () => {
             </Typography>
           )}
           {user?.savedPosts.map((post) => (
-            <SavedPost postId={post._id} image={post.image} />
+            <SavedPost image={post.image} />
           ))}
         </Container>
       )}

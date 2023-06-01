@@ -29,6 +29,7 @@
   height: 0;
   padding: 0;
   transition: 0.3s;
+  z-index: 12;
 }
 
 .search_form_div .search_container.isActive {
