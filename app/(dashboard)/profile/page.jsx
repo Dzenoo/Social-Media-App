@@ -8,23 +8,35 @@ import {
   Typography,
 } from "@mui/material";
 import classes from "../../../css/Profile.module.css";
-import Link from "next/link";
+import useSwr from "swr";
 import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { getUser } from "@/utils/functions";
+import { FadeLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import SavedPost from "@/components/Posts/SavedPost";
 
 const Profile = async () => {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const { data, error, loading } = useSwr(
+    `/api/users/${userInfo.userId}`,
+    fetcher
+  );
   const { logout } = useAuth();
   const [isShowing, setisShowing] = useState(false);
   const [imageValue, setimageValue] = useState("");
   const router = useRouter();
-  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-  const user = await getUser(userInfo.userId);
+
+  if (!data) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
 
   const changeUserPrivate = async () => {
     try {
@@ -93,7 +105,7 @@ const Profile = async () => {
       <Box className={classes.profile_container}>
         <div className={classes.profile_info}>
           <Image
-            src={user?.image}
+            src={data?.image}
             style={{ borderRadius: "100px" }}
             width={200}
             height={200}
@@ -102,23 +114,23 @@ const Profile = async () => {
           <div className={classes.profile_nm}>
             <div className={classes.edit_inputs}>
               <Typography variant="h4" fontWeight="bold">
-                {user?.first_name.concat(" ", user?.last_name)}
+                {data?.first_name.concat(" ", data?.last_name)}
               </Typography>
               <Typography variant="p" color="textSecondary">
-                {user?.email}
+                {data?.email}
               </Typography>
             </div>
             <div className={classes.profile_followers_info}>
               <Typography className={classes.typo_profile} variant="p">
-                <strong>{user?.followers.length}</strong>
+                <strong>{data?.followers.length}</strong>
                 followers
               </Typography>
               <Typography className={classes.typo_profile} variant="p">
-                <strong>{user?.following.length}</strong>
+                <strong>{data?.following.length}</strong>
                 following
               </Typography>{" "}
               <Typography className={classes.typo_profile} variant="p">
-                <strong>{user?.posts.length}</strong>
+                <strong>{data?.posts.length}</strong>
                 posts
               </Typography>
             </div>
@@ -126,7 +138,7 @@ const Profile = async () => {
         </div>
         <form className={classes.coverForm} onSubmit={changeImageHandler}>
           <Typography>Change Cover Image</Typography>
-          <Image src={user?.wideImage} width={600} height={200} alt="profimg" />
+          <Image src={data?.wideImage} width={600} height={200} alt="profimg" />
           <input
             type="file"
             accept="image/*"
@@ -150,7 +162,7 @@ const Profile = async () => {
           <Typography fontWeight="bold" variant="h6">
             Biography
           </Typography>
-          <Typography color="textSecondary">{user?.biography}</Typography>
+          <Typography color="textSecondary">{data?.biography}</Typography>
         </div>
         <div>
           <Typography fontWeight="bold" variant="h6">
@@ -159,7 +171,7 @@ const Profile = async () => {
           <div className={classes.profile_actions}>
             <Switch
               onClick={changeUserPrivate}
-              defaultChecked={user?.isPrivate}
+              defaultChecked={data?.isPrivate}
             />
             Turn my profile private
           </div>
@@ -170,12 +182,12 @@ const Profile = async () => {
           <Typography fontWeight="bold" variant="h6">
             Saved Posts
           </Typography>
-          {user?.savedPosts.length === 0 && (
+          {data?.savedPosts.length === 0 && (
             <Typography textAlign="center" fontWeight="bold">
               No saved posts
             </Typography>
           )}
-          {user?.savedPosts.map((post) => (
+          {data?.savedPosts.map((post) => (
             <SavedPost postId={post._id} image={post.image} />
           ))}
         </Container>

@@ -9,12 +9,13 @@ import { useEffect } from "react";
 import { FadeLoader } from "react-spinners";
 
 const UserProfile = async ({ params }) => {
-  const { userId } = params.userId;
-  const { data, error, loading } = useSwr(`/api/users/${userId}`, fetcher);
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error, loading } = useSwr(
+    `/api/users/${params.userId}`,
+    fetcher
+  );
   const router = useRouter();
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   useEffect(() => {
     if (userInfo.userId === params.userId) {
@@ -23,7 +24,7 @@ const UserProfile = async ({ params }) => {
   }, [router]);
 
   const followUser = async () => {
-    await fetch(`/api/users/${user._id}`, {
+    await fetch(`/api/users/${data._id}`, {
       method: "POST",
       body: JSON.stringify({
         userIdToSend: userInfo.userId,
@@ -59,13 +60,13 @@ const UserProfile = async ({ params }) => {
       />
       {data.posts.length === 0 && (
         <Typography variant="h4" align="center" marginTop="40px">
-          {userPosts === 0 && "User have no posts"}
+          {data.posts.length === 0 && "User have no posts"}
         </Typography>
       )}
       {data.isPrivate && !isUserFollowed && <div>Profile is private</div>}
       {isUserFollowed && (
         <Container maxWidth="md">
-          {Object.keys(user.posts).map((key) => {
+          {Object.keys(data.posts).map((key) => {
             const post = data.posts[key];
             return (
               <Post
@@ -80,9 +81,9 @@ const UserProfile = async ({ params }) => {
                 description={post.description}
                 date={post.createdAt}
                 location={post.location}
-                firstName={user.first_name}
-                lastName={user.last_name}
-                creatorImg={user.image}
+                firstName={data.first_name}
+                lastName={data.last_name}
+                creatorImg={data.image}
               />
             );
           })}
