@@ -2,13 +2,13 @@
 
 import Post from "@/components/Posts/Post";
 import UserProfileCard from "@/components/Profile/UserProfileCard";
+import { getUser } from "@/utils/functions";
 import { Container, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FadeLoader } from "react-spinners";
 
-const UserProfile = ({ params }) => {
-  const [user, setuser] = useState();
+const UserProfile = async ({ params }) => {
   const router = useRouter();
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
 
@@ -18,17 +18,7 @@ const UserProfile = ({ params }) => {
     }
   }, [router]);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(`/api/users/${params.userId}`, {
-        cache: "no-store",
-        next: { revalidate: 2 },
-      });
-      const responseData = await response.json();
-      setuser(responseData);
-    };
-    fetchUser();
-  }, []);
+  const user = await getUser(params.userId);
 
   const followUser = async () => {
     await fetch(`/api/users/${user._id}`, {
