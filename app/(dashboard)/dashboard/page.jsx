@@ -9,7 +9,10 @@ import NotificationItem from "@/components/Notifications/NotificationItem";
 const Dashboard = async () => {
   const userId = JSON.parse(localStorage.getItem("userinfo"));
   const user = await getUser(userId.userId);
-  const postItems = user.posts.slice(0, 2);
+  const postItems = user.posts.slice(0, 3);
+  const recentPosts = postItems.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
   const notificationItems = user.notifications.slice(0, 2);
 
   const obj = () => console.log("");
@@ -36,7 +39,7 @@ const Dashboard = async () => {
           <Typography variant="h5" fontWeight="bold" sx={{ padding: "20px" }}>
             Recent Posts
           </Typography>
-          {postItems.map((post) => (
+          {recentPosts.map((post) => (
             <PostItem
               description={post.description}
               likes={post.likes.length}
