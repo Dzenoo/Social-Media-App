@@ -236,19 +236,23 @@ const Post = ({
         <Image src={image} width={400} height={400} alt="img" />
       </div>
       <div className={classes.post_card_actions}>
-        <Button
-          fullWidth
-          className={classes.post_card_button}
-          onClick={likePost}
-        >
-          <Image
-            src={isLiked ? "/images/like2.png" : "/images/like.png"}
-            width={30}
-            height={30}
-            alt="like"
-          />
-          Like {likes.length}
-        </Button>
+        {userId === user?.userId ? (
+          ""
+        ) : (
+          <Button
+            fullWidth
+            className={classes.post_card_button}
+            onClick={likePost}
+          >
+            <Image
+              src={isLiked ? "/images/like2.png" : "/images/like.png"}
+              width={30}
+              height={30}
+              alt="like"
+            />
+            Like {likes.length}
+          </Button>
+        )}
         <Button
           fullWidth
           className={classes.post_card_button}
