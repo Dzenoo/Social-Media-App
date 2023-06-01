@@ -133,3 +133,8 @@
   align-items: flex-start;
   padding: 20px;
 }
+
+.coverForm {
+  display: flex;
+  flex-direction: column;
+}

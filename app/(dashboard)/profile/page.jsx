@@ -8,9 +8,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { getUser } from "@/utils/functions";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import { useState } from "react";
 
 const Profile = async () => {
   const { logout } = useAuth();
+  const [imageValue, setimageValue] = useState("");
   const router = useRouter();
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
   const user = await getUser(userInfo.userId);
@@ -43,6 +45,30 @@ const Profile = async () => {
       }
     } catch (error) {
       toast.error(error);
+      console.log(error);
+    }
+  };
+
+  const handleCoverImageChange = (e) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const imageUrl = fileReader.result;
+      setimageValue(imageUrl);
+    };
+    fileReader.readAsDataURL(e.target.files[0]);
+  };
+
+  const changeImageHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      await fetch(`/api/users/${userInfo.userId}/change`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          coverImage: imageValue,
+        }),
+      });
+    } catch (error) {
       console.log(error);
     }
   };
@@ -81,10 +107,25 @@ const Profile = async () => {
               <Typography className={classes.typo_profile} variant="p">
                 <strong>{user?.following.length}</strong>
                 following
+              </Typography>{" "}
+              <Typography className={classes.typo_profile} variant="p">
+                <strong>{user?.posts.length}</strong>
+                posts
               </Typography>
             </div>
           </div>
         </div>
+        <form className={classes.coverForm} onSubmit={changeImageHandler}>
+          <Typography>Change Cover Image</Typography>
+          <Image src={user?.wideImage} width={600} height={200} alt="profimg" />
+          <input
+            type="file"
+            accept="image/*"
+            required={true}
+            onChange={handleCoverImageChange}
+          />
+          <Button type="submit">Change Image</Button>
+        </form>
         <Link
           href={`/profile/${userInfo?.userId}`}
           className="link_no_decoration"
