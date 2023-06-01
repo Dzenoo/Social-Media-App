@@ -1,11 +1,11 @@
 export const getPostById = async (id) => {
-  const response = await fetch(`/api/posts/${id}`, {
-    cache: "default",
-    next: { revalidate: 2 },
-  });
-  const post = await response.json();
-
-  return post;
+  try {
+    const response = await fetch(`/api/posts/${id}`);
+    const post = await response.json();
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getPosts = async () => {
@@ -16,7 +16,7 @@ export const getPosts = async () => {
 };
 
 export const getUser = async (uId) => {
-  const response = await fetch(`/api/users/${uId}`, { cache: "no-store" });
+  const response = await fetch(`/api/users/${uId}`);
   const responseData = await response.json();
 
   return responseData;

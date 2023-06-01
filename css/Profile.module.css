@@ -138,3 +138,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.saved_posts_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2em;
+  width: 100%;
+  padding: 3em;
+}

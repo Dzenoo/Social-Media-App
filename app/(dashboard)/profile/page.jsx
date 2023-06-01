@@ -1,5 +1,12 @@
 "use client";
-import { Box, Button, Card, Switch, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Switch,
+  Typography,
+} from "@mui/material";
 import classes from "../../../css/Profile.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,9 +16,11 @@ import { getUser } from "@/utils/functions";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
+import SavedPost from "@/components/Posts/SavedPost";
 
 const Profile = async () => {
   const { logout } = useAuth();
+  const [isShowing, setisShowing] = useState(false);
   const [imageValue, setimageValue] = useState("");
   const router = useRouter();
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
@@ -124,22 +133,17 @@ const Profile = async () => {
             required={true}
             onChange={handleCoverImageChange}
           />
-          <Button type="submit">Change Image</Button>
+          <Button type="submit" variant="contained">
+            Change Image
+          </Button>
         </form>
-        <Link
-          href={`/profile/${userInfo?.userId}`}
-          className="link_no_decoration"
+        <Card
+          className={classes.profile_saved}
+          onClick={() => setisShowing(!isShowing)}
         >
-          <Card className={classes.profile_saved}>
-            <Image
-              src="/images/save.png"
-              width={30}
-              height={30}
-              alt="profile"
-            />
-            <Typography fontWeight="bold">Saved Posts</Typography>
-          </Card>
-        </Link>
+          <Image src="/images/save.png" width={30} height={30} alt="profile" />
+          <Typography fontWeight="bold">Saved Posts</Typography>
+        </Card>
       </Box>
       <Box className={classes.profile_edit_info}>
         <div>
@@ -161,6 +165,21 @@ const Profile = async () => {
           </div>
         </div>
       </Box>
+      {isShowing && (
+        <Container maxWidth="xl" className={classes.saved_posts_container}>
+          <Typography fontWeight="bold" variant="h6">
+            Saved Posts
+          </Typography>
+          {user?.savedPosts.length === 0 && (
+            <Typography textAlign="center" fontWeight="bold">
+              No saved posts
+            </Typography>
+          )}
+          {user?.savedPosts.map((post) => (
+            <SavedPost postId={post._id} image={post.image} />
+          ))}
+        </Container>
+      )}
       <div className={classes.profile_buttons}>
         <Button variant="outlined" onClick={deleteUser} color="error">
           Delete account?
