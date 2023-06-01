@@ -18,7 +18,7 @@ export const GET = async (request, { params }) => {
 
   let post;
   try {
-    post = await Post.findById(params.postId);
+    post = await Post.findById(params.postId).populate("creator");
     return new Response(JSON.stringify(post), { status: 200 });
   } catch (error) {
     return new Response("Cannot find post by id", { status: 402 });

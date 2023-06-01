@@ -1,12 +1,25 @@
 "use client";
 import { Box, Typography } from "@mui/material";
+import { FadeLoader } from "react-spinners";
 import classes from "../../../css/Notifications.module.css";
+import useSwr from "swr";
 import NotificationItem from "@/components/Notifications/NotificationItem";
-import { getUser } from "@/utils/functions";
 
 const Notifications = async () => {
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-  const user = await getUser(userInfo.userId);
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error, loading } = useSwr(
+    `/api/users/${userInfo.userId}`,
+    fetcher
+  );
+
+  if (!data) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
 
   return (
     <section className={classes.notifications_section}>
@@ -16,7 +29,7 @@ const Notifications = async () => {
         </Typography>
       </Box>
       <Box className={classes.notifications_container}>
-        {user.notifications.map((not) => {
+        {data.notifications.map((not) => {
           return (
             <NotificationItem
               key={not._id}

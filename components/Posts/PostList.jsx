@@ -36,6 +36,8 @@ const PostList = () => {
     );
   }
 
+  console.log(allPosts);
+
   return (
     <div>
       {allPosts.length === 0 ? (

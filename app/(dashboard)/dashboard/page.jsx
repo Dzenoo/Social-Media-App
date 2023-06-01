@@ -1,19 +1,34 @@
 "use client";
+
 import { Box, Container, Typography } from "@mui/material";
-import { getUser } from "@/utils/functions";
+import { FadeLoader } from "react-spinners";
 import classes from "../../../css/Dashboard.module.css";
 import Cards from "@/components/Dashboard/Cards";
 import PostItem from "@/components/Posts/PostItem";
+import useSwr from "swr";
 import NotificationItem from "@/components/Notifications/NotificationItem";
 
 const Dashboard = async () => {
-  const userId = JSON.parse(localStorage.getItem("userinfo"));
-  const user = await getUser(userId.userId);
-  const postItems = user.posts.slice(0, 3);
+  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error, loading } = useSwr(
+    `/api/users/${userInfo.userId}`,
+    fetcher
+  );
+
+  if (!data) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
+
+  const postItems = data.posts.slice(0, 3);
   const recentPosts = postItems.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
-  const notificationItems = user.notifications.slice(0, 2);
+  const notificationItems = data.notifications.slice(0, 3);
 
   const obj = () => console.log("");
 
@@ -24,13 +39,13 @@ const Dashboard = async () => {
       </Typography>
       <Container maxWidth="xl" className={classes.main_cont}>
         <Cards
-          posts={user?.posts.length}
-          followers={user?.followers.length}
-          likes={user?.posts.reduce(
+          posts={data?.posts.length}
+          followers={data?.followers.length}
+          likes={data?.posts.reduce(
             (count, post) => count + post.likes.length,
             0
           )}
-          comments={user?.posts.reduce(
+          comments={data?.posts.reduce(
             (count, post) => count + post.comments.length,
             0
           )}

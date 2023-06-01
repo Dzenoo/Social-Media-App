@@ -190,13 +190,18 @@ const Post = ({
     <Card className={classes.post_card}>
       <div className={classes.post_card_header}>
         <div className={classes.post_card_header_info}>
-          <Image
-            src={creatorImg}
-            width={78}
-            height={78}
-            alt="img"
-            style={{ borderRadius: "100px" }}
-          />
+          <Link
+            className="link_no_decoration"
+            href={userId === user?.userId ? "/" : `/${userId}`}
+          >
+            <Image
+              src={creatorImg}
+              width={78}
+              height={78}
+              alt="img"
+              style={{ borderRadius: "100px" }}
+            />
+          </Link>
           <div>
             <Link
               className="link_no_decoration"
@@ -233,7 +238,9 @@ const Post = ({
         </Typography>
       </div>
       <div className={classes.post_card_image}>
-        <Image src={image} width={400} height={400} alt="img" />
+        <Link href={`/post/${postId}`}>
+          <Image src={image} width={400} height={400} alt="img" />
+        </Link>
       </div>
       <div className={classes.post_card_actions}>
         {userId === user?.userId ? (
