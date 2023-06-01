@@ -109,15 +109,6 @@ const Profile = async () => {
         </div>
         <div>
           <Typography fontWeight="bold" variant="h6">
-            Notifications
-          </Typography>
-          <div className={classes.profile_actions}>
-            <Switch />
-            Send me notifications
-          </div>
-        </div>
-        <div>
-          <Typography fontWeight="bold" variant="h6">
             Privacy
           </Typography>
           <div className={classes.profile_actions}>
