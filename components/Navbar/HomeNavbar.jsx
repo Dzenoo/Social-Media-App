@@ -44,16 +44,18 @@ const HomeNavbar = () => {
         <Image src="/images/logo_blue.png" width={200} height={70} alt="logo" />
       </div>
       <div className={classes.search_form_div}>
-        <div className={classes.search_bar}>
-          <TextField
-            placeholder="Search users"
-            type="text"
-            required
-            onChange={searchUser}
-            onMouseEnter={() => setisActive(true)}
-            onMouseLeave={() => setisActive(false)}
-          />
-        </div>
+        {token?.token && (
+          <div className={classes.search_bar}>
+            <TextField
+              placeholder="Search users"
+              type="text"
+              required
+              onChange={searchUser}
+              onMouseEnter={() => setisActive(true)}
+              onMouseLeave={() => setisActive(false)}
+            />
+          </div>
+        )}
         <Card
           className={searchContainerClasses}
           onMouseLeave={() => setisActive(false)}

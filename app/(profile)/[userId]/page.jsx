@@ -4,6 +4,8 @@ import Post from "@/components/Posts/Post";
 import useSwr from "swr";
 import UserProfileCard from "@/components/Profile/UserProfileCard";
 import { Container, Typography } from "@mui/material";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { FadeLoader } from "react-spinners";
@@ -24,12 +26,20 @@ const UserProfile = async ({ params }) => {
   }, [router]);
 
   const followUser = async () => {
-    await fetch(`/api/users/${data._id}`, {
-      method: "POST",
-      body: JSON.stringify({
-        userIdToSend: userInfo.userId,
-      }),
-    });
+    try {
+      const response = await fetch(`/api/users/${data._id}`, {
+        method: "POST",
+        body: JSON.stringify({
+          userIdToSend: userInfo.userId,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("You send follow request");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   if (!data) {
@@ -58,13 +68,12 @@ const UserProfile = async ({ params }) => {
         isUserFollowed={isUserFollowed}
         followUser={followUser}
       />
-      {data.posts.length === 0 && (
-        <Typography variant="h4" align="center" marginTop="40px">
-          {data.posts.length === 0 && "User have no posts"}
+      {data.isPrivate && !isUserFollowed && (
+        <Typography textAlign="center" fontWeight="bold">
+          Profile is private
         </Typography>
       )}
-      {data.isPrivate && !isUserFollowed && <div>Profile is private</div>}
-      {isUserFollowed && (
+      {(!data.isPrivate || isUserFollowed) && (
         <Container maxWidth="md">
           {Object.keys(data.posts).map((key) => {
             const post = data.posts[key];

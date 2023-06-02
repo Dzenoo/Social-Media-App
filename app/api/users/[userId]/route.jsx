@@ -15,7 +15,8 @@ export const GET = async (request, { params }) => {
           model: "Comment",
         },
       })
-      .populate("savedPosts");
+      .populate("savedPosts")
+      .populate("followRequests", "first_name last_name _id image");
     return new Response(JSON.stringify(user), { status: 200 });
   } catch (error) {
     return new Response("Could not connect", { status: 500 });
@@ -35,15 +36,26 @@ export const POST = async (request, { params }) => {
     const userToFollow = await User.findById(params.userId);
     const userWhichSendRequest = await User.findById(userIdToSend);
 
-    userToFollow.followers.push(userWhichSendRequest.id);
-    userWhichSendRequest.following.push(userToFollow.id);
+    if (userToFollow.isPrivate) {
+      if (userToFollow.followRequests.includes(userWhichSendRequest.id)) {
+        return new Response("You already sended a follow request", {
+          status: 500,
+        });
+      }
+    }
 
-    const notification = {
-      message: `${userWhichSendRequest.first_name} ${userWhichSendRequest.last_name} has started following you!`,
-      image: `${userWhichSendRequest.image}`,
-    };
+    if (userToFollow.isPrivate) {
+      userToFollow.followRequests.push(userWhichSendRequest.id);
+    } else {
+      userToFollow.followers.push(userWhichSendRequest.id);
+      userWhichSendRequest.following.push(userToFollow.id);
 
-    userToFollow.notifications.push(notification);
+      const notification = {
+        message: `${userWhichSendRequest.first_name} ${userWhichSendRequest.last_name} has started following you!`,
+        image: `${userWhichSendRequest.image}`,
+      };
+      userToFollow.notifications.push(notification);
+    }
 
     await userToFollow.save();
     await userWhichSendRequest.save();
