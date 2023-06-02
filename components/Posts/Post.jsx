@@ -93,18 +93,6 @@ const CommentSection = ({
   );
 };
 
-const ShareSection = ({ closeContent, openContent }) => {
-  return (
-    <div
-      onMouseLeave={closeContent}
-      onMouseEnter={openContent}
-      className={classes.share_div_content}
-    >
-      <Image src="/images/linkedin.png" width={40} height={40} alt="linkedin" />
-    </div>
-  );
-};
-
 const Post = ({
   firstName,
   lastName,
@@ -124,10 +112,6 @@ const Post = ({
   const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state
   const [comment, setComment] = useState(""); // comment state
   const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
-  const [isEnteredShare, setisEnteredShare] = useState(false); // share state
-
-  const openShareContent = () => setisEnteredShare(true); // open share div
-  const closeShareContent = () => setisEnteredShare(false); // close share div
 
   // Logic for date //
   const createdDate = new Date(date);
@@ -272,21 +256,6 @@ const Post = ({
             alt="comment"
           />
           Comment {comments.length}
-        </Button>
-        {isEnteredShare && (
-          <ShareSection
-            closeContent={closeShareContent}
-            openContent={openShareContent}
-          />
-        )}
-        <Button
-          fullWidth
-          className={classes.post_card_button}
-          onMouseEnter={openShareContent}
-          onMouseLeave={closeShareContent}
-        >
-          <Image src="/images/share.png" width={30} height={30} alt="share" />
-          Share
         </Button>
       </div>
       {/* Comments for post */}

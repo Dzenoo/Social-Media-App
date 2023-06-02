@@ -9,7 +9,7 @@ export const POST = async (request, { params }) => {
     const userWhichSendRequest = await User.findById(params.userId);
     const userToAccept = await User.findById(userIdToAccept);
 
-    userToAccept.followRequests.pull(userWhichSendRequest._id);
+    userToAccept.followRequests.pull(params.userId);
 
     userToAccept.followers.push(userWhichSendRequest._id);
     userWhichSendRequest.following.push(userToAccept._id);

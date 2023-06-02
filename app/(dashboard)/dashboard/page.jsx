@@ -59,7 +59,6 @@ const Dashboard = async () => {
               description={post.description}
               likes={post.likes.length}
               comments={post.comments.length}
-              shares={post.shares.length}
               date={post.createdAt}
               image={post.image}
               hashtags={post.hashtags}

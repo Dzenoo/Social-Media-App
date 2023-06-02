@@ -9,7 +9,6 @@ const PostItem = ({
   description,
   likes,
   comments,
-  shares,
   date,
   id,
   image,
@@ -66,12 +65,6 @@ const PostItem = ({
               />
             </div>
             <strong>{comments}</strong>
-          </div>
-          <div className={classes.interactive_item}>
-            <div className={classes.interactive_background_share}>
-              <Image alt="img" src="/images/share.png" width={20} height={20} />
-            </div>
-            <strong>{shares}</strong>
           </div>
         </Box>
       )}

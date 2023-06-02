@@ -19,7 +19,6 @@ const PostSchema = new Schema(
     },
     likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-    shares: [{ type: Number, default: 0 }],
     creator: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }

@@ -97,7 +97,6 @@ const Posts = () => {
                 date={post.createdAt}
                 likes={post.likes.length}
                 comments={post.comments.length}
-                shares={post.shares.length}
                 show={true}
                 hashtags={post.hashtags}
               />
