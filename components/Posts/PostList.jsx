@@ -72,6 +72,7 @@ const PostList = () => {
               userId={post.creator._id}
               likes={post.likes}
               comments={post.comments}
+              show={true}
             />
           ))
       )}

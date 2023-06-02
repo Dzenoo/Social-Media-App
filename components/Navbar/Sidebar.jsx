@@ -40,17 +40,6 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link href="/analytics">
-            <Image
-              src="/images/analytics.png"
-              width={30}
-              height={30}
-              alt="analytics"
-            />
-            <Typography>Analytics</Typography>
-          </Link>
-        </li>
-        <li>
           <Link href="/notifications">
             <Image
               src="/images/notifications.png"

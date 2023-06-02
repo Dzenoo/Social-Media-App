@@ -34,6 +34,7 @@ const PostPage = ({ params }) => {
         userId={data.creator._id}
         likes={data.likes}
         comments={data.comments}
+        show={true}
       />
     </Container>
   );

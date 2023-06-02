@@ -177,11 +177,13 @@ const Profile = async () => {
           </div>
         </div>
       </Box>
+      <div className={classes.profile_buttons}>
+        <Button variant="outlined" onClick={deleteUser} color="error">
+          Delete account?
+        </Button>
+      </div>
       {isShowing && (
         <Container maxWidth="xl" className={classes.saved_posts_container}>
-          <Typography fontWeight="bold" variant="h6">
-            Saved Posts
-          </Typography>
           {data?.savedPosts.length === 0 && (
             <Typography textAlign="center" fontWeight="bold">
               No saved posts
@@ -192,11 +194,6 @@ const Profile = async () => {
           ))}
         </Container>
       )}
-      <div className={classes.profile_buttons}>
-        <Button variant="outlined" onClick={deleteUser} color="error">
-          Delete account?
-        </Button>
-      </div>
     </section>
   );
 };

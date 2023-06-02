@@ -107,6 +107,7 @@ const Post = ({
   postId,
   likes,
   comments,
+  show,
 }) => {
   const user = JSON.parse(localStorage.getItem("userinfo")); // user info
   const [isLoading, setisLoading] = useState(false);
@@ -137,7 +138,7 @@ const Post = ({
   }
   // Logic for date //
 
-  // Like function //
+  // Like post //
   const likePost = async () => {
     try {
       const response = await fetch(`/api/posts/${postId}/like`, {
@@ -156,6 +157,7 @@ const Post = ({
     }
   };
 
+  // Save Post //
   const savePost = async () => {
     try {
       const response = await fetch(`/api/posts/${postId}`, {
@@ -172,6 +174,7 @@ const Post = ({
     }
   };
 
+  // Share Post //
   const sharePost = () => {
     const sharePostData = {
       text: "Check out this post",
@@ -222,15 +225,18 @@ const Post = ({
       <div className={classes.post_card_header}>
         <Typography color="textSecondary">
           {description} <br />
-          {hashtags.split(",").map((hs) => (
-            <Link
-              href={"/"}
-              key={hs}
-              style={{ color: "royalblue", textDecoration: "none" }}
-            >
-              {hs}
-            </Link>
-          ))}
+          {hashtags.split(", ").map((hs) => {
+            const formatted = hs.slice(1);
+            return (
+              <Link
+                href={`/hashtag/${formatted}`}
+                key={hs}
+                style={{ color: "royalblue", textDecoration: "none" }}
+              >
+                {hs}
+              </Link>
+            );
+          })}
         </Typography>
       </div>
       <div className={classes.post_card_image}>
@@ -238,38 +244,39 @@ const Post = ({
           <Image src={image} width={400} height={400} alt="img" />
         </Link>
       </div>
-      <div className={classes.post_card_actions}>
-        {userId === user?.userId ? (
-          ""
-        ) : (
+      {show && (
+        <div className={classes.post_card_actions}>
+          {userId === user?.userId ? (
+            ""
+          ) : (
+            <Button
+              fullWidth
+              className={classes.post_card_button}
+              onClick={likePost}
+            >
+              <Image
+                src={isLiked ? "/images/like2.png" : "/images/like.png"}
+                width={30}
+                height={30}
+                alt="like"
+              />
+              Like {likes.length}
+            </Button>
+          )}
           <Button
             fullWidth
             className={classes.post_card_button}
-            onClick={likePost}
+            onClick={() => setcommentIsOpen((prevState) => !prevState)}
           >
             <Image
-              src={isLiked ? "/images/like2.png" : "/images/like.png"}
+              src="/images/comment.png"
               width={30}
               height={30}
-              alt="like"
+              alt="comment"
             />
-            Like {likes.length}
+            Comment {comments.length}
           </Button>
-        )}
-        <Button
-          fullWidth
-          className={classes.post_card_button}
-          onClick={() => setcommentIsOpen((prevState) => !prevState)}
-        >
-          <Image
-            src="/images/comment.png"
-            width={30}
-            height={30}
-            alt="comment"
-          />
-          Comment {comments.length}
-        </Button>
-        {pathname === `/post/${postId}` && (
+
           <Button
             onClick={sharePost}
             fullWidth
@@ -278,8 +285,8 @@ const Post = ({
             <Image src="/images/share.png" width={30} height={30} alt="share" />
             Share
           </Button>
-        )}
-      </div>
+        </div>
+      )}
       {/* Comments for post */}
       {commentIsOpen && (
         <CommentSection

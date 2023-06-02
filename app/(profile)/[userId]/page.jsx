@@ -54,6 +54,7 @@ const UserProfile = async ({ params }) => {
 
   return (
     <Container maxWidth="lg">
+      <ToastContainer />
       <UserProfileCard
         isPrivate={data.isPrivate}
         userImage={data.image}
@@ -93,6 +94,7 @@ const UserProfile = async ({ params }) => {
                 firstName={data.first_name}
                 lastName={data.last_name}
                 creatorImg={data.image}
+                show={true}
               />
             );
           })}
