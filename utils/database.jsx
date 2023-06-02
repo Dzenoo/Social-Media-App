@@ -7,7 +7,7 @@ export const connectToDB = async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "Networkly",
+      dbName: "networkly-prod",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
