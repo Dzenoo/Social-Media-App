@@ -55,7 +55,7 @@ const PostList = () => {
             (post) =>
               post.creator.isPrivate === false ||
               data?.following.includes(post.creator._id) ||
-              post.creator === data?._id
+              post.creator._id === userInfo.userId
           )
           .map((post) => (
             <Post
