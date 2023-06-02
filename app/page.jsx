@@ -4,7 +4,10 @@ import PostList from "@/components/Posts/PostList";
 import { Container } from "@mui/material";
 
 export default function Home() {
-  const token = JSON.parse(localStorage.getItem("userdata"));
+  const token =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userdata"))
+      : null;
 
   return (
     <>

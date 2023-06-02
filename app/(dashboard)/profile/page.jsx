@@ -20,7 +20,10 @@ import SavedPost from "@/components/Posts/SavedPost";
 
 const Profile = async () => {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const userInfo =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userinfo"))
+      : null;
   const { data, error, loading } = useSwr(
     `/api/users/${userInfo.userId}`,
     fetcher

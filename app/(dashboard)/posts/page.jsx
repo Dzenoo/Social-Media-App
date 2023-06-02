@@ -20,7 +20,10 @@ const Posts = () => {
   };
   const handleClose = () => setopen(false);
 
-  const userId = JSON.parse(localStorage.getItem("userinfo"));
+  const userId =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userinfo"))
+      : null;
 
   useEffect(() => {
     const fetchUserPosts = async () => {

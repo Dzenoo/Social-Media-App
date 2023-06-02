@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const layout = ({ children }) => {
-  const token = JSON.parse(localStorage.getItem("userdata"));
+  const token =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userdata"))
+      : null;
+
   const [isLoading, setisLoading] = useState(false);
   const router = useRouter();
 

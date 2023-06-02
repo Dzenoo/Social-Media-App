@@ -11,7 +11,11 @@ import { useAuth } from "@/hooks/useAuth";
 const Login = () => {
   const { login } = useAuth();
   const [isLoading, setisLoading] = useState(false);
-  const token = JSON.parse(localStorage.getItem("userdata"));
+  const token =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userdata"))
+      : null;
+
   const router = useRouter();
 
   useEffect(() => {
@@ -39,7 +43,9 @@ const Login = () => {
         image: resdata.image,
         userId: resdata.userId,
       };
-      localStorage.setItem("userinfo", JSON.stringify(userInfo));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userinfo", JSON.stringify(userInfo));
+      }
 
       if (response.ok) {
         router.push("/");

@@ -9,7 +9,11 @@ import useSwr from "swr";
 import NotificationItem from "@/components/Notifications/NotificationItem";
 
 const Dashboard = async () => {
-  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const userInfo =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userinfo"))
+      : null;
+
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, loading } = useSwr(
     `/api/users/${userInfo.userId}`,

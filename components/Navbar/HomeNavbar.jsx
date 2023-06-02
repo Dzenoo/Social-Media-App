@@ -10,8 +10,14 @@ const HomeNavbar = () => {
   const pathname = usePathname();
   const [results, setResults] = useState([]);
   const [isActive, setisActive] = useState(false);
-  const token = JSON.parse(localStorage.getItem("userdata"));
-  const user = JSON.parse(localStorage.getItem("userinfo"));
+  const user =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userinfo"))
+      : null;
+  const token =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userdata"))
+      : null;
 
   const searchContainerClasses = isActive
     ? `${classes.search_container} ${classes.isActive}`
