@@ -7,6 +7,7 @@ import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
+import { usePathname } from "next/navigation";
 
 const CommentSection = ({
   userImg,
@@ -112,6 +113,7 @@ const Post = ({
   const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state
   const [comment, setComment] = useState(""); // comment state
   const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
+  const pathname = usePathname();
 
   // Logic for date //
   const createdDate = new Date(date);
@@ -168,6 +170,16 @@ const Post = ({
       toast.error(error);
       console.log(error);
     }
+  };
+
+  const sharePost = () => {
+    const sharePostData = {
+      text: "Check out this post",
+      title: "Networkly",
+      url: `http://localhost:3000/post/${postId}`,
+    };
+
+    navigator.share(sharePostData);
   };
 
   return (
@@ -257,6 +269,16 @@ const Post = ({
           />
           Comment {comments.length}
         </Button>
+        {pathname === `/post/${postId}` && (
+          <Button
+            onClick={sharePost}
+            fullWidth
+            className={classes.post_card_button}
+          >
+            <Image src="/images/share.png" width={30} height={30} alt="share" />
+            Share
+          </Button>
+        )}
       </div>
       {/* Comments for post */}
       {commentIsOpen && (
