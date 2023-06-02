@@ -32,6 +32,7 @@ const Signup = () => {
       const response = await fetch("/api/users/signup", {
         method: "POST",
         body: JSON.stringify(userData),
+        cache: "force-cache",
       });
 
       const resdata = await response.json();
