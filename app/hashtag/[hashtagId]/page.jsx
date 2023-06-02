@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { FadeLoader } from "react-spinners";
 import { Container } from "@mui/material";
 import Post from "@/components/Posts/Post";
-import Image from "next/image";
 
 const HashtagPage = () => {
   const pathname = usePathname();
@@ -28,7 +27,7 @@ const HashtagPage = () => {
       maxWidth="sm"
       sx={{
         display: "flex",
-        alignItems: "center",
+        alignItems: "stretch",
         gap: "12px",
         flexWrap: "wrap",
       }}
