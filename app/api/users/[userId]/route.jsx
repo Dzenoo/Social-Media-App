@@ -112,6 +112,7 @@ export const DELETE = async (request, { params }) => {
 
     return new Response("User deleted", { status: 200 });
   } catch (error) {
+    console.log(error);
     return new Response("Could not connect", { status: 500 });
   }
 };

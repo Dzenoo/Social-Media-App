@@ -109,7 +109,10 @@ const Post = ({
   comments,
   show,
 }) => {
-  const user = JSON.parse(localStorage.getItem("userinfo")); // user info
+  const user =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userinfo"))
+      : null;
   const [isLoading, setisLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state
   const [likeCount, setlikeCount] = useState(0); // like state
