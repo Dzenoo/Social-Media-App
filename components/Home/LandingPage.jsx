@@ -3,7 +3,6 @@ import { Button, Card, Typography } from "@mui/material";
 import classes from "../../css/LandingPage.module.css";
 import Link from "next/link";
 import Image from "next/image";
-
 const LandingPage = () => {
   return (
     <section className={classes.landing_hero}>
