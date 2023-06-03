@@ -115,10 +115,8 @@ const Post = ({
       : null;
   const [isLoading, setisLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state
-  const [likeCount, setlikeCount] = useState(0); // like state
   const [comment, setComment] = useState(""); // comment state
   const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
-  const pathname = usePathname();
 
   // Logic for date //
   const createdDate = new Date(date);
@@ -153,8 +151,6 @@ const Post = ({
       });
       if (response.ok) {
         setIsLiked((prevState) => !prevState);
-        const updatedLikeCount = isLiked ? likes.length - 1 : likes.length + 1;
-        setlikeCount(updatedLikeCount);
         toast.success("Post liked!");
       }
     } catch (error) {
@@ -266,7 +262,7 @@ const Post = ({
                 height={30}
                 alt="like"
               />
-              Like {likeCount}
+              Like {likes.length}
             </Button>
           )}
           <Button
