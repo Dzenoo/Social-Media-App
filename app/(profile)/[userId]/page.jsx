@@ -7,10 +7,11 @@ import { Container, Typography } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
 
 const UserProfile = async ({ params }) => {
+  const [isSendedRequest, setisSendedRequest] = useState(false);
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, loading } = useSwr(
     `/api/users/${params.userId}`,
@@ -35,8 +36,11 @@ const UserProfile = async ({ params }) => {
       });
 
       if (response.ok) {
+        setisSendedRequest(true);
         toast.success("You send follow request");
       }
+
+      setisSendedRequest(false);
     } catch (error) {
       toast.error(error.message);
     }
@@ -68,6 +72,7 @@ const UserProfile = async ({ params }) => {
         wideImage={data.wideImage}
         isUserFollowed={isUserFollowed}
         followUser={followUser}
+        isSended={isSendedRequest}
       />
       {data.isPrivate && !isUserFollowed && (
         <Typography textAlign="center" fontWeight="bold">

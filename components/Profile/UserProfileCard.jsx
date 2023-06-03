@@ -24,6 +24,7 @@ const UserProfileCard = ({
   wideImage,
   followUser,
   isUserFollowed,
+  isSended,
 }) => {
   return (
     <Card className={classes.user_profile_card}>
@@ -60,7 +61,7 @@ const UserProfileCard = ({
         </Box>
         {!isUserFollowed && (
           <Button variant="contained" onClick={followUser}>
-            Follow
+            {isSended && "Follow"}
           </Button>
         )}
       </CardContent>

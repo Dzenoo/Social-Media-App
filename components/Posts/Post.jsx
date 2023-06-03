@@ -112,6 +112,7 @@ const Post = ({
   const user = JSON.parse(localStorage.getItem("userinfo")); // user info
   const [isLoading, setisLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state
+  const [likeCount, setlikeCount] = useState(0); // like state
   const [comment, setComment] = useState(""); // comment state
   const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
   const pathname = usePathname();
@@ -149,6 +150,8 @@ const Post = ({
       });
       if (response.ok) {
         setIsLiked((prevState) => !prevState);
+        const updatedLikeCount = isLiked ? likes.length - 1 : likes.length + 1;
+        setlikeCount(updatedLikeCount);
         toast.success("Post liked!");
       }
     } catch (error) {
@@ -177,9 +180,9 @@ const Post = ({
   // Share Post //
   const sharePost = () => {
     const sharePostData = {
-      text: "Check out this post",
+      text: "Check out this post at Networkly!",
       title: "Networkly",
-      url: `http://localhost:3000/post/${postId}`,
+      url: `https://next-js-13-social-media-app.vercel.app/post/${postId}`,
     };
 
     navigator.share(sharePostData);
@@ -260,7 +263,7 @@ const Post = ({
                 height={30}
                 alt="like"
               />
-              Like {likes.length}
+              Like {likeCount}
             </Button>
           )}
           <Button
