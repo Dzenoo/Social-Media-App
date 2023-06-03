@@ -90,7 +90,7 @@ export const DELETE = async (request, { params }) => {
   try {
     await connectToDB();
 
-    const user = await User.findByIdAndDelete(params.userId);
+    const user = await User.findById(params.userId);
 
     if (!user) {
       return new Response("User not found", { status: 500 });
