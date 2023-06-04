@@ -61,7 +61,7 @@ const UserProfileCard = ({
         </Box>
         {!isUserFollowed && (
           <Button variant="contained" onClick={followUser}>
-            {isSended && "Follow"}
+            {isSended ? "Sended request" : "Follow"}
           </Button>
         )}
       </CardContent>

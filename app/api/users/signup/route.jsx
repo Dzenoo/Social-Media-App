@@ -53,7 +53,7 @@ export const POST = async (request) => {
     following: [],
     image: photoUrl.url,
     wideImage:
-      "https://res.cloudinary.com/dzwb60tk1/image/upload/v1685623132/PostMaster_awejfz.png",
+      "https://res.cloudinary.com/dzwb60tk1/image/upload/v1685738699/Untitled_design_h5xtak.png",
   });
 
   let user;
