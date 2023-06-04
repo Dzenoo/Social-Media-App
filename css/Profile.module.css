@@ -163,4 +163,8 @@
     align-items: baseline;
     gap: 2em;
   }
+
+  .user_profile_card .profile_content {
+    flex-wrap: wrap;
+  }
 }
