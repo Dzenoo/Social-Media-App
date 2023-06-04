@@ -9,12 +9,16 @@ export const GET = async () => {
 
     const posts = await Post.find();
 
-    const populatedPosts = await Post.find()
-      .populate({
-        path: "comments",
+    const populatedPosts = await Promise.all(
+      posts.map(async (post) => {
+        const [comments, creator] = await Promise.all([
+          Comment.find({ _id: { $in: post.comments } }),
+          User.findById(post.creator),
+        ]);
+
+        return { ...post.toObject(), comments, creator };
       })
-      .populate("creator")
-      .exec();
+    );
 
     return new Response(JSON.stringify(populatedPosts), { status: 200 });
   } catch (error) {
