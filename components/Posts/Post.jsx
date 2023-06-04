@@ -180,7 +180,7 @@ const Post = ({
     const sharePostData = {
       text: "Check out this post at Networkly!",
       title: "Networkly",
-      url: `https://teal-daffodil-6f53e3.netlify.app/post/${postId}`,
+      url: `${process.env.URL}/post/${postId}`,
     };
 
     navigator.share(sharePostData);
