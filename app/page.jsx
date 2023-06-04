@@ -11,9 +11,12 @@ export default function Home() {
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userdata"))
       : null;
-  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const userInfo =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("userinfo"))
+      : null;
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data } = useSwr(`/api/users/${userInfo.userId}`, fetcher);
+  const { data } = useSwr(`/api/users/${userInfo?.userId}`, fetcher);
   const { data: postsData } = useSwr("/api/posts", fetcher);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export default function Home() {
                 (post) =>
                   post.creator.isPrivate === false ||
                   data?.following.includes(post.creator._id) ||
-                  post.creator._id === userInfo.userId
+                  post.creator._id === userInfo?.userId
               )
               .map((post) => (
                 <Post
