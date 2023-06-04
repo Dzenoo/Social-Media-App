@@ -4,44 +4,22 @@ import { useEffect, useState } from "react";
 import Post from "./Post";
 import useSwr from "swr";
 import { Typography } from "@mui/material";
-import { FadeLoader } from "react-spinners";
 
 const PostList = () => {
   const [allPosts, setallPosts] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, error, loading } = useSwr(
-    `/api/users/${userInfo.userId}`,
-    fetcher
-  );
+  const { data } = useSwr(`/api/users/${userInfo.userId}`, fetcher);
+  const { data: postsData } = useSwr("/api/posts", fetcher);
 
   useEffect(() => {
-    setisLoading(true);
-    const getPosts = async () => {
-      const response = await fetch("/api/posts", {
-        cache: "no-store",
-        next: { revalidate: 2 },
-      });
-      const responseData = await response.json();
-
-      const recentPosts = responseData.sort(
+    if (postsData) {
+      const recentPosts = postsData.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
-
-      setisLoading(false);
       setallPosts(recentPosts);
-    };
-    getPosts();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="loader_wrapper">
-        <FadeLoader />
-      </div>
-    );
-  }
+    }
+  }, [postsData]);
 
   return (
     <div>
