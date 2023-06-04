@@ -2,6 +2,8 @@
 
 import { Box, Container, Typography } from "@mui/material";
 import { FadeLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import classes from "../../../css/Dashboard.module.css";
 import Cards from "@/components/Dashboard/Cards";
 import PostItem from "@/components/Posts/PostItem";
@@ -20,12 +22,16 @@ const Dashboard = async () => {
     fetcher
   );
 
-  if (!data) {
+  if (!data || loading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
       </div>
     );
+  }
+
+  if (error) {
+    return toast.error("Something get wrong");
   }
 
   const postItems = data.posts.slice(0, 3);
@@ -38,6 +44,7 @@ const Dashboard = async () => {
 
   return (
     <section className={classes.main_dashboard}>
+      <ToastContainer />
       <Typography variant="h5" fontWeight="bold" sx={{ padding: "20px" }}>
         Dashboard
       </Typography>

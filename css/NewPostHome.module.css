@@ -40,7 +40,7 @@
 .post_card .post_card_image img {
   width: 100%;
   height: auto;
-  object-fit: unset;
+  object-fit: cover;
 }
 
 .post_card .post_card_actions {

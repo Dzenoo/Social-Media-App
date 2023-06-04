@@ -18,14 +18,16 @@ const Notifications = async () => {
     fetcher
   );
 
-  console.log(data);
-
-  if (!data) {
+  if (!data || loading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
       </div>
     );
+  }
+
+  if (error) {
+    return toast.error("Something get wrong");
   }
 
   return (

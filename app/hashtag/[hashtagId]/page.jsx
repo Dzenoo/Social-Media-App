@@ -1,5 +1,7 @@
 "use client";
 import useSwr from "swr";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { usePathname } from "next/navigation";
 import { FadeLoader } from "react-spinners";
 import { Container } from "@mui/material";
@@ -14,12 +16,16 @@ const HashtagPage = () => {
     fetcher
   );
 
-  if (!data) {
+  if (!data || loading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
       </div>
     );
+  }
+
+  if (error) {
+    return toast.error("Something get wrong");
   }
 
   return (
@@ -32,6 +38,7 @@ const HashtagPage = () => {
         flexWrap: "wrap",
       }}
     >
+      <ToastContainer />
       {data.map((post) => (
         <div>
           <Post

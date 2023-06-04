@@ -46,12 +46,16 @@ const UserProfile = async ({ params }) => {
     }
   };
 
-  if (!data) {
+  if (!data || loading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
       </div>
     );
+  }
+
+  if (error) {
+    return toast.error("Something get wrong");
   }
 
   const isUserFollowed = data.followers.includes(userInfo.userId);

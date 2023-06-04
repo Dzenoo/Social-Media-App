@@ -3,6 +3,8 @@
 import Post from "@/components/Posts/Post";
 import { Container } from "@mui/material";
 import { FadeLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import useSwr from "swr";
 
 const PostPage = ({ params }) => {
@@ -10,7 +12,7 @@ const PostPage = ({ params }) => {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, loading } = useSwr(`/api/posts/${postId}`, fetcher);
 
-  if (!data) {
+  if (!data || loading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
@@ -18,8 +20,13 @@ const PostPage = ({ params }) => {
     );
   }
 
+  if (error) {
+    return toast.error("Something get wrong");
+  }
+
   return (
     <Container maxWidth="md" sx={{ padding: "20px" }}>
+      <ToastContainer />
       <Post
         key={data._id}
         postId={data._id}

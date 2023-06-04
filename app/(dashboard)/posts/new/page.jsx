@@ -45,9 +45,6 @@ const NewPost = () => {
         <Typography color="textSecondary">
           You are about to add new post.
         </Typography>
-        <Alert severity="info">
-          Please upload smaller and low quality images
-        </Alert>
       </Box>
       <PostForm onSubmitPost={onSubmitPost} />
       <ToastContainer />

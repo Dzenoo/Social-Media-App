@@ -180,7 +180,7 @@ const Post = ({
     const sharePostData = {
       text: "Check out this post at Networkly!",
       title: "Networkly",
-      url: `https://next-js-13-social-media-app.vercel.app/post/${postId}`,
+      url: `http://localhost:3000/post/${postId}`,
     };
 
     navigator.share(sharePostData);
@@ -224,8 +224,11 @@ const Post = ({
         </span>
       </div>
       <div className={classes.post_card_header}>
-        <Typography color="textSecondary">
-          {description} <br />
+        <Typography color="textSecondary">{description}</Typography>
+        <Typography
+          color="textSecondary"
+          sx={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
+        >
           {hashtags.split(", ").map((hs) => {
             const formatted = hs.slice(1);
             return (

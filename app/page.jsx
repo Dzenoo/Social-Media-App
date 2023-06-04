@@ -1,9 +1,12 @@
 "use client";
 import LandingPage from "@/components/Home/LandingPage";
 import useSwr from "swr";
+import Post from "@/components/Posts/Post";
 import { Typography, Container } from "@mui/material";
 import { useEffect, useState } from "react";
-import Post from "@/components/Posts/Post";
+import { FadeLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [allPosts, setallPosts] = useState([]);
@@ -16,8 +19,16 @@ export default function Home() {
       ? JSON.parse(localStorage.getItem("userinfo"))
       : null;
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data } = useSwr(`/api/users/${userInfo?.userId}`, fetcher);
-  const { data: postsData } = useSwr("/api/posts", fetcher);
+  const {
+    data,
+    loading: userLoading,
+    error: userError,
+  } = useSwr(`/api/users/${userInfo?.userId}`, fetcher);
+  const {
+    data: postsData,
+    loading: postLoading,
+    error: postError,
+  } = useSwr("/api/posts", fetcher);
 
   useEffect(() => {
     if (postsData) {
@@ -28,10 +39,23 @@ export default function Home() {
     }
   }, [postsData]);
 
+  if (userLoading || postLoading) {
+    return (
+      <div className="loader_wrapper">
+        <FadeLoader />
+      </div>
+    );
+  }
+
+  if (userError || postError) {
+    return toast.error("Something get wrong");
+  }
+
   return (
     <>
       {token?.token ? (
         <Container maxWidth="md" sx={{ padding: "20px" }}>
+          <ToastContainer />
           {allPosts.length === 0 ? (
             <Typography textAlign="center" variant="h4">
               No posts jet

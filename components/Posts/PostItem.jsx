@@ -40,11 +40,18 @@ const PostItem = ({
           color="textSecondary"
           sx={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
         >
-          {hashtags.split(",").map((h) => (
-            <Link style={{ textDecoration: "none" }} href="/posts">
-              {h}
-            </Link>
-          ))}
+          {hashtags.split(", ").map((hs) => {
+            const formatted = hs.slice(1);
+            return (
+              <Link
+                href={`/hashtag/${formatted}`}
+                key={hs}
+                style={{ color: "royalblue", textDecoration: "none" }}
+              >
+                {hs}
+              </Link>
+            );
+          })}
         </Typography>
       </Box>
       {show && (

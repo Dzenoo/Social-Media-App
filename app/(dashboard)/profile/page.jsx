@@ -33,12 +33,16 @@ const Profile = async () => {
   const [imageValue, setimageValue] = useState("");
   const router = useRouter();
 
-  if (!data) {
+  if (!data || loading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
       </div>
     );
+  }
+
+  if (error) {
+    return toast.error("Something get wrong");
   }
 
   const changeUserPrivate = async () => {
