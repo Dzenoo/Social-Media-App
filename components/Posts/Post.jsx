@@ -7,7 +7,6 @@ import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
-import { usePathname } from "next/navigation";
 
 const CommentSection = ({
   userImg,
@@ -108,7 +107,6 @@ const Post = ({
   likes,
   comments,
   show,
-  showCommAndLike,
 }) => {
   const user =
     typeof window !== "undefined"
@@ -249,7 +247,7 @@ const Post = ({
       </div>
       {show && (
         <div className={classes.post_card_actions}>
-          {userId === user?.userId || showCommAndLike ? (
+          {userId === user?.userId ? (
             ""
           ) : (
             <Button
@@ -266,21 +264,19 @@ const Post = ({
               Like {likes.length}
             </Button>
           )}
-          {showCommAndLike && (
-            <Button
-              fullWidth
-              className={classes.post_card_button}
-              onClick={() => setcommentIsOpen((prevState) => !prevState)}
-            >
-              <Image
-                src="/images/comment.png"
-                width={30}
-                height={30}
-                alt="comment"
-              />
-              Comment {comments.length}
-            </Button>
-          )}
+          <Button
+            fullWidth
+            className={classes.post_card_button}
+            onClick={() => setcommentIsOpen((prevState) => !prevState)}
+          >
+            <Image
+              src="/images/comment.png"
+              width={30}
+              height={30}
+              alt="comment"
+            />
+            Comment {comments.length}
+          </Button>
 
           <Button
             onClick={sharePost}
