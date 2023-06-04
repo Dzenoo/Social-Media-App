@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import classes from "../../css/HomeNavbar.module.css";
 import { usePathname } from "next/navigation";
-import { Card, TextField, Typography } from "@mui/material";
+import { Button, Card, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 const HomeNavbar = () => {
@@ -115,7 +115,18 @@ const HomeNavbar = () => {
           />
         </div>
       ) : (
-        ""
+        <div className={classes.landing_buttons}>
+          <Button variant="contained" fontWeight="bold" size="large">
+            <Link href="/signup" className="link_no_decoration">
+              Sign Up Today!
+            </Link>
+          </Button>
+          <Button variant="contained" fontWeight="bold" size="large">
+            <Link href="/login" className="link_no_decoration">
+              Log in to Account
+            </Link>
+          </Button>
+        </div>
       )}
     </header>
   );
