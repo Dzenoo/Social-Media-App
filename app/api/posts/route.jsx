@@ -1,7 +1,5 @@
 import { connectToDB } from "@/utils/database";
 import Post from "@/models/post";
-import User from "@/models/user";
-import Comment from "@/models/comment";
 
 export const GET = async () => {
   try {

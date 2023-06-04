@@ -60,6 +60,7 @@ export default function Home() {
                   likes={post.likes}
                   comments={post.comments}
                   show={true}
+                  showCommAndLike={true}
                 />
               ))
           )}

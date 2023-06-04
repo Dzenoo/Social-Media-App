@@ -108,6 +108,7 @@ const Post = ({
   likes,
   comments,
   show,
+  showCommAndLike,
 }) => {
   const user =
     typeof window !== "undefined"
@@ -248,7 +249,7 @@ const Post = ({
       </div>
       {show && (
         <div className={classes.post_card_actions}>
-          {userId === user?.userId ? (
+          {userId === user?.userId || showCommAndLike ? (
             ""
           ) : (
             <Button
@@ -265,19 +266,21 @@ const Post = ({
               Like {likes.length}
             </Button>
           )}
-          <Button
-            fullWidth
-            className={classes.post_card_button}
-            onClick={() => setcommentIsOpen((prevState) => !prevState)}
-          >
-            <Image
-              src="/images/comment.png"
-              width={30}
-              height={30}
-              alt="comment"
-            />
-            Comment {comments.length}
-          </Button>
+          {showCommAndLike && (
+            <Button
+              fullWidth
+              className={classes.post_card_button}
+              onClick={() => setcommentIsOpen((prevState) => !prevState)}
+            >
+              <Image
+                src="/images/comment.png"
+                width={30}
+                height={30}
+                alt="comment"
+              />
+              Comment {comments.length}
+            </Button>
+          )}
 
           <Button
             onClick={sharePost}
