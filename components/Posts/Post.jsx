@@ -180,7 +180,7 @@ const Post = ({
     const sharePostData = {
       text: "Check out this post at Networkly!",
       title: "Networkly",
-      url: `${process.env.URL}/post/${postId}`,
+      url: `${process.env.URLFORSHARE}/post/${postId}`,
     };
 
     navigator.share(sharePostData);
