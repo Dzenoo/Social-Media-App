@@ -7,16 +7,7 @@ export const GET = async () => {
   try {
     await connectToDB();
 
-    const posts = await Post.find();
-
-    const populatedPosts = await Promise.all(
-      posts.map(async (post) => {
-        const comments = await Comment.find({ _id: { $in: post.comments } });
-        const creator = await User.findById(post.creator);
-
-        return { ...post.toObject(), comments, creator };
-      })
-    );
+    const posts = await Post.find().populate("creator").populate("comments");
 
     return new Response(JSON.stringify(populatedPosts), { status: 200 });
   } catch (error) {
