@@ -9,16 +9,15 @@ export const GET = async () => {
 
     const posts = await Post.find();
 
-    const populatedPosts = await Promise.all(
+      const populatedPosts = await Promise.all(
       posts.map(async (post) => {
-        const [comments, creator] = await Promise.all([
-          Comment.find({ _id: { $in: post.comments } }),
-          User.findById(post.creator),
-        ]);
+        const comments = await Comment.find({ _id: { $in: post.comments } });
+        const creator = await User.findById(post.creator);
 
         return { ...post.toObject(), comments, creator };
       })
     );
+
 
     return new Response(JSON.stringify(populatedPosts), { status: 200 });
   } catch (error) {
