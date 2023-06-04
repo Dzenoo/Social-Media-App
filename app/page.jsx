@@ -1,8 +1,7 @@
 "use client";
 import LandingPage from "@/components/Home/LandingPage";
 import useSwr from "swr";
-import { Typography } from "@mui/material";
-import { Container } from "@mui/material";
+import { Typography, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import Post from "@/models/post";
 
@@ -12,10 +11,7 @@ export default function Home() {
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userdata"))
       : null;
-  const userInfo =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userinfo"))
-      : null;
+  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data } = useSwr(`/api/users/${userInfo.userId}`, fetcher);
   const { data: postsData } = useSwr("/api/posts", fetcher);
