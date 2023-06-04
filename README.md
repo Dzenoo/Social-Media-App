@@ -15,7 +15,7 @@
 <em>Clone the repository to your local machine using the following command:</em>
 
 ```
-git clone https://github.com/your-username/nextjs-social-media-app.git
+git clone https://github.com/Dzenoo/Next-js-13-Social-Media-App.git
 ```
 
 <em>Navigate into the project directory:</em>
@@ -30,13 +30,9 @@ cd nextjs-social-media-app
 npm install
 ```
 
-**Usage**
 Once you have completed the installation steps, you can now run the app on your local machine.
 
 Start the development server:
-
-bash
-Copy code
 
 ```
 npm run dev
