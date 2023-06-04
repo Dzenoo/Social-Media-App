@@ -57,3 +57,9 @@
   padding: 6px;
   border-radius: 8px;
 }
+
+@media (max-width: 480px) {
+  .container {
+    flex-wrap: wrap;
+  }
+}

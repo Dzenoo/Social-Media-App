@@ -148,3 +148,19 @@
   width: 100%;
   padding: 3em;
 }
+
+@media (max-width: 480px) {
+  .profile_section .profile_container {
+    gap: 2em;
+    flex-wrap: wrap;
+  }
+
+  .profile_section .profile_container .profile_info {
+    flex-wrap: wrap;
+  }
+
+  .coverForm {
+    align-items: baseline;
+    gap: 2em;
+  }
+}

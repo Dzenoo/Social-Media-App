@@ -46,13 +46,14 @@ const HomeNavbar = () => {
 
   return (
     <header className={classes.home_navbar}>
-      <div>
+      <div className={classes.logo}>
         <Image src="/images/logo_blue.png" width={200} height={70} alt="logo" />
       </div>
       <div className={classes.search_form_div}>
         {token?.token && (
           <div className={classes.search_bar}>
             <TextField
+              className={classes.search_input}
               placeholder="Search users"
               type="text"
               required

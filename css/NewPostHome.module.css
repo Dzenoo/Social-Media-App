@@ -24,6 +24,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px;
+  flex-wrap: wrap;
 }
 
 .post_card .post_card_header .post_card_header_info {
@@ -88,4 +89,14 @@
   right: 0;
   transition: 0.3s;
   padding: 12px;
+}
+
+@media (max-width: 480px) {
+  .post_card_button {
+    font-size: 10px;
+  }
+  .post_card_button img {
+    width: 17px;
+    height: 17px;
+  }
 }

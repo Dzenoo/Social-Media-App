@@ -64,9 +64,41 @@
 }
 
 .landing_buttons {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1em;
+}
+
+@media (max-width: 720px) {
+  .home_navbar {
+    padding: 8px;
+    justify-content: space-around;
+  }
+  .home_navbar .logo {
+    display: none;
+  }
+
+  .search_form_div .search_container.isActive {
+    width: 153px;
+  }
+
+  .result_div {
+    padding: 6px;
+  }
+
+  .result_div img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .search_form_div .search_bar .search_input {
+    width: 70%;
+  }
+
+  .nav_buttons a {
+    font-size: 14px;
+    position: relative;
+    right: 30px;
+  }
 }

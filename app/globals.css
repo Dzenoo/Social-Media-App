@@ -33,3 +33,9 @@
 button {
   border: none;
 }
+
+@media (max-width: 480px) {
+  .layout {
+    flex-wrap: wrap;
+  }
+}
