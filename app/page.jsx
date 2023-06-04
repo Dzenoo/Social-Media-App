@@ -3,7 +3,7 @@ import LandingPage from "@/components/Home/LandingPage";
 import useSwr from "swr";
 import { Typography, Container } from "@mui/material";
 import { useEffect, useState } from "react";
-import Post from "@/models/post";
+import Post from "@/components/Posts/Post";
 
 export default function Home() {
   const [allPosts, setallPosts] = useState([]);
