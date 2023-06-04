@@ -28,31 +28,24 @@ const PostList = () => {
           No posts jet
         </Typography>
       ) : (
-        allPosts
-          .filter(
-            (post) =>
-              post.creator.isPrivate === false ||
-              data?.following.includes(post.creator._id) ||
-              post.creator === userInfo.userId
-          )
-          .map((post) => (
-            <Post
-              key={post._id}
-              postId={post._id}
-              hashtags={post.hashtags}
-              description={post.description}
-              image={post.image}
-              date={post.createdAt}
-              location={post.location}
-              firstName={post.creator.first_name}
-              lastName={post.creator.last_name}
-              creatorImg={post.creator.image}
-              userId={post.creator._id}
-              likes={post.likes}
-              comments={post.comments}
-              show={true}
-            />
-          ))
+        allPosts.map((post) => (
+          <Post
+            key={post._id}
+            postId={post._id}
+            hashtags={post.hashtags}
+            description={post.description}
+            image={post.image}
+            date={post.createdAt}
+            location={post.location}
+            firstName={post.creator.first_name}
+            lastName={post.creator.last_name}
+            creatorImg={post.creator.image}
+            userId={post.creator._id}
+            likes={post.likes}
+            comments={post.comments}
+            show={true}
+          />
+        ))
       )}
     </div>
   );
