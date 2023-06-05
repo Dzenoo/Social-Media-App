@@ -46,6 +46,10 @@ export default function Home() {
     return toast.error("Something get wrong");
   }
 
+  if (!userInfo || userInfo === undefined) {
+    return <p>Please log in or sign up</p>;
+  }
+
   return (
     <Container maxWidth="md" sx={{ padding: "20px" }}>
       <ToastContainer />
