@@ -1,3 +1,5 @@
+![Social App](./public/images/socmedia.png)
+
 **Next.js Social Media App**
 
 <p>Welcome to the Next.js Social Media App! This is a simple social media application built with Next.js, a popular React framework. This README will provide you with information on how to run the app locally and how to get started.</p>
