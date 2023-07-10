@@ -1,3 +1,5 @@
+import { PostProps } from "../posts";
+
 export interface UserSignupData {
   first_name: string;
   last_name: string;
@@ -27,4 +29,20 @@ export interface SearchResultProps {
   first_name: string;
   image?: string;
   last_name: string;
+}
+
+export interface User {
+  isPrivate: boolean;
+  userImage: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  posts: PostProps[];
+  biography: string;
+  followers: number;
+  following: number;
+  wideImage: string;
+  followUser: () => void;
+  isUserFollowed: boolean;
+  isSended: boolean;
 }

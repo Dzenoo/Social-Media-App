@@ -10,8 +10,10 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import classes from "../../css/Profile.module.css";
+import React from "react";
+import { User } from "@/types/user";
 
-const UserProfileCard = ({
+const UserProfileCard: React.FC<User> = ({
   isPrivate,
   userImage,
   firstName,
@@ -39,22 +41,22 @@ const UserProfileCard = ({
               {firstName} {lastName}
             </Typography>
             {!isPrivate && (
-              <Typography color="textSecondary" variant="p">
+              <Typography color="textSecondary" variant="h6">
                 {email}
               </Typography>
             )}
           </div>
         </Box>
         <Box className={classes.profile_view_flw}>
-          <Typography variant="p" className={classes.profile_flws}>
+          <Typography variant="h6" className={classes.profile_flws}>
             <strong>{followers}</strong>
             followers
           </Typography>
-          <Typography variant="p" className={classes.profile_flws}>
+          <Typography variant="h6" className={classes.profile_flws}>
             <strong>{following}</strong>
             following
           </Typography>{" "}
-          <Typography variant="p" className={classes.profile_flws}>
+          <Typography variant="h6" className={classes.profile_flws}>
             <strong>{posts.length}</strong>
             posts
           </Typography>
@@ -70,7 +72,7 @@ const UserProfileCard = ({
           <Typography variant="h6" fontWeight="bold">
             Bio
           </Typography>
-          <Typography color="textSecondary" variant="p">
+          <Typography color="textSecondary" variant="h6">
             {biography}
           </Typography>
         </CardActions>
