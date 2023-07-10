@@ -61,3 +61,15 @@ export interface CommentProps {
   isLoading: boolean;
   setisLoading: (value: boolean) => void;
 }
+
+export interface PostData {
+  location: string;
+  hashtags: string;
+  description: string;
+  image: string;
+  userId: string;
+}
+
+export interface PostForm {
+  onSubmitPost: (data: PostData) => void;
+}

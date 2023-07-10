@@ -14,7 +14,7 @@ const NewPost = () => {
       }}
     >
       <div className={classes.comment_div}>
-        <Image src="/images/setting.png" width={60} height={60} />
+        <Image src="/images/setting.png" width={60} height={60} alt="img" />
         <form>
           <TextField placeholder="What's on your mind?" fullWidth />
         </form>

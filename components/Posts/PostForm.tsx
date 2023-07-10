@@ -1,11 +1,12 @@
 "use client";
 import { Button, Card, FormControl, TextField } from "@mui/material";
 import classes from "../../css/NewPost.module.css";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useValidation } from "@/hooks/useValidation";
 import { VALIDATOR_REQUIRE } from "@/utils/validators";
+import { PostForm } from "@/types/posts";
 
-const PostForm = ({ onSubmitPost }) => {
+const PostForm: React.FC<PostForm> = ({ onSubmitPost }) => {
   const [postValues, setpostValues] = useState({
     location: "",
     hashtags: "",
@@ -17,7 +18,10 @@ const PostForm = ({ onSubmitPost }) => {
   const descriptionVal = useValidation([VALIDATOR_REQUIRE()]);
   const user = JSON.parse(localStorage.getItem("userinfo"));
 
-  const handleInputChange = (event, onChangeHandler) => {
+  const handleInputChange = (
+    event: ChangeEvent<any>,
+    onChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void
+  ) => {
     const { id, value } = event.target;
     setpostValues((prevValues) => ({
       ...prevValues,
@@ -26,13 +30,17 @@ const PostForm = ({ onSubmitPost }) => {
     onChangeHandler(event);
   };
 
-  const handleImageChange = (e) => {
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      const imageUrl = fileReader.result;
-      setimageVal(imageUrl);
-    };
-    fileReader.readAsDataURL(e.target.files[0]);
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        const imageUrl = fileReader.result as string;
+        setimageVal(imageUrl);
+      };
+      fileReader.readAsDataURL(file);
+    }
   };
 
   let formIsValid = false;
@@ -40,7 +48,7 @@ const PostForm = ({ onSubmitPost }) => {
     formIsValid = true;
   }
 
-  const submitFormHandler = (e) => {
+  const submitFormHandler = (e: FormEvent) => {
     e.preventDefault();
 
     const data = {
