@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { FadeLoader } from "react-spinners";
+import { ModalProps } from "@/types/modal";
+import { PostProps } from "@/types/posts";
 
 const style = {
   position: "absolute",
@@ -21,7 +23,7 @@ const style = {
   p: 4,
 };
 
-const Modale = ({
+const Modale: React.FC<ModalProps> = ({
   isOpen,
   close,
   text,
@@ -40,9 +42,11 @@ const Modale = ({
     });
 
     if (response.ok) {
-      const filteredPosts = posts.filter((p) => p._id !== id);
+      const filteredPosts = posts.filter(
+        (p: PostProps) => p._id !== id
+      ) as PostProps[];
       toast.success("Post deleted!");
-      setPosts(filteredPosts);
+      setPosts(filteredPosts as []);
       setisLoading(false);
       onCloseModal();
     } else {
