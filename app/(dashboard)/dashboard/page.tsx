@@ -9,6 +9,8 @@ import Cards from "@/components/Dashboard/Cards";
 import PostItem from "@/components/Posts/PostItem";
 import useSwr from "swr";
 import NotificationItem from "@/components/Notifications/NotificationItem";
+import { PostProps } from "@/types/posts";
+import { NotificationProps } from "@/types/notification";
 
 const Dashboard = async () => {
   const userInfo =
@@ -16,7 +18,7 @@ const Dashboard = async () => {
       ? JSON.parse(localStorage.getItem("userinfo"))
       : null;
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
   const { data, error, loading } = useSwr(
     `/api/users/${userInfo.userId}`,
     fetcher
@@ -36,7 +38,8 @@ const Dashboard = async () => {
 
   const postItems = data.posts.slice(0, 3);
   const recentPosts = postItems.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    (a: { createdAt: string }, b: { createdAt: string }) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
   const notificationItems = data.notifications.slice(0, 3);
 
@@ -53,11 +56,11 @@ const Dashboard = async () => {
           posts={data?.posts.length}
           followers={data?.followers.length}
           likes={data?.posts.reduce(
-            (count, post) => count + post.likes.length,
+            (count: number, post: PostProps) => count + post.likes.length,
             0
           )}
           comments={data?.posts.reduce(
-            (count, post) => count + post.comments.length,
+            (count: number, post: PostProps) => count + post.comments.length,
             0
           )}
         />
@@ -65,7 +68,7 @@ const Dashboard = async () => {
           <Typography variant="h5" fontWeight="bold" sx={{ padding: "20px" }}>
             Recent Posts
           </Typography>
-          {recentPosts.map((post) => (
+          {recentPosts.map((post: PostProps) => (
             <PostItem
               description={post.description}
               likes={post.likes.length}
@@ -84,12 +87,15 @@ const Dashboard = async () => {
           <Typography variant="h5" fontWeight="bold" sx={{ padding: "20px" }}>
             Recent Notifications
           </Typography>
-          {notificationItems.map((notification) => (
+          {notificationItems.map((notification: NotificationProps) => (
             <NotificationItem
               key={notification._id}
               title={notification.message}
               image={notification.image}
               time={new Date(notification.date).toLocaleDateString()}
+              showButtons={""}
+              showImage={""}
+              onAccept={""}
             />
           ))}
         </Box>

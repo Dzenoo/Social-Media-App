@@ -1,18 +1,20 @@
 "use client";
 
 import Post from "@/components/Posts/Post";
+import { ParamsPost } from "@/types/posts";
 import { Container } from "@mui/material";
+import React from "react";
 import { FadeLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useSwr from "swr";
 
-const PostPage = ({ params }) => {
+const PostPage: React.FC<ParamsPost> = ({ params }) => {
   const { postId } = params;
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, error, loading } = useSwr(`/api/posts/${postId}`, fetcher);
+  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSwr(`/api/posts/${postId}`, fetcher);
 
-  if (!data || loading) {
+  if (!data) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />

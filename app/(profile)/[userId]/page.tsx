@@ -7,12 +7,13 @@ import { Container, Typography } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
+import { ParamsPost } from "@/types/posts";
 
-const UserProfile = async ({ params }) => {
+const UserProfile: React.FC<ParamsPost> = async ({ params }) => {
   const [isSendedRequest, setisSendedRequest] = useState(false);
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
   const { data, error, loading } = useSwr(
     `/api/users/${params.userId}`,
     fetcher
@@ -41,8 +42,12 @@ const UserProfile = async ({ params }) => {
       }
 
       setisSendedRequest(false);
-    } catch (error) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An error ocurred");
+      }
     }
   };
 
@@ -90,7 +95,6 @@ const UserProfile = async ({ params }) => {
             return (
               <Post
                 key={post._id}
-                id={post._id}
                 userId={post.creator}
                 postId={post._id}
                 comments={post.comments}

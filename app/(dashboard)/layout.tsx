@@ -4,7 +4,7 @@ import { FadeLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const layout = ({ children }) => {
+const layout = ({ children }: { children: any }) => {
   const token =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userdata"))

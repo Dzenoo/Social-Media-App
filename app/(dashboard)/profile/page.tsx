@@ -15,11 +15,12 @@ import { ToastContainer, toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import SavedPost from "@/components/Posts/SavedPost";
+import { PostProps } from "@/types/posts";
 
 const Profile = async () => {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
   const userInfo =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userinfo"))
@@ -30,7 +31,7 @@ const Profile = async () => {
   );
   const { logout } = useAuth();
   const [isShowing, setisShowing] = useState(false);
-  const [imageValue, setimageValue] = useState("");
+  const [imageValue, setimageValue] = useState<any>();
   const router = useRouter();
 
   if (!data || loading) {
@@ -54,9 +55,12 @@ const Profile = async () => {
       if (response.ok) {
         toast.success("Profile Updated");
       }
-    } catch (error) {
-      toast.error(error);
-      console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        console.log("Something went wrong");
+      }
     }
   };
 
@@ -71,13 +75,16 @@ const Profile = async () => {
         router.push("/");
         logout();
       }
-    } catch (error) {
-      toast.error(error);
-      console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        console.log("Something went wrong");
+      }
     }
   };
 
-  const handleCoverImageChange = (e) => {
+  const handleCoverImageChange = (e: ChangeEvent<{ files: any }>) => {
     const fileReader = new FileReader();
     fileReader.onload = () => {
       const imageUrl = fileReader.result;
@@ -86,7 +93,7 @@ const Profile = async () => {
     fileReader.readAsDataURL(e.target.files[0]);
   };
 
-  const changeImageHandler = async (e) => {
+  const changeImageHandler = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
@@ -123,20 +130,20 @@ const Profile = async () => {
               <Typography variant="h4" fontWeight="bold">
                 {data?.first_name.concat(" ", data?.last_name)}
               </Typography>
-              <Typography variant="p" color="textSecondary">
+              <Typography variant="h6" color="textSecondary">
                 {data?.email}
               </Typography>
             </div>
             <div className={classes.profile_followers_info}>
-              <Typography className={classes.typo_profile} variant="p">
+              <Typography className={classes.typo_profile} variant="h6">
                 <strong>{data?.followers.length}</strong>
                 followers
               </Typography>
-              <Typography className={classes.typo_profile} variant="p">
+              <Typography className={classes.typo_profile} variant="h6">
                 <strong>{data?.following.length}</strong>
                 following
               </Typography>{" "}
-              <Typography className={classes.typo_profile} variant="p">
+              <Typography className={classes.typo_profile} variant="h6">
                 <strong>{data?.posts.length}</strong>
                 posts
               </Typography>
@@ -196,7 +203,7 @@ const Profile = async () => {
               No saved posts
             </Typography>
           )}
-          {data?.savedPosts.map((post) => (
+          {data?.savedPosts.map((post: PostProps) => (
             <SavedPost postId={post._id} image={post.image} />
           ))}
         </Container>

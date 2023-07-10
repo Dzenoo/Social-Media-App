@@ -10,7 +10,6 @@ const NotificationItem = ({
   image,
   showImage,
   onAccept,
-  onReject,
   showButtons,
 }) => {
   return (

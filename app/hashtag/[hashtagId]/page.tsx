@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { FadeLoader } from "react-spinners";
 import { Container } from "@mui/material";
 import Post from "@/components/Posts/Post";
+import { PostProps } from "@/types/posts";
 
 const HashtagPage = () => {
   const pathname = usePathname();
@@ -39,7 +40,7 @@ const HashtagPage = () => {
       }}
     >
       <ToastContainer />
-      {data.map((post) => (
+      {data.map((post: PostProps) => (
         <div>
           <Post
             key={post._id}
