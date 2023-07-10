@@ -14,7 +14,7 @@
 .notifications_section .notifications_container {
   border-radius: 8px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 12px;
 }
 

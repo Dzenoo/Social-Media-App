@@ -7,7 +7,7 @@ export interface NotificationProps {
 
 export interface NotificationItemProps {
   title: string;
-  time: string & Date;
+  time: string | Date;
   image: string;
   showImage?: boolean;
   onAccept?: () => void;

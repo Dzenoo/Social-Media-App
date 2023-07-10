@@ -14,10 +14,6 @@ import { loginUser } from "@/utils/functions";
 
 const Login = () => {
   const { login } = useAuth();
-  const [loggedFixed, setloggedFixed] = useState({
-    email: "",
-    password: "",
-  });
   const [isLoading, setisLoading] = useState<boolean>(false);
   const token =
     typeof window !== "undefined"
@@ -39,12 +35,11 @@ const Login = () => {
   };
 
   async function loginDummyUser(email: string, password: string) {
-    setloggedFixed({
-      email: email,
-      password: password,
-    });
-    if (loggedFixed.email !== "" && loggedFixed.password !== "") {
-      loginUser(loggedFixed, setisLoading, login, router);
+    const confirm = window.confirm(
+      "Are you sure you want to login as this user?"
+    );
+    if (confirm) {
+      await loginUser({ email, password }, setisLoading, login, router);
     }
   }
 
@@ -66,7 +61,7 @@ const Login = () => {
           <ul className={classes.user_list}>
             {Users.map((user) => (
               <Card
-                onClick={loginDummyUser.bind(null, user.email, user.password)}
+                onClick={() => loginDummyUser(user.email, user.password)}
                 className={classes.user}
                 key={user.id}
               >
