@@ -79,7 +79,6 @@ export interface PostData {
   image: string;
   userId: string;
 }
-
 export interface PostForm {
   onSubmitPost: (data: PostData) => void;
 }
