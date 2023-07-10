@@ -21,3 +21,10 @@ export interface AuthSignupProps {
   classes: any;
   onSubmitSignup: (data: UserSignupData) => void;
 }
+
+export interface SearchResultProps {
+  _id: string;
+  first_name: string;
+  image?: string;
+  last_name: string;
+}

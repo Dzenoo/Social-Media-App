@@ -4,7 +4,8 @@ import Link from "next/link";
 import classes from "../../css/HomeNavbar.module.css";
 import { usePathname } from "next/navigation";
 import { Button, Card, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { SearchResultProps } from "@/types/user";
 
 const HomeNavbar = () => {
   const pathname = usePathname();
@@ -23,7 +24,7 @@ const HomeNavbar = () => {
     ? `${classes.search_container} ${classes.isActive}`
     : `${classes.search_container}`;
 
-  async function searchUser(e) {
+  async function searchUser(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
 
     try {
@@ -69,7 +70,7 @@ const HomeNavbar = () => {
           onMouseEnter={() => setisActive(true)}
         >
           {isActive &&
-            results.map((result, i) => {
+            results.map((result: SearchResultProps, i) => {
               return (
                 <Link href={`/${result._id}`} key={i}>
                   <div className={classes.result_div}>
@@ -102,7 +103,7 @@ const HomeNavbar = () => {
       </div>
       {token?.token ? (
         <div className={classes.nav_profile}>
-          <Typography variant="p" fontWeight="bold">
+          <Typography variant="h6" fontWeight="bold">
             {user.firstname
               ? user.firstname.concat(" ", user.lastname)
               : "John Doe"}
@@ -117,16 +118,16 @@ const HomeNavbar = () => {
         </div>
       ) : (
         <div className={classes.landing_buttons}>
-          <Button variant="contained" fontWeight="bold" size="large">
-            <Link href="/signup" className="link_no_decoration">
+          <Link href="/signup" className="link_no_decoration">
+            <Button variant="contained" size="large">
               Sign Up Today!
-            </Link>
-          </Button>
-          <Button variant="contained" fontWeight="bold" size="large">
-            <Link href="/login" className="link_no_decoration">
+            </Button>
+          </Link>
+          <Link href="/login" className="link_no_decoration">
+            <Button variant="contained" size="large">
               Log in to Account
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       )}
     </header>

@@ -3,8 +3,9 @@ import { Box, Button, Card, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import classes from "../../css/Notifications.module.css";
+import { NotificationItemProps } from "@/types/notification";
 
-const NotificationItem = ({
+const NotificationItem: React.FC<NotificationItemProps> = ({
   title,
   time,
   image,
@@ -30,7 +31,7 @@ const NotificationItem = ({
           justifyContent: "center",
         }}
       >
-        <Typography fontWeight="bold" variant="p">
+        <Typography fontWeight="bold" variant="h6">
           {title}
         </Typography>
         <Typography color="textSecondary">{time}</Typography>

@@ -9,7 +9,12 @@ const LandingPageNav = () => {
     <ul className={classes.landing_nav}>
       <div className={classes.logo_div}>
         <Link href="/">
-          <Image src="/images/logo_blue.png" width={180} height={60} />
+          <Image
+            src="/images/logo_blue.png"
+            width={180}
+            height={60}
+            alt="img"
+          />
         </Link>
       </div>
       <div className={classes.button_div}>

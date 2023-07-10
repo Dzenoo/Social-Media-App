@@ -7,6 +7,7 @@ import classes from "../../../css/Notifications.module.css";
 import useSwr from "swr";
 import NotificationItem from "@/components/Notifications/NotificationItem";
 import { NotificationProps } from "@/types/notification";
+import { SearchResultProps } from "@/types/user";
 
 const Notifications = async () => {
   const userInfo =
@@ -49,11 +50,10 @@ const Notifications = async () => {
               image={not.image}
               showImage={true}
               showButtons={false}
-              onAccept={""}
             />
           );
         })}
-        {data.followRequests.map((requestingUser) => {
+        {data.followRequests.map((requestingUser: SearchResultProps) => {
           const acceptFollowRequest = async () => {
             const response = await fetch(
               `/api/users/${requestingUser._id}/accept`,
