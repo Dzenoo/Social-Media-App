@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FadeLoader } from "react-spinners";
 import { useAuth } from "@/hooks/useAuth";
+import { UserSignupData } from "@/types/user";
 
 const Signup = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -26,7 +27,7 @@ const Signup = () => {
     }
   }, [router]);
 
-  const onSubmitSignup = async (userData) => {
+  const onSubmitSignup = async (userData: UserSignupData) => {
     setisLoading(true);
     try {
       const response = await fetch("/api/users/signup", {
@@ -36,7 +37,6 @@ const Signup = () => {
       });
 
       const resdata = await response.json();
-      console.log(resdata);
       login(resdata.token);
 
       const userInfo = {
@@ -74,7 +74,7 @@ const Signup = () => {
         <Typography color="#333" variant="h4" fontWeight="bold">
           CREATE ACCOUNT
         </Typography>
-        <Typography color="textSecondary" variant="p">
+        <Typography color="textSecondary">
           Join our community today by filling out our simple signup form and
           start enjoying exclusive benefits
         </Typography>

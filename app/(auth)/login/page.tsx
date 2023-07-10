@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
 import { useAuth } from "@/hooks/useAuth";
+import { UserLoginData } from "@/types/user";
 
 const Login = () => {
   const { login } = useAuth();
@@ -26,7 +27,7 @@ const Login = () => {
     }
   }, [router]);
 
-  const onLoginSubmit = async (loginData) => {
+  const onLoginSubmit = async (loginData: UserLoginData) => {
     setisLoading(true);
     try {
       const response = await fetch("/api/users/login", {
@@ -73,7 +74,7 @@ const Login = () => {
         <Typography color="#333" variant="h4" fontWeight="bold">
           LOGIN
         </Typography>
-        <Typography color="textSecondary" variant="p">
+        <Typography color="textSecondary">
           Join our community today by filling out our simple login form and
           start enjoying exclusive benefits
         </Typography>

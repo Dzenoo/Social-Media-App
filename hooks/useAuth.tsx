@@ -1,14 +1,14 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-let logoutTimer;
+let logoutTimer: any | number;
 
 export const useAuth = () => {
-  const [token, settoken] = useState(null);
-  const [tokenExp, settokenExp] = useState();
+  const [token, settoken] = useState<null | string>(null);
+  const [tokenExp, settokenExp] = useState<null | Date>();
   const router = useRouter();
 
-  const login = useCallback((token, expirationDate) => {
+  const login = useCallback((token: any, expirationDate?: Date) => {
     settoken(token);
     const tokenExpirationDate =
       expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);

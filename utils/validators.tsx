@@ -1,3 +1,5 @@
+import { ValidatorTypes } from "@/types/validator";
+
 const VALIDATOR_TYPE_REQUIRE = "REQUIRE";
 const VALIDATOR_TYPE_FIRST_NAME = "FIRST_NAME";
 const VALIDATOR_TYPE_MINLENGTH = "MINLENGTH";
@@ -11,23 +13,29 @@ const VALIDATOR_TYPE_PASSWORD_MATCH = "PASSWORD_MATCH";
 export const VALIDATOR_REQUIRE = () => ({ type: VALIDATOR_TYPE_REQUIRE });
 export const VALIDATOR_FIRSTNAME = () => ({ type: VALIDATOR_TYPE_FIRST_NAME });
 export const VALIDATOR_FILE = () => ({ type: VALIDATOR_TYPE_FILE });
-export const VALIDATOR_MINLENGTH = (val) => ({
+export const VALIDATOR_MINLENGTH = (val: number) => ({
   type: VALIDATOR_TYPE_MINLENGTH,
   val: val,
 });
-export const VALIDATOR_MAXLENGTH = (val) => ({
+export const VALIDATOR_MAXLENGTH = (val: number) => ({
   type: VALIDATOR_TYPE_MAXLENGTH,
   val: val,
 });
-export const VALIDATOR_MIN = (val) => ({ type: VALIDATOR_TYPE_MIN, val: val });
-export const VALIDATOR_MAX = (val) => ({ type: VALIDATOR_TYPE_MAX, val: val });
+export const VALIDATOR_MIN = (val: number) => ({
+  type: VALIDATOR_TYPE_MIN,
+  val: val,
+});
+export const VALIDATOR_MAX = (val: number) => ({
+  type: VALIDATOR_TYPE_MAX,
+  val: val,
+});
 export const VALIDATOR_EMAIL = () => ({ type: VALIDATOR_TYPE_EMAIL });
-export const VALIDATOR_PASSWORD_MATCH = (password) => ({
+export const VALIDATOR_PASSWORD_MATCH = (password: string) => ({
   type: VALIDATOR_TYPE_PASSWORD_MATCH,
   password: password,
 });
 
-export const validate = (value, validators) => {
+export const validate = (value: string, validators: ValidatorTypes[]) => {
   let isValid = true;
   for (const validator of validators) {
     if (validator.type === VALIDATOR_TYPE_REQUIRE) {

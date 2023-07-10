@@ -1,7 +1,18 @@
+import {
+  ReduceActionTypes,
+  ReducerStateTypes,
+  ValidatorTypes,
+} from "@/types/validator";
 import { validate } from "@/utils/validators";
-import { useReducer } from "react";
+import { ChangeEvent, useReducer } from "react";
 
-const reducer = (state, action) => {
+const initialState = {
+  value: "",
+  isTouched: false,
+  isValid: false,
+};
+
+const reducer = (state: ReducerStateTypes, action: ReduceActionTypes) => {
   switch (action.type) {
     case "CHANGE": {
       return {
@@ -18,14 +29,10 @@ const reducer = (state, action) => {
   }
 };
 
-export const useValidation = (validators) => {
-  const [state, dispatch] = useReducer(reducer, {
-    value: "",
-    isTouched: false,
-    isValid: false,
-  });
+export const useValidation = (validators: ValidatorTypes[]) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     dispatch({
       type: "CHANGE",
       inputValue: e.target.value,
@@ -33,8 +40,8 @@ export const useValidation = (validators) => {
     });
   };
 
-  const handleBlur = () => {
-    dispatch({ type: "TOUCH" });
+  const handleBlur = (): void => {
+    dispatch({ type: "TOUCH", inputValue: "", validators: [] });
   };
 
   return {
