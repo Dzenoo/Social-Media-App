@@ -4,7 +4,7 @@ import { useValidation } from "@/hooks/useValidation";
 import { AuthLoginProps } from "@/types/user";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "@/utils/validators";
 import { Button, TextField } from "@mui/material";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 
 const LoginForm: React.FC<AuthLoginProps> = ({ classes, onLoginSubmit }) => {
   const emailValidation = useValidation([VALIDATOR_EMAIL()]);

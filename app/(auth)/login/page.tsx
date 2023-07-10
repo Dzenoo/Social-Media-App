@@ -1,5 +1,5 @@
 "use client";
-import { Typography } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import classes from "../../../css/Auth.module.css";
 import Link from "next/link";
 import LoginForm from "@/components/Auth/LoginForm";
@@ -11,6 +11,10 @@ import { UserLoginData } from "@/types/user";
 
 const Login = () => {
   const { login } = useAuth();
+  const [loggedFixed, setloggedFixed] = useState({
+    email: "",
+    password: "",
+  });
   const [isLoading, setisLoading] = useState<boolean>(false);
   const token =
     typeof window !== "undefined"
@@ -69,7 +73,11 @@ const Login = () => {
 
   return (
     <section className={classes.auth_section}>
-      <div className={classes.empty_div}></div>
+      <div className={classes.empty_div}>
+        <Card>
+          <Typography variant="h4">Login as this user</Typography>
+        </Card>
+      </div>
       <div className={classes.form_div}>
         <Typography color="#333" variant="h4" fontWeight="bold">
           LOGIN

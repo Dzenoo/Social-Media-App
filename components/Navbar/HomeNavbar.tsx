@@ -88,19 +88,20 @@ const HomeNavbar = () => {
               );
             })}
         </Card>
+        <div className={classes.nav_buttons}>
+          {token?.token ? (
+            <Link
+              className="link_no_decoration"
+              href={pathname === "/" ? "/dashboard" : "/"}
+            >
+              {pathname === "/" ? "Go to dashboard" : "Go to home"}
+            </Link>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-      <div className={classes.nav_buttons}>
-        {token?.token ? (
-          <Link
-            className="link_no_decoration"
-            href={pathname === "/" ? "/dashboard" : "/"}
-          >
-            {pathname === "/" ? "Go to dashboard" : "Go to home"}
-          </Link>
-        ) : (
-          ""
-        )}
-      </div>
+
       {token?.token ? (
         <div className={classes.nav_profile}>
           <Typography variant="h6" fontWeight="bold">

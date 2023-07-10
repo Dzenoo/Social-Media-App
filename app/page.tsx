@@ -1,12 +1,15 @@
 "use client";
 import useSwr from "swr";
-import Post from "@/components/Posts/Post";
-import { Typography, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PostProps } from "@/types/posts";
+import HomeSidebar from "@/components/Navbar/HomeSidebar";
+import classes from "@/css/HomeNavbar.module.css";
+import PostContainer from "@/components/Home/PostContainer";
+import Stories from "@/components/Home/Stories";
+import { Container } from "@mui/material";
 
 export default function Home() {
   const [allPosts, setallPosts] = useState<PostProps[]>([]);
@@ -53,39 +56,17 @@ export default function Home() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ padding: "20px" }}>
-      <ToastContainer />
-      {allPosts.length === 0 ? (
-        <Typography textAlign="center" variant="h4">
-          No posts jet
-        </Typography>
-      ) : (
-        allPosts
-          .filter(
-            (post) =>
-              post.creator.isPrivate === false ||
-              data?.following.includes(post.creator._id) ||
-              post.creator._id === userInfo?.userId
-          )
-          .map((post: PostProps) => (
-            <Post
-              key={post._id}
-              postId={post._id}
-              hashtags={post.hashtags}
-              description={post.description}
-              image={post.image}
-              date={post.createdAt}
-              location={post.location}
-              firstName={post.creator.first_name}
-              lastName={post.creator.last_name}
-              creatorImg={post.creator.image}
-              userId={post.creator._id}
-              likes={post.likes}
-              comments={post.comments}
-              show={true}
-            />
-          ))
-      )}
-    </Container>
+    <section className={classes.mainSection}>
+      <HomeSidebar />
+      <Container className={classes.mainSection_stories}>
+        <Stories />
+        <PostContainer
+          data={data}
+          userInfo={userInfo}
+          allPosts={allPosts}
+          classes={classes}
+        />
+      </Container>
+    </section>
   );
 }

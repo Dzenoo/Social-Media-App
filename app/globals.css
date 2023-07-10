@@ -7,6 +7,10 @@
   padding: 0;
 }
 
+body {
+  position: relative;
+}
+
 .link_no_decoration {
   text-decoration: none;
   color: inherit;
