@@ -3,8 +3,10 @@ import { Box, Button, Card, Typography } from "@mui/material";
 import classes from "../../css/Posts.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+import { PostItemDashboard } from "@/types/posts";
 
-const PostItem = ({
+const PostItem: React.FC<PostItemDashboard> = ({
   openDeleteModal,
   description,
   likes,
@@ -15,8 +17,8 @@ const PostItem = ({
   hashtags,
   show,
 }) => {
-  const createdDate = new Date(date);
-  const currentTime = new Date();
+  const createdDate = new Date(date).getTime();
+  const currentTime = new Date().getTime();
   const timeDifference = currentTime - createdDate;
   const timeDifferenceHours = Math.floor(timeDifference / (1000 * 60 * 60));
 
@@ -32,11 +34,11 @@ const PostItem = ({
     <Card className={classes.post_item}>
       <Box className={classes.img}>
         <Image alt="img" src={image} width={100} height={100} />
-        <Typography variant="p" color="textSecondary">
+        <Typography variant="h6" color="textSecondary">
           {description}
         </Typography>
         <Typography
-          variant="p"
+          variant="h6"
           color="textSecondary"
           sx={{ display: "flex", gap: "12px", flexWrap: "wrap" }}
         >
