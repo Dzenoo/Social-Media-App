@@ -1,14 +1,15 @@
 "use client";
 import { Button, Card, TextField, Typography } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import classes from "../../css/NewPostHome.module.css";
 import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
+import { CommentProps, PostProps } from "@/types/posts";
 
-const CommentSection = ({
+const CommentSection: React.FC<CommentProps> = ({
   userImg,
   setComment,
   comment,
@@ -18,7 +19,7 @@ const CommentSection = ({
   isLoading,
   setisLoading,
 }) => {
-  const commentPost = async (e) => {
+  const commentPost = async (e: FormEvent) => {
     e.preventDefault();
     setisLoading(true);
     try {
@@ -35,10 +36,12 @@ const CommentSection = ({
         setisLoading(false);
         toast.success("Successfully commented!");
       }
-    } catch (error) {
-      setisLoading(false);
-      toast.error(error);
-      console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+        setisLoading(false);
+        console.log(error);
+      }
     }
   };
 
@@ -59,6 +62,7 @@ const CommentSection = ({
           width={60}
           height={60}
           style={{ borderRadius: "100px" }}
+          alt="img"
         />
         <form className={classes.comment_form} onSubmit={commentPost}>
           <TextField
@@ -93,7 +97,7 @@ const CommentSection = ({
   );
 };
 
-const Post = ({
+const Post: React.FC<PostProps> = ({
   firstName,
   lastName,
   creatorImg,
@@ -120,7 +124,7 @@ const Post = ({
   // Logic for date //
   const createdDate = new Date(date);
   const currentTime = new Date();
-  const timeDifference = currentTime - createdDate;
+  const timeDifference = currentTime.getTime() - createdDate.getTime();
   const timeDifferenceHours = Math.floor(timeDifference / (1000 * 60 * 60));
 
   let formattedTimeDifference = "";
@@ -152,9 +156,11 @@ const Post = ({
         setIsLiked((prevState) => !prevState);
         toast.success("Post liked!");
       }
-    } catch (error) {
-      toast.error(error);
-      console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+        console.log(error);
+      }
     }
   };
 
@@ -169,9 +175,11 @@ const Post = ({
       if (response.ok) {
         toast.success("Post saved!");
       }
-    } catch (error) {
-      toast.error(error);
-      console.log(error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+        console.log(error);
+      }
     }
   };
 

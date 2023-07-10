@@ -19,20 +19,22 @@ export interface Creator {
 }
 
 export interface PostProps {
-  _id: string;
+  _id?: string;
   hashtags: string;
   description: string;
   image: string;
-  createdAt: string;
+  createdAt?: string;
   location: string;
   firstName: string;
   lastName: string;
   creatorImg: string;
   userId: string;
   likes: {}[];
-  creator: Creator;
+  creator?: Creator;
   comments: Comment[];
   show: boolean;
+  date: string;
+  postId: string;
 }
 
 export interface PostFormTypes {
@@ -41,4 +43,21 @@ export interface PostFormTypes {
   description: string;
   image: string;
   userId: string;
+}
+
+export interface Comment {
+  userImage: string;
+  userName: string;
+  content: string;
+}
+
+export interface CommentProps {
+  userImg: string;
+  setComment: (value: string) => void;
+  comment: string;
+  userName: string;
+  postId: string;
+  comments: Comment[];
+  isLoading: boolean;
+  setisLoading: (value: boolean) => void;
 }
