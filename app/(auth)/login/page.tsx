@@ -2,12 +2,15 @@
 import { Card, Typography } from "@mui/material";
 import classes from "../../../css/Auth.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import LoginForm from "@/components/Auth/LoginForm";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
 import { useAuth } from "@/hooks/useAuth";
 import { UserLoginData } from "@/types/user";
+import { Users } from "@/constants/users";
+import { loginUser } from "@/utils/functions";
 
 const Login = () => {
   const { login } = useAuth();
@@ -32,36 +35,18 @@ const Login = () => {
   }, [router]);
 
   const onLoginSubmit = async (loginData: UserLoginData) => {
-    setisLoading(true);
-    try {
-      const response = await fetch("/api/users/login", {
-        method: "POST",
-        body: JSON.stringify(loginData),
-      });
-      const resdata = await response.json();
-
-      login(resdata.token);
-
-      const userInfo = {
-        firstname: resdata.firstname,
-        lastname: resdata.lastname,
-        image: resdata.image,
-        userId: resdata.userId,
-      };
-      if (typeof window !== "undefined") {
-        localStorage.setItem("userinfo", JSON.stringify(userInfo));
-      }
-
-      if (response.ok) {
-        router.push("/");
-      }
-    } catch (error) {
-      setisLoading(false);
-      console.log(error);
-    } finally {
-      setisLoading(false);
-    }
+    loginUser(loginData, setisLoading, login, router);
   };
+
+  async function loginDummyUser(email: string, password: string) {
+    setloggedFixed({
+      email: email,
+      password: password,
+    });
+    if (loggedFixed.email !== "" && loggedFixed.password !== "") {
+      loginUser(loggedFixed, setisLoading, login, router);
+    }
+  }
 
   if (isLoading) {
     return (
@@ -74,9 +59,29 @@ const Login = () => {
   return (
     <section className={classes.auth_section}>
       <div className={classes.empty_div}>
-        <Card>
-          <Typography variant="h4">Login as this user</Typography>
-        </Card>
+        <div style={{ padding: "20px" }}>
+          <Typography variant="h4" color="#fff">
+            Pick account you want
+          </Typography>
+          <ul className={classes.user_list}>
+            {Users.map((user) => (
+              <Card
+                onClick={loginDummyUser.bind(null, user.email, user.password)}
+                className={classes.user}
+                key={user.id}
+              >
+                <Image
+                  src={user.image}
+                  width={100}
+                  height={100}
+                  alt={user.username}
+                  style={{ borderRadius: "100px" }}
+                />
+                <Typography variant="h6">{user.username}</Typography>
+              </Card>
+            ))}
+          </ul>
+        </div>
       </div>
       <div className={classes.form_div}>
         <Typography color="#333" variant="h4" fontWeight="bold">

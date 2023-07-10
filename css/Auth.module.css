@@ -17,6 +17,31 @@
   height: 100%;
 }
 
+.auth_section .empty_div .user_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+}
+
+.auth_section .empty_div .user_list .user {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.auth_section .empty_div .user_list .user:hover {
+  transition: 0.3s;
+  box-shadow: 0 2px 4px #121212;
+  transform: translateY(2px);
+}
+
 .auth_section .form_div {
   grid-area: form;
   padding: 40px;
