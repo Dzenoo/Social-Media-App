@@ -74,6 +74,11 @@ export interface PostForm {
   onSubmitPost: (data: PostData) => void;
 }
 
+export interface SavedPost {
+  image: string;
+  postId: string;
+}
+
 export interface PostItemDashboard {
   openDeleteModal: () => void;
   description: string;
