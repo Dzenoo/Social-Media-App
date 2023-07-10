@@ -10,7 +10,7 @@ const layout = ({ children }: { children: any }) => {
       ? JSON.parse(localStorage.getItem("userdata"))
       : null;
 
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 
 const Sidebar = () => {
-  const [barIsOpen, setbarIsOpen] = useState(false);
+  const [barIsOpen, setbarIsOpen] = useState<boolean>(false);
   const toggle = () => setbarIsOpen(!barIsOpen);
   const token = JSON.parse(localStorage.getItem("userdata"));
   const { logout } = useAuth();

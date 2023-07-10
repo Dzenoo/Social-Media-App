@@ -30,7 +30,7 @@ const Profile = async () => {
     fetcher
   );
   const { logout } = useAuth();
-  const [isShowing, setisShowing] = useState(false);
+  const [isShowing, setisShowing] = useState<boolean>(false);
   const [imageValue, setimageValue] = useState<any>();
   const router = useRouter();
 

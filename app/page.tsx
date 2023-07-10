@@ -6,14 +6,15 @@ import { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PostProps } from "@/types/posts";
 
 export default function Home() {
-  const [allPosts, setallPosts] = useState([]);
+  const [allPosts, setallPosts] = useState<PostProps[]>([]);
   const userInfo =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userinfo"))
       : null;
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
   const {
     data,
     loading: userLoading,
@@ -28,7 +29,8 @@ export default function Home() {
   useEffect(() => {
     if (postsData) {
       const recentPosts = postsData.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        (a: { createdAt: string }, b: { createdAt: string }) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
       setallPosts(recentPosts);
     }
@@ -65,7 +67,7 @@ export default function Home() {
               data?.following.includes(post.creator._id) ||
               post.creator._id === userInfo?.userId
           )
-          .map((post) => (
+          .map((post: PostProps) => (
             <Post
               key={post._id}
               postId={post._id}

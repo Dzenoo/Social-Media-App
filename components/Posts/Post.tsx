@@ -7,7 +7,7 @@ import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
-import { CommentProps, PostProps } from "@/types/posts";
+import { CommentProps, Post, PostProps } from "@/types/posts";
 
 const CommentSection: React.FC<CommentProps> = ({
   userImg,
@@ -97,7 +97,7 @@ const CommentSection: React.FC<CommentProps> = ({
   );
 };
 
-const Post: React.FC<PostProps> = ({
+const Post: React.FC<Post> = ({
   firstName,
   lastName,
   creatorImg,
@@ -116,10 +116,10 @@ const Post: React.FC<PostProps> = ({
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userinfo"))
       : null;
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state
-  const [comment, setComment] = useState(""); // comment state
-  const [commentIsOpen, setcommentIsOpen] = useState(false); // isComment state
+  const [comment, setComment] = useState<string>(""); // comment state
+  const [commentIsOpen, setcommentIsOpen] = useState<boolean>(false); // isComment state
 
   // Logic for date //
   const createdDate = new Date(date);

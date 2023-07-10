@@ -12,9 +12,9 @@ import { PostProps } from "@/types/posts";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  const [postIdToDelete, setpostIdToDelete] = useState("");
-  const [query, setquery] = useState("");
-  const [open, setopen] = useState(false);
+  const [postIdToDelete, setpostIdToDelete] = useState<string>("");
+  const [query, setquery] = useState<string>("");
+  const [open, setopen] = useState<boolean>(false);
   const handleOpen = (postId: string) => {
     setopen(true);
     setpostIdToDelete(postId);

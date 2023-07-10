@@ -33,7 +33,7 @@ const Modale: React.FC<ModalProps> = ({
   posts,
   setPosts,
 }) => {
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
   const deletePost = async () => {
     setisLoading(true);

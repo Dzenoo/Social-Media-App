@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { UserSignupData } from "@/types/user";
 
 const Signup = () => {
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState<boolean>(false);
   const { login } = useAuth();
   const token =
     typeof window !== "undefined"

@@ -12,7 +12,7 @@ const PostForm: React.FC<PostForm> = ({ onSubmitPost }) => {
     hashtags: "",
     description: "",
   });
-  const [imageVal, setimageVal] = useState("");
+  const [imageVal, setimageVal] = useState<string>("");
   const locationVal = useValidation([VALIDATOR_REQUIRE()]);
   const hashtagsVal = useValidation([VALIDATOR_REQUIRE()]);
   const descriptionVal = useValidation([VALIDATOR_REQUIRE()]);

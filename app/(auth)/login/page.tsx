@@ -11,7 +11,7 @@ import { UserLoginData } from "@/types/user";
 
 const Login = () => {
   const { login } = useAuth();
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState<boolean>(false);
   const token =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userdata"))

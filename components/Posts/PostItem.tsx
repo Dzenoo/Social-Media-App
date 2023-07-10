@@ -17,17 +17,24 @@ const PostItem: React.FC<PostItemDashboard> = ({
   hashtags,
   show,
 }) => {
-  const createdDate = new Date(date).getTime();
-  const currentTime = new Date().getTime();
-  const timeDifference = currentTime - createdDate;
+  const createdDate = new Date(date);
+  const currentTime = new Date();
+  const timeDifference = currentTime.getTime() - createdDate.getTime();
   const timeDifferenceHours = Math.floor(timeDifference / (1000 * 60 * 60));
 
-  let formattedTimeDIfference = "";
-  if (timeDifferenceHours > 0) {
-    formattedTimeDIfference = `${timeDifferenceHours}hr ago`;
+  let formattedTimeDifference = "";
+  if (timeDifferenceHours >= 24) {
+    const timeDifferenceDays = Math.floor(
+      timeDifference / (1000 * 60 * 60 * 24)
+    );
+    formattedTimeDifference = `${timeDifferenceDays} ${
+      timeDifferenceDays === 1 ? "day" : "days"
+    } ago`;
+  } else if (timeDifferenceHours > 0) {
+    formattedTimeDifference = `${timeDifferenceHours} hr ago`;
   } else {
     const timeDifferenceMinutes = Math.floor(timeDifference / (1000 * 60));
-    formattedTimeDIfference = `${timeDifferenceMinutes} minutes ago`;
+    formattedTimeDifference = `${timeDifferenceMinutes} minutes ago`;
   }
 
   return (
@@ -80,7 +87,7 @@ const PostItem: React.FC<PostItemDashboard> = ({
       {show && (
         <Box className={classes.date}>
           <Image alt="img" src="/images/calendar2.png" width={40} height={40} />
-          <Typography fontWeight="bold">{formattedTimeDIfference}</Typography>
+          <Typography fontWeight="bold">{formattedTimeDifference}</Typography>
         </Box>
       )}
       {show && (

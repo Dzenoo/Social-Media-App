@@ -10,7 +10,7 @@ import { SearchResultProps } from "@/types/user";
 const HomeNavbar = () => {
   const pathname = usePathname();
   const [results, setResults] = useState([]);
-  const [isActive, setisActive] = useState(false);
+  const [isActive, setisActive] = useState<boolean>(false);
   const user =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("userinfo"))

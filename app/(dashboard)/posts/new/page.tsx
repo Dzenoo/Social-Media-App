@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { PostFormTypes } from "@/types/posts";
 
 const NewPost = () => {
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
   const onSubmitPost = async (data: PostFormTypes) => {
     setisLoading(true);

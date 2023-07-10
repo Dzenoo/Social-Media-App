@@ -12,7 +12,7 @@ import { FadeLoader } from "react-spinners";
 import { ParamsPost } from "@/types/posts";
 
 const UserProfile: React.FC<ParamsPost> = async ({ params }) => {
-  const [isSendedRequest, setisSendedRequest] = useState(false);
+  const [isSendedRequest, setisSendedRequest] = useState<boolean>(false);
   const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
   const { data, error, loading } = useSwr(
     `/api/users/${params.userId}`,

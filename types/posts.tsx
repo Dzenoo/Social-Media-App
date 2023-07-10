@@ -16,25 +16,35 @@ export interface Creator {
   image: string;
   first_name: string;
   last_name: string;
+  isPrivate: boolean;
 }
 
-export interface PostProps {
-  _id?: string;
-  hashtags: string;
-  description: string;
-  image: string;
-  createdAt?: string;
-  location: string;
+export interface Post {
   firstName: string;
   lastName: string;
   creatorImg: string;
+  description: string;
+  image: string;
+  date: string | Date;
+  hashtags: string;
+  location: string;
   userId: string;
+  postId: string;
   likes: {}[];
-  creator?: Creator;
   comments: Comment[];
   show: boolean;
-  date: string;
-  postId: string;
+}
+
+export interface PostProps {
+  _id: string;
+  hashtags: string;
+  description: string;
+  image: string;
+  createdAt: string;
+  location: string;
+  likes: {}[];
+  creator: Creator;
+  comments: Comment[];
 }
 
 export interface PostFormTypes {
