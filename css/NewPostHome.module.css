@@ -17,6 +17,12 @@
 
 .post_card {
   margin-top: 20px;
+  height: min-content;
+}
+
+.post_card .post_card_image {
+  position: relative;
+  height: 600px;
 }
 
 .post_card .post_card_header {
@@ -37,12 +43,6 @@
   width: 100%;
   height: max-content;
 } */
-
-.post_card .post_card_image img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
 
 .post_card .post_card_actions {
   padding: 8px;
@@ -98,5 +98,9 @@
   .post_card_button img {
     width: 17px;
     height: 17px;
+  }
+  .post_card .post_card_image {
+    position: relative;
+    height: 300px;
   }
 }

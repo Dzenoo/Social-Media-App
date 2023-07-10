@@ -14,14 +14,17 @@ export const POST = async (
   const { userId } = await request.json();
 
   try {
-    const post = await Post.findByIdAndUpdate(params.postId, {
-      $push: { likes: userId },
-      new: true,
-    });
+    const post = await Post.findById(params.postId);
 
     if (post.likes.includes(userId)) {
       await Post.findByIdAndUpdate(params.postId, {
         $pull: { likes: userId },
+        new: true,
+      });
+    } else {
+      await Post.findByIdAndUpdate(params.postId, {
+        $push: { likes: userId },
+        new: true,
       });
     }
 

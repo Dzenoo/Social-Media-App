@@ -145,17 +145,14 @@ const Post: React.FC<Post> = ({
 
   // Like post //
   const likePost = async () => {
+    setIsLiked((prevState) => !prevState);
     try {
-      const response = await fetch(`/api/posts/${postId}/like`, {
+      await fetch(`/api/posts/${postId}/like`, {
         method: "POST",
         body: JSON.stringify({
           userId: user.userId,
         }),
       });
-      if (response.ok) {
-        setIsLiked((prevState) => !prevState);
-        toast.success("Post liked!");
-      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -167,14 +164,10 @@ const Post: React.FC<Post> = ({
   // Save Post //
   const savePost = async () => {
     try {
-      const response = await fetch(`/api/posts/${postId}`, {
+      await fetch(`/api/posts/${postId}`, {
         method: "POST",
         body: JSON.stringify({ userId: user.userId }),
       });
-
-      if (response.ok) {
-        toast.success("Post saved!");
-      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -253,7 +246,7 @@ const Post: React.FC<Post> = ({
       </div>
       <div className={classes.post_card_image}>
         <Link href={`/post/${postId}`}>
-          <Image src={image} width={400} height={400} alt="img" />
+          <Image src={image} fill alt="img" />
         </Link>
       </div>
       {show && (
