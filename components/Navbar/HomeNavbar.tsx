@@ -11,13 +11,15 @@ const HomeNavbar = () => {
   const pathname = usePathname();
   const [results, setResults] = useState([]);
   const [isActive, setisActive] = useState<boolean>(false);
+
   const user =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userinfo"))
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
       : null;
+
   const token =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userdata"))
+    typeof window !== "undefined" && localStorage.getItem("userdata")
+      ? JSON.parse(localStorage.getItem("userdata")!)
       : null;
 
   const searchContainerClasses = isActive

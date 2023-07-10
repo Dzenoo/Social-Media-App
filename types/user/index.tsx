@@ -27,7 +27,7 @@ export interface AuthSignupProps {
 export interface SearchResultProps {
   _id: string;
   first_name: string;
-  image?: string;
+  image: string;
   last_name: string;
 }
 

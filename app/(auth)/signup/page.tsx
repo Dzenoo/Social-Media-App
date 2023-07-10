@@ -13,8 +13,8 @@ const Signup = () => {
   const [isLoading, setisLoading] = useState<boolean>(false);
   const { login } = useAuth();
   const token =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userdata"))
+    typeof window !== "undefined" && localStorage.getItem("userdata")
+      ? JSON.parse(localStorage.getItem("userdata")!)
       : null;
 
   const router = useRouter();

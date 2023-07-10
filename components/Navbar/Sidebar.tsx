@@ -9,7 +9,10 @@ import { useAuth } from "@/hooks/useAuth";
 const Sidebar = () => {
   const [barIsOpen, setbarIsOpen] = useState<boolean>(false);
   const toggle = () => setbarIsOpen(!barIsOpen);
-  const token = JSON.parse(localStorage.getItem("userdata"));
+  const token =
+    typeof window !== "undefined" && localStorage.getItem("userdata")
+      ? JSON.parse(localStorage.getItem("userdata")!)
+      : null;
   const { logout } = useAuth();
 
   const activeClassNames = barIsOpen
