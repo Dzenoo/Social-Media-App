@@ -1,7 +1,7 @@
 import Post from "@/models/post";
 import { connectToDB } from "@/utils/database";
 
-export const GET = async (request, { params }) => {
+export const GET = async ({ params }: { params: { hashtag: string } }) => {
   try {
     await connectToDB();
 

@@ -3,7 +3,7 @@ import { connectToDB } from "@/utils/database";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-export const POST = async (request) => {
+export const POST = async (request: Request) => {
   try {
     await connectToDB();
   } catch (error) {

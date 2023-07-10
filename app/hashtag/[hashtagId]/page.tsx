@@ -11,7 +11,7 @@ import { PostProps } from "@/types/posts";
 const HashtagPage = () => {
   const pathname = usePathname();
   const hashtag = pathname.split("/")[2];
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
   const { data, error, loading } = useSwr(
     `/api/posts/hashtags/${hashtag}`,
     fetcher

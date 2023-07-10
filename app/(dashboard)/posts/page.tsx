@@ -1,6 +1,6 @@
 "use client";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import classes from "../../../css/Posts.module.css";
@@ -8,13 +8,14 @@ import Image from "next/image";
 import PostItem from "@/components/Posts/PostItem";
 import Link from "next/link";
 import Modale from "@/components/Modal/Modal";
+import { PostProps } from "@/types/posts";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  const [postIdToDelete, setpostIdToDelete] = useState();
+  const [postIdToDelete, setpostIdToDelete] = useState("");
   const [query, setquery] = useState("");
   const [open, setopen] = useState(false);
-  const handleOpen = (postId) => {
+  const handleOpen = (postId: string) => {
     setopen(true);
     setpostIdToDelete(postId);
   };
@@ -41,7 +42,7 @@ const Posts = () => {
     fetchUserPosts();
   }, []);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setquery(e.target.value);
   };
 
@@ -72,7 +73,12 @@ const Posts = () => {
                 }}
               >
                 Create new post
-                <Image src="/images/add.png" width={30} height={30} />
+                <Image
+                  src="/images/add.png"
+                  width={30}
+                  height={30}
+                  alt="image"
+                />
               </Button>
             </Link>
           </FormControl>
@@ -86,13 +92,13 @@ const Posts = () => {
         ) : (
           posts
             .filter(
-              (p) =>
+              (p: PostProps) =>
                 p.description.toLowerCase().includes(query) ||
                 p.hashtags.toLowerCase().includes(query)
             )
-            .map((post) => (
+            .map((post: PostProps) => (
               <PostItem
-                key={post.id}
+                key={post._id}
                 id={post._id}
                 openDeleteModal={() => handleOpen(post._id)}
                 description={post.description}

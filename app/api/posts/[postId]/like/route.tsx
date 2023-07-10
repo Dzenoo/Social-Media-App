@@ -2,7 +2,10 @@ import Post from "@/models/post";
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 
-export const POST = async (request, { params }) => {
+export const POST = async (
+  request: Request,
+  { params }: { params: { postId: string } }
+) => {
   try {
     await connectToDB();
   } catch (error) {

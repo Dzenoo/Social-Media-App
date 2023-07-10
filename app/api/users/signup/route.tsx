@@ -10,7 +10,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const POST = async (request) => {
+export const POST = async (request: Request) => {
   try {
     await connectToDB();
   } catch (error) {

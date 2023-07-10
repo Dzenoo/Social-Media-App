@@ -1,7 +1,11 @@
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
+import { NextApiRequest } from "next";
 
-export const GET = async (request, { params }) => {
+export const GET = async (
+  request: NextApiRequest,
+  { params }: { params: { username: string } }
+) => {
   try {
     await connectToDB();
 
@@ -16,6 +20,8 @@ export const GET = async (request, { params }) => {
     return new Response(JSON.stringify(users), { status: 200 });
   } catch (error) {
     console.log(error);
-    return new Response(error.message, { status: 500 });
+    return new Response("Failed to get post, please try again", {
+      status: 500,
+    });
   }
 };

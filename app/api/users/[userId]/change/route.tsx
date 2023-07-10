@@ -8,7 +8,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const PATCH = async (request, { params }) => {
+export const PATCH = async (
+  request: Request,
+  { params }: { params: { userId: string } }
+) => {
   try {
     await connectToDB();
   } catch (error) {

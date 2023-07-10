@@ -10,7 +10,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const GET = async (request, { params }) => {
+export const GET = async (
+  request: Request,
+  { params }: { params: { postId: string } }
+) => {
   try {
     await connectToDB();
 
@@ -33,7 +36,10 @@ export const GET = async (request, { params }) => {
   }
 };
 
-export const POST = async (request, { params }) => {
+export const POST = async (
+  request: Request,
+  { params }: { params: { postId: string } }
+) => {
   try {
     await connectToDB();
   } catch (error) {
@@ -60,7 +66,10 @@ export const POST = async (request, { params }) => {
   }
 };
 
-export const PATCH = async (request, { params }) => {
+export const PATCH = async (
+  request: Request,
+  { params }: { params: { postId: string } }
+) => {
   try {
     await connectToDB();
   } catch (error) {
@@ -91,7 +100,10 @@ export const PATCH = async (request, { params }) => {
   }
 };
 
-export const DELETE = async (request, { params }) => {
+export const DELETE = async (
+  request: Request,
+  { params }: { params: { postId: string } }
+) => {
   try {
     await connectToDB();
   } catch (error) {

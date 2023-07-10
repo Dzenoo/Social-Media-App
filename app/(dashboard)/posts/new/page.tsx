@@ -1,16 +1,17 @@
 "use client";
-import { Alert, Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import classes from "../../../../css/NewPost.module.css";
 import PostForm from "@/components/Posts/PostForm";
 import { useState } from "react";
 import { FadeLoader } from "react-spinners";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import { PostFormTypes } from "@/types/posts";
 
 const NewPost = () => {
   const [isLoading, setisLoading] = useState(false);
 
-  const onSubmitPost = async (data) => {
+  const onSubmitPost = async (data: PostFormTypes) => {
     setisLoading(true);
     try {
       const response = await fetch("/api/posts/create", {

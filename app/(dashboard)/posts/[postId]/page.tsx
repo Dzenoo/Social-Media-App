@@ -5,8 +5,15 @@ import classes from "../../../../css/Posts.module.css";
 import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FocusEventHandler,
+  FormEvent,
+  useEffect,
+  useState,
+} from "react";
 import { useRouter } from "next/navigation";
+import { ParamsPost, PostProps } from "@/types/posts";
 
 export async function generateStaticParams() {
   const user = JSON.parse(localStorage.getItem("userinfo"));
@@ -14,18 +21,18 @@ export async function generateStaticParams() {
   const response = await fetch(`/api/users/${user.userId}`);
   const responseData = await response.json();
 
-  return responseData.posts.map((post) => ({
+  return responseData.posts.map((post: PostProps) => ({
     slug: post._id,
   }));
 }
 
-const EditPostPage = async ({ params }) => {
+const EditPostPage: React.FC<ParamsPost> = async ({ params }) => {
   const [editValues, setEditValues] = useState({
     location: "",
     hashtags: "",
     description: "",
   });
-  const [imageVal, setimageVal] = useState("");
+  const [imageVal, setimageVal] = useState<any>();
   const user = JSON.parse(localStorage.getItem("userinfo"));
   const router = useRouter();
 
@@ -36,7 +43,9 @@ const EditPostPage = async ({ params }) => {
       const response = await fetch(`/api/users/${user.userId}`);
       const responseData = await response.json();
 
-      const post = responseData.posts.find((p) => p._id === params.postId);
+      const post = responseData.posts.find(
+        (p: PostProps) => p._id === params.postId
+      );
 
       setEditValues((prevValues) => ({
         ...prevValues,
@@ -49,7 +58,7 @@ const EditPostPage = async ({ params }) => {
     fetchPost();
   }, []);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     setEditValues((prevValues) => ({
       ...prevValues,
@@ -57,17 +66,21 @@ const EditPostPage = async ({ params }) => {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      const imageUrl = fileReader.result;
-      setimageVal(imageUrl);
-    };
-    fileReader.readAsDataURL(e.target.files[0]);
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        const imageUrl = fileReader.result as string;
+        setimageVal(imageUrl);
+      };
+      fileReader.readAsDataURL(file);
+    }
   };
 
   let disabled = false;
-  const submitEditHandler = async (e) => {
+  const submitEditHandler = async (e: FormEvent) => {
     e.preventDefault();
 
     const response = await fetch(`/api/posts/${params.postId}`, {
@@ -109,7 +122,7 @@ const EditPostPage = async ({ params }) => {
           <TextField
             id="description"
             defaultValue={editValues.description}
-            onBlur={handleInputChange}
+            onChange={handleInputChange}
             multiline
           />
         </div>
@@ -120,14 +133,14 @@ const EditPostPage = async ({ params }) => {
               id="hashtags"
               multiline
               defaultValue={editValues.hashtags}
-              onBlur={handleInputChange}
+              onChange={handleInputChange}
             />
           </FormControl>
           <FormControl>
             <TextField
               label="Location"
               id="location"
-              onBlur={handleInputChange}
+              onChange={handleInputChange}
               defaultValue={editValues.location}
             />
           </FormControl>

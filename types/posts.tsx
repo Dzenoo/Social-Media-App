@@ -34,3 +34,11 @@ export interface PostProps {
   comments: Comment[];
   show: boolean;
 }
+
+export interface PostFormTypes {
+  location: string;
+  hashtags: string;
+  description: string;
+  image: string;
+  userId: string;
+}
