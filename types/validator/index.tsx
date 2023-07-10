@@ -1,7 +1,7 @@
 export interface ValidatorTypes {
   type: string;
   password?: string;
-  val: number;
+  val?: number;
 }
 
 export interface ReducerStateTypes {

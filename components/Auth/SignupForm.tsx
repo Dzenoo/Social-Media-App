@@ -10,9 +10,10 @@ import {
 import { Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { AuthSignupProps } from "@/types/user";
 
-const SignupForm = ({ classes, onSubmitSignup }) => {
+const SignupForm: React.FC<AuthSignupProps> = ({ classes, onSubmitSignup }) => {
   const firstNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
   const lastNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
   const emailValidation = useValidation([VALIDATOR_EMAIL()]);
@@ -22,7 +23,7 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
     VALIDATOR_PASSWORD_MATCH(passwordValidation.value),
   ]);
   const router = useRouter();
-  const [imageVal, setimageVal] = useState("");
+  const [imageVal, setimageVal] = useState<string>("");
 
   const formData = {
     first_name: firstNameValidation.value,
@@ -45,16 +46,20 @@ const SignupForm = ({ classes, onSubmitSignup }) => {
     formIsValid = true;
   }
 
-  const handleImageChange = (e) => {
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      const imageUrl = fileReader.result;
-      setimageVal(imageUrl);
-    };
-    fileReader.readAsDataURL(e.target.files[0]);
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        const imageUrl = fileReader.result as string;
+        setimageVal(imageUrl);
+      };
+      fileReader.readAsDataURL(file);
+    }
   };
 
-  const submitSignup = (e) => {
+  const submitSignup = (e: FormEvent) => {
     e.preventDefault();
     onSubmitSignup(formData);
   };

@@ -3,6 +3,8 @@
 import { Box, Card, Typography } from "@mui/material";
 import classes from "../../css/Dashboard.module.css";
 import Image from "next/image";
+import React from "react";
+import { CardsProps } from "@/types/dashboard";
 
 const CARD = [
   {
@@ -31,7 +33,7 @@ const CARD = [
   },
 ];
 
-const Cards = ({ posts, followers, likes, comments }) => {
+const Cards: React.FC<CardsProps> = ({ posts, followers, likes, comments }) => {
   return (
     <Box className={classes.container}>
       {CARD.map((card) => (
@@ -48,13 +50,18 @@ const Cards = ({ posts, followers, likes, comments }) => {
             </Typography>
             <div
               className={
-                (card.num === "posts" && classes.pst) ||
-                (card.num === "followers" && classes.flw) ||
-                (card.num === "likes" && classes.lis) ||
-                (card.num === "comments" && classes.cmt)
+                card.num === "posts"
+                  ? classes.pst
+                  : card.num === "followers"
+                  ? classes.flw
+                  : card.num === "likes"
+                  ? classes.lis
+                  : card.num === "comments"
+                  ? classes.cmt
+                  : ""
               }
             >
-              <Image src={card.img} width={30} height={30} />
+              <Image src={card.img} width={30} height={30} alt="img" />
             </div>
           </div>
         </Card>
