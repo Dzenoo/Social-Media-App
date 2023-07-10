@@ -1,9 +1,8 @@
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
-import { NextApiRequest } from "next";
 
 export const GET = async (
-  request: NextApiRequest,
+  request: Request,
   { params }: { params: { username: string } }
 ) => {
   try {
