@@ -11,7 +11,8 @@ import useSwr from "swr";
 
 const PostPage: React.FC<ParamsPost> = ({ params }) => {
   const { postId } = params;
-  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json());
   const { data, error } = useSwr(`/api/posts/${postId}`, fetcher);
 
   if (!data) {

@@ -20,12 +20,13 @@ import SavedPost from "@/components/Posts/SavedPost";
 import { PostProps } from "@/types/posts";
 
 const Profile = async () => {
-  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json());
   const userInfo =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userinfo"))
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
       : null;
-  const { data, error, loading } = useSwr(
+  const { data, error, isLoading } = useSwr(
     `/api/users/${userInfo.userId}`,
     fetcher
   );
@@ -34,7 +35,7 @@ const Profile = async () => {
   const [imageValue, setimageValue] = useState<any>();
   const router = useRouter();
 
-  if (!data || loading) {
+  if (!data || isLoading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />

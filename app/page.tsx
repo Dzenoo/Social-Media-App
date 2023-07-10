@@ -14,18 +14,20 @@ import { Container } from "@mui/material";
 export default function Home() {
   const [allPosts, setallPosts] = useState<PostProps[]>([]);
   const userInfo =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userinfo"))
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
       : null;
-  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
+
+  const fetcher = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json());
   const {
     data,
-    loading: userLoading,
+    isLoading: userLoading,
     error: userError,
   } = useSwr(`/api/users/${userInfo?.userId}`, fetcher);
   const {
     data: postsData,
-    loading: postLoading,
+    isLoading: postLoading,
     error: postError,
   } = useSwr("/api/posts", fetcher);
 

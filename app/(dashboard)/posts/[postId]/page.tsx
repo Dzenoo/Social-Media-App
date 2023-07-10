@@ -16,7 +16,10 @@ import { useRouter } from "next/navigation";
 import { ParamsPost, PostProps } from "@/types/posts";
 
 export async function generateStaticParams() {
-  const user = JSON.parse(localStorage.getItem("userinfo"));
+  const user =
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
+      : null;
 
   const response = await fetch(`/api/users/${user.userId}`);
   const responseData = await response.json();
@@ -33,7 +36,10 @@ const EditPostPage: React.FC<ParamsPost> = async ({ params }) => {
     description: "",
   });
   const [imageVal, setimageVal] = useState<any>();
-  const user = JSON.parse(localStorage.getItem("userinfo"));
+  const user =
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
+      : null;
   const router = useRouter();
 
   console.log(editValues);

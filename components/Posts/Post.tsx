@@ -113,8 +113,8 @@ const Post: React.FC<Post> = ({
   show,
 }) => {
   const user =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userinfo"))
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
       : null;
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState(likes.includes(user?.userId)); // like state

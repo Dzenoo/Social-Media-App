@@ -22,8 +22,8 @@ const Posts = () => {
   const handleClose = () => setopen(false);
 
   const userId =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userinfo"))
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
       : null;
 
   useEffect(() => {

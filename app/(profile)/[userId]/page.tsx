@@ -13,13 +13,17 @@ import { ParamsPost } from "@/types/posts";
 
 const UserProfile: React.FC<ParamsPost> = async ({ params }) => {
   const [isSendedRequest, setisSendedRequest] = useState<boolean>(false);
-  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
-  const { data, error, loading } = useSwr(
+  const fetcher = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json());
+  const { data, error, isLoading } = useSwr(
     `/api/users/${params.userId}`,
     fetcher
   );
   const router = useRouter();
-  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  const userInfo =
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
+      : null;
 
   useEffect(() => {
     if (userInfo.userId === params.userId) {
@@ -51,7 +55,7 @@ const UserProfile: React.FC<ParamsPost> = async ({ params }) => {
     }
   };
 
-  if (!data || loading) {
+  if (!data || isLoading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />

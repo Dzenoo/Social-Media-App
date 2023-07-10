@@ -16,7 +16,10 @@ const PostForm: React.FC<PostForm> = ({ onSubmitPost }) => {
   const locationVal = useValidation([VALIDATOR_REQUIRE()]);
   const hashtagsVal = useValidation([VALIDATOR_REQUIRE()]);
   const descriptionVal = useValidation([VALIDATOR_REQUIRE()]);
-  const user = JSON.parse(localStorage.getItem("userinfo"));
+  const user =
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
+      : null;
 
   const handleInputChange = (
     event: ChangeEvent<any>,

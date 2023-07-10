@@ -1,3 +1,5 @@
+import { PostProps } from "./posts";
+
 export interface ModalProps {
   isOpen: boolean;
   close: () => void;
@@ -5,6 +7,6 @@ export interface ModalProps {
   title: string;
   id: string;
   onCloseModal: () => void;
-  posts: [];
+  posts: PostProps[];
   setPosts: (filteredPosts: []) => void;
 }

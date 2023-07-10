@@ -11,16 +11,17 @@ import { SearchResultProps } from "@/types/user";
 
 const Notifications = async () => {
   const userInfo =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("userinfo"))
+    typeof window !== "undefined" && localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo")!)
       : null;
-  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
-  const { data, error, loading } = useSwr(
+  const fetcher = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json());
+  const { data, error, isLoading } = useSwr(
     `/api/users/${userInfo.userId}`,
     fetcher
   );
 
-  if (!data || loading) {
+  if (!data || isLoading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
@@ -85,7 +86,7 @@ const Notifications = async () => {
                 time={new Date().toLocaleDateString()}
                 onAccept={acceptFollowRequest}
                 showButtons={true}
-                image={undefined}
+                image={""}
               />
             </div>
           );

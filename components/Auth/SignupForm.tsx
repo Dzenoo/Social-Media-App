@@ -22,7 +22,6 @@ const SignupForm: React.FC<AuthSignupProps> = ({ classes, onSubmitSignup }) => {
   const confirmPasswordValidation = useValidation([
     VALIDATOR_PASSWORD_MATCH(passwordValidation.value),
   ]);
-  const router = useRouter();
   const [imageVal, setimageVal] = useState<string>("");
 
   const formData = {

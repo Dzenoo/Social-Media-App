@@ -11,13 +11,14 @@ import { PostProps } from "@/types/posts";
 const HashtagPage = () => {
   const pathname = usePathname();
   const hashtag = pathname.split("/")[2];
-  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
-  const { data, error, loading } = useSwr(
+  const fetcher = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json());
+  const { data, error, isLoading } = useSwr(
     `/api/posts/hashtags/${hashtag}`,
     fetcher
   );
 
-  if (!data || loading) {
+  if (!data || isLoading) {
     return (
       <div className="loader_wrapper">
         <FadeLoader />
