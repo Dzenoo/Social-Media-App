@@ -77,12 +77,10 @@ const UserProfile: React.FC<ParamsPost> = async ({ params }) => {
         userImage={data.image}
         firstName={data.first_name}
         lastName={data.last_name}
-        biography={data.biography}
         posts={data.posts}
         email={data.email}
         followers={data.followers.length}
         following={data.following.length}
-        wideImage={data.wideImage}
         isUserFollowed={isUserFollowed}
         followUser={followUser}
         isSended={isSendedRequest}

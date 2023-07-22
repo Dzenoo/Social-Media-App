@@ -1,14 +1,7 @@
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
-import { v2 as cloudinary } from "cloudinary";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 export const POST = async (request: Request) => {
   try {
@@ -17,8 +10,7 @@ export const POST = async (request: Request) => {
     return new Response("Could not connect with mongodb", { status: 500 });
   }
 
-  const { first_name, last_name, email, biography, password, image } =
-    await request.json();
+  const { first_name, last_name, email, password } = await request.json();
 
   let existingUser;
   try {
@@ -38,22 +30,17 @@ export const POST = async (request: Request) => {
     return new Response("Could not hash password", { status: 500 });
   }
 
-  const photoUrl = await cloudinary.uploader.upload(image);
-
   const newUser = new User({
     first_name: first_name,
     last_name: last_name,
     email: email,
-    biography: biography,
     password: hashedPassword,
     notifications: [],
     posts: [],
     savedPosts: [],
     followers: [],
     following: [],
-    image: photoUrl.url,
-    wideImage:
-      "https://res.cloudinary.com/dzwb60tk1/image/upload/v1685738699/Untitled_design_h5xtak.png",
+    image: process.env.USERIMAGE,
   });
 
   let user;

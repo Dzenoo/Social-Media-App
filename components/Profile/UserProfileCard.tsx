@@ -20,19 +20,14 @@ const UserProfileCard: React.FC<User> = ({
   lastName,
   email,
   posts,
-  biography,
   followers,
   following,
-  wideImage,
   followUser,
   isUserFollowed,
   isSended,
 }) => {
   return (
     <Card className={classes.user_profile_card}>
-      <Box className={classes.landingImage}>
-        <Image src={wideImage} width={600} height={600} alt="profileimg" />
-      </Box>
       <CardContent className={classes.profile_content}>
         <Box className={classes.profile_view_info}>
           <Image src={userImage} width={120} height={120} alt="landingimg" />
@@ -67,16 +62,6 @@ const UserProfileCard: React.FC<User> = ({
           </Button>
         )}
       </CardContent>
-      {!isPrivate && (
-        <CardActions className={classes.profile_view_actions}>
-          <Typography variant="h6" fontWeight="bold">
-            Bio
-          </Typography>
-          <Typography color="textSecondary" variant="h6">
-            {biography}
-          </Typography>
-        </CardActions>
-      )}
     </Card>
   );
 };

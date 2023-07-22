@@ -90,7 +90,7 @@ export const PATCH = async (
   post.location = location;
   post.hashtags = hashtags;
   post.description = description;
-  post.image = photoUrl.url;
+  post.image = process.env.USERIMAGE;
 
   try {
     await post.save();

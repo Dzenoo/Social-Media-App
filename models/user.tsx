@@ -14,10 +14,6 @@ const UserSchema = new Schema({
     unique: [true, "Email already exist!"],
     required: [true, "Email is required!"],
   },
-  biography: {
-    type: String,
-    required: [true, "Biography is required!"],
-  },
   password: {
     type: String,
     required: [true, "Password is required!"],
@@ -32,7 +28,6 @@ const UserSchema = new Schema({
   image: { type: String, required: [true, "Image is required!"] },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   savedPosts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
-  wideImage: { type: String },
   followRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   following: [{ type: Schema.Types.ObjectId, ref: "User" }],

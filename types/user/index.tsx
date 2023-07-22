@@ -4,7 +4,6 @@ export interface UserSignupData {
   first_name: string;
   last_name: string;
   email: string;
-  biography: string;
   password: string | number;
   image: string;
 }
@@ -38,10 +37,8 @@ export interface User {
   lastName: string;
   email: string;
   posts: PostProps[];
-  biography: string;
   followers: number;
   following: number;
-  wideImage: string;
   followUser: () => void;
   isUserFollowed: boolean;
   isSended: boolean;

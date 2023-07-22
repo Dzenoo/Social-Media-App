@@ -151,19 +151,6 @@ const Profile = async () => {
             </div>
           </div>
         </div>
-        <form className={classes.coverForm} onSubmit={changeImageHandler}>
-          <Typography>Change Cover Image</Typography>
-          <Image src={data?.wideImage} width={600} height={200} alt="profimg" />
-          <input
-            type="file"
-            accept="image/*"
-            required={true}
-            onChange={handleCoverImageChange}
-          />
-          <Button type="submit" variant="contained">
-            Change Image
-          </Button>
-        </form>
         <Card
           className={classes.profile_saved}
           onClick={() => setisShowing(!isShowing)}
@@ -173,12 +160,6 @@ const Profile = async () => {
         </Card>
       </Box>
       <Box className={classes.profile_edit_info}>
-        <div>
-          <Typography fontWeight="bold" variant="h6">
-            Biography
-          </Typography>
-          <Typography color="textSecondary">{data?.biography}</Typography>
-        </div>
         <div>
           <Typography fontWeight="bold" variant="h6">
             Privacy

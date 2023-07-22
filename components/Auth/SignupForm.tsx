@@ -8,29 +8,24 @@ import {
   VALIDATOR_PASSWORD_MATCH,
 } from "@/utils/validators";
 import { Button, TextField } from "@mui/material";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { FormEvent } from "react";
 import { AuthSignupProps } from "@/types/user";
 
 const SignupForm: React.FC<AuthSignupProps> = ({ classes, onSubmitSignup }) => {
   const firstNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
   const lastNameValidation = useValidation([VALIDATOR_FIRSTNAME()]);
   const emailValidation = useValidation([VALIDATOR_EMAIL()]);
-  const biographyValidation = useValidation([VALIDATOR_MINLENGTH(20)]);
   const passwordValidation = useValidation([VALIDATOR_MINLENGTH(6)]);
   const confirmPasswordValidation = useValidation([
     VALIDATOR_PASSWORD_MATCH(passwordValidation.value),
   ]);
-  const [imageVal, setimageVal] = useState<string>("");
 
   const formData = {
     first_name: firstNameValidation.value,
     last_name: lastNameValidation.value,
     email: emailValidation.value,
-    biography: biographyValidation.value,
     password: passwordValidation.value,
-    image: imageVal,
+    image: "/images/user.png",
   };
 
   let formIsValid = false;
@@ -38,25 +33,11 @@ const SignupForm: React.FC<AuthSignupProps> = ({ classes, onSubmitSignup }) => {
     firstNameValidation.isValid &&
     lastNameValidation.isValid &&
     emailValidation.isValid &&
-    biographyValidation.isValid &&
     passwordValidation.isValid &&
     confirmPasswordValidation.isValid
   ) {
     formIsValid = true;
   }
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        const imageUrl = fileReader.result as string;
-        setimageVal(imageUrl);
-      };
-      fileReader.readAsDataURL(file);
-    }
-  };
 
   const submitSignup = (e: FormEvent) => {
     e.preventDefault();
@@ -89,13 +70,7 @@ const SignupForm: React.FC<AuthSignupProps> = ({ classes, onSubmitSignup }) => {
         onBlur={lastNameValidation.onBlurHandler}
         label="Last Name"
       />
-      <Image src={imageVal} width={70} height={70} alt="profimg" />
-      <input
-        type="file"
-        accept="image/*"
-        required={true}
-        onChange={handleImageChange}
-      />
+
       <TextField
         value={emailValidation.value}
         error={!emailValidation.isValid && emailValidation.isTouched}
@@ -107,19 +82,6 @@ const SignupForm: React.FC<AuthSignupProps> = ({ classes, onSubmitSignup }) => {
         onChange={emailValidation.onChangeHandler}
         onBlur={emailValidation.onBlurHandler}
         label="Email"
-      />
-      <TextField
-        value={biographyValidation.value}
-        error={!biographyValidation.isValid && biographyValidation.isTouched}
-        helperText={
-          !biographyValidation.isValid &&
-          biographyValidation.isTouched &&
-          "Invalid Biography"
-        }
-        onChange={biographyValidation.onChangeHandler}
-        onBlur={biographyValidation.onBlurHandler}
-        label="Biography"
-        multiline
       />
       <TextField
         value={passwordValidation.value}
