@@ -15,7 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useState } from "react";
 import SavedPost from "@/components/Posts/SavedPost";
 import { PostProps } from "@/types/posts";
 
@@ -32,7 +32,6 @@ const Profile = async () => {
   );
   const { logout } = useAuth();
   const [isShowing, setisShowing] = useState<boolean>(false);
-  const [imageValue, setimageValue] = useState<any>();
   const router = useRouter();
 
   if (!data || isLoading) {
@@ -82,30 +81,6 @@ const Profile = async () => {
       } else {
         console.log("Something went wrong");
       }
-    }
-  };
-
-  const handleCoverImageChange = (e: ChangeEvent<{ files: any }>) => {
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      const imageUrl = fileReader.result;
-      setimageValue(imageUrl);
-    };
-    fileReader.readAsDataURL(e.target.files[0]);
-  };
-
-  const changeImageHandler = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      await fetch(`/api/users/${userInfo.userId}/change`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          coverImage: imageValue,
-        }),
-      });
-    } catch (error) {
-      console.log(error);
     }
   };
 
